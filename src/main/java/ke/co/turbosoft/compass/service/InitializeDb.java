@@ -132,7 +132,7 @@ public class InitializeDb {
         user1.setUsername("akipkoech");
         user1.setFirstName("Anthony");
         user1.setLastName("Kipkoech");
-        user1.setPassword("pass123");
+        user1.setPassword("1Madison#");
         user1.setEmail("akipkoech@madison.co.ke");
         user1.setUserRoles(userRoles1);
         userRepo.save(user1);

@@ -8,11 +8,14 @@ Ext.define('compass.Application', {
     
     name: 'compass',
 
+    views: ['login.Login'],
+
     stores: [
         // TODO: add global / shared stores here
     ],
     
     launch: function () {
+        Ext.tip.QuickTipManager.init();
         var me = this;
         var task = new Ext.util.DelayedTask(function(){
            me.splashscreen.fadeOut({

@@ -909,6 +909,7 @@ $include-extthemeneptune-resizer-splitter: true;
 $include-extthemeneptune-toolbar-paging: true;
 $include-extthemeneptune-toolbar-toolbar: true;
 $include-compass-application: true;
+$include-compass-view-login-login: true;
 $include-compass-view-main-main: true;
 $include-compass-view-main-maincontroller: true;
 $include-compass-view-main-mainmodel: true;
@@ -918,6 +919,8 @@ $include-compass-view-main-mainmodel: true;
 @import '../../../../../ext/packages/ext-theme-neutral/sass/etc/all';
 /* including package ext-theme-neptune */
 @import '../../../../../ext/packages/ext-theme-neptune/sass/etc/all';
+/* including package compass */
+@import '../../../../../sass/etc/all';
 /* including package ext-theme-neptune */
 @import '../../../../../ext/packages/ext-theme-neptune/sass/var/Component';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/var/LoadMask';

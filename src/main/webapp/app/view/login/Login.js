@@ -3,6 +3,10 @@ Ext.define('compass.view.login.Login',{
 
     xtype: 'login-dialog',
 
+    controller: 'login',
+
+    requires: ['compass.view.login.LoginController'],
+
     autoShow: true,
     height: 170,
     width: 360,
@@ -19,6 +23,7 @@ Ext.define('compass.view.login.Login',{
     items: [
         {
             xtype: 'form',
+            reference: 'form',
             bodyPadding: 15,
             defaults: {
                 xtype: 'textfield',
@@ -27,11 +32,14 @@ Ext.define('compass.view.login.Login',{
                 allowBlank: false,
                 vtype: 'alphanum',
                 minLength: 3,
-                msgTarget: 'under'
+                msgTarget: 'under',
+                listeners: {
+                    specialKey: 'onTextFieldSpecialKey'
+                }
             },
             items: [
                 {
-                    name: 'user',
+                    name: 'username',
                     fieldLabel: 'User',
                     maxLength: 25
                 },
@@ -41,7 +49,13 @@ Ext.define('compass.view.login.Login',{
                     fieldLabel: 'Password',
                     maxLength: 15,
                     msgTarget: 'side',
-                    vtype: 'customPass'
+                    vtype: 'customPass',
+                    id: 'password',
+                    enableKeyEvents: true,
+                    listeners: {
+                        keypress: 'onTextFieldKeyPress',
+                        specialKey: 'onTextFieldSpecialKey'
+                    }
                 }
             ],
             dockedItems: [
