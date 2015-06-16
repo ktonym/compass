@@ -7,7 +7,11 @@ Ext.define('compass.view.main.MainModel', {
     alias: 'viewmodel.main',
 
     data: {
-        name: 'compass'
+        name: 'compass',
+        appName: 'Compass',
+        appHeaderIcon: '<span class="fa fa-compass fa-lg app-header-logo">',
+        footer: 'Compass Medical Insurance System - Turbosoft - ' +
+            'http://turbosoft.co.ke'
     }
 
     //TODO - add data, formulas and/or methods to support your view

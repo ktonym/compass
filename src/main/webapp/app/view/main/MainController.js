@@ -9,18 +9,32 @@ Ext.define('compass.view.main.MainController', {
     extend: 'Ext.app.ViewController',
 
     requires: [
-        'Ext.window.MessageBox'
+        'compass.util.Util'
     ],
 
     alias: 'controller.main',
 
-    onClickButton: function () {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+    onLogout: function(button,e,options){
+        var me = this;
+        Ext.Ajax.request({
+            url: 'compass/security/logout',
+            scope: me,
+            success: 'onLogoutSuccess',
+            failure: 'onLogoutFailure'
+        });
     },
+    onLogoutFailure: function(conn, response, options, eOpts){
+        compass.util.Util.showErrorMsg(conn.responseText);
+    },
+    onLogoutSuccess: function(conn, response, options, eOpts){
+        var result = compass.util.Util.decodeJSON(conn.responseText);
 
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
+        if (result.success){
+            this.getView().destroy();
+            window.location.reload();
+        } else {
+            compass.util.Util.showErrorMsg(result.msg);
         }
+
     }
 });
