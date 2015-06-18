@@ -2,7 +2,7 @@ Ext.define('compass.view.main.Header',{
     extend: 'Ext.toolbar.Toolbar',
     xtype: 'appheader',
 
-    //requires: ['compass.view.locale.Translation'],
+    requires: ['compass.view.locale.Translation'],
 
     ui: 'footer',
 
@@ -20,15 +20,14 @@ Ext.define('compass.view.main.Header',{
             }
         },{
             xtype: 'tbfill'
-        }//,{
-         //   xtype: 'translation'
-        //},
-        ,{
+        },{
+            xtype: 'translation'
+        },{
             xtype: 'tbseparator'
         },{
             xtype: 'button',
             itemId: 'logout',
-            text: 'Logout',
+            text: translations.logout,
             reference: 'logout',
             iconCls: 'fa fa-sign-out fa-lg buttonIcon',
             listeners: {

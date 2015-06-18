@@ -1,4 +1,4 @@
-$image-search-path: 'D:/projects/compass/src/main/webapp/build/production/compass/resources';
+$image-search-path: '/home/ktonym/IdeaProjects/compass/src/main/webapp/build/production/compass/resources';
 $theme-name:  'ext-theme-neptune' !default;
 $include-ext-abstractcomponent: true;
 $include-ext-abstractcontainer: true;
@@ -908,10 +908,18 @@ $include-extthemeneptune-resizer-splitter: true;
 $include-extthemeneptune-toolbar-paging: true;
 $include-extthemeneptune-toolbar-toolbar: true;
 $include-compass-application: true;
+$include-compass-util-util: true;
+$include-compass-view-locale-translation: true;
+$include-compass-view-locale-translationcontroller: true;
+$include-compass-view-login-capslocktooltip: true;
 $include-compass-view-login-login: true;
+$include-compass-view-login-logincontroller: true;
+$include-compass-view-main-footer: true;
+$include-compass-view-main-header: true;
 $include-compass-view-main-main: true;
 $include-compass-view-main-maincontroller: true;
 $include-compass-view-main-mainmodel: true;
+$include-compass-view-main-panel: true;
 /* including package ext-theme-base */
 @import '../../../../../ext/packages/ext-theme-base/sass/etc/all';
 /* including package ext-theme-neutral */
@@ -1167,3 +1175,8 @@ $relative-image-path-for-uis: $ext-theme-neptune-resource-path;
 @import '../../../../../ext/packages/ext-theme-neptune/sass/src/form/field/File';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/src/form/field/HtmlEditor';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer';
+/* including package compass */
+$compass-resource-path: 'images' !default;
+$relative-image-path-for-uis: $compass-resource-path;
+@import '../../../../../sass/src/view/main/Footer';
+@import '../../../../../sass/src/view/main/Header';

@@ -5,7 +5,8 @@ Ext.define('compass.view.login.Login',{
 
     controller: 'login',
 
-    requires: ['compass.view.login.LoginController'],
+    requires: ['compass.view.login.LoginController',
+                'compass.view.locale.Translation'],
 
     autoShow: true,
     height: 170,
@@ -14,7 +15,7 @@ Ext.define('compass.view.login.Login',{
         type: 'fit'
     },
     iconCls: 'fa fa-key fa-lg',
-    title: 'Login',
+    title: translations.login,
     closeAction: 'hide',
     closable: false,
     draggable: false,
@@ -40,13 +41,13 @@ Ext.define('compass.view.login.Login',{
             items: [
                 {
                     name: 'username',
-                    fieldLabel: 'User',
+                    fieldLabel: translations.user,
                     maxLength: 25
                 },
                 {
                     inputType: 'password',
                     name: 'password',
-                    fieldLabel: 'Password',
+                    fieldLabel: translations.password,
                     maxLength: 15,
                     msgTarget: 'side',
                     vtype: 'customPass',
@@ -64,12 +65,15 @@ Ext.define('compass.view.login.Login',{
                     dock: 'bottom',
                     items: [
                         {
+                            xtype:'translation'
+                        },
+                        {
                             xtype: 'tbfill'
                         },
                         {
                             xtype: 'button',
                             iconCls: 'fa fa-times fa-lg',
-                            text: 'Cancel',
+                            text: translations.cancel,
                             listeners: {
                                 click: 'onButtonClickCancel'
                             }
@@ -78,7 +82,7 @@ Ext.define('compass.view.login.Login',{
                             xtype: 'button',
                             formBind: true,
                             iconCls: 'fa fa-sign-in fa-lg',
-                            text: 'Submit',
+                            text: translations.submit,
                             listeners: {
                                 click: 'onButtonClickSubmit'
                             }
