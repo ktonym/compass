@@ -29,7 +29,7 @@ Ext.define('compass.view.login.Login',{
             defaults: {
                 xtype: 'textfield',
                 anchor: '100%',
-                labelWidth: 60,
+                labelWidth: translations.labelWidth,
                 allowBlank: false,
                 vtype: 'alphanum',
                 minLength: 3,

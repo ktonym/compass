@@ -2,6 +2,8 @@ Ext.define('compass.view.main.Panel',{
     extend: 'Ext.tab.Panel',
     xtype: 'mainpanel',
 
+    requires: ['compass.view.locale.Translation'],
+
     activeTab: 0,
 
     items: [
@@ -9,7 +11,7 @@ Ext.define('compass.view.main.Panel',{
             xtype: 'panel',
             closable: false,
             iconCls: 'fa fa-home fa-lg tabIcon',
-            title: 'Home'
+            title: translations.home
         }
     ]
 

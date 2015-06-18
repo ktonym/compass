@@ -5,6 +5,8 @@ translations = {
     cancel: "Cancel",
     submit: "Submit",
     logout: 'Logout',
+    home: 'Home',
+    labelWidth: 60,
     capsLockTitle: 'Caps Lock is On',
     capsLockMsg1: 'Having Caps Lock on may cause you to ',
     capsLockMsg2: 'enter your password incorrectly.',

@@ -3,7 +3,8 @@ Ext.define('compass.view.login.LoginController',{
     alias: 'controller.login',
     requires: [
         'compass.view.login.CapsLockTooltip',
-        'compass.util.Util'
+        'compass.util.Util',
+        'compass.util.SessionMonitor'
     ],
 
     onTextFieldSpecialKey: function(field,e,options){
@@ -78,5 +79,6 @@ Ext.define('compass.view.login.LoginController',{
         this.getView().unmask();
         this.getView().close();
         Ext.create('compass.view.main.Main').show();
+        compass.util.SessionMonitor.start();
     }
 });

@@ -5,6 +5,8 @@ translations = {
     cancel: "Annuler",
     submit: "Soumettre",
     logout: 'Se déconnecter',
+    home: 'Accueil',
+    labelWidth: 100,
     capsLockTitle: 'Verrouillage des majuscules est activé',
     capsLockMsg1: 'Ayant le verrouillage des majuscules peut vous ',
     capsLockMsg2: 'amener à saisir votre mot de passe incorrect.',

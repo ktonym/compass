@@ -2,6 +2,7 @@ Ext.define('compass.view.locale.Translation',{
     extend: 'Ext.button.Split',
     xtype: 'translation',
     requires: ['compass.view.locale.TranslationController'],
+    controller: 'translation',
     menu: {
         xtype: 'menu',
         defaults: {

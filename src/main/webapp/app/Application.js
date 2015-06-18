@@ -5,10 +5,10 @@
  */
 function loadLocale(){
     var lang = localStorage ? (localStorage.getItem('user-lang')||'en') : 'en',
-        file = Ext.util.Format.format("app/view/locale/{0}.js",lang),
-        extJsFile = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", lang);
+        file = Ext.util.Format.format("app/view/locale/{0}.js",lang);//,
+        //extJsFile = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", lang);
 
-    Ext.Loader.loadScript({url: extJsFile});
+   // Ext.Loader.loadScript({url: extJsFile});
 
     Ext.Loader.loadScript({url: file, onError: function(){
         alert('Error loading locale file. Please contact system administrator.');
