@@ -1,17 +1,26 @@
 package ke.co.turbosoft.compass.entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.Index;
+import org.hibernate.search.annotations.*;
+
 import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
+@Indexed @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Corporate extends AbstractEntity implements EntityItem<Integer> {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @DocumentId
     private Integer idCorporate;
+    @Field(index = org.hibernate.search.annotations.Index.YES,analyze = Analyze.YES, store = Store.YES)
     private String corporateName;
 	private String abbreviation;
 	private String tel;

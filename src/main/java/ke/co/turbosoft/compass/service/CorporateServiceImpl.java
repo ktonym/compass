@@ -83,9 +83,10 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Result<Corporate> remove(Integer idCorporate, String actionUsername) {
 
-        if(!hasRole(actionUsername,"UW_SPVZ")){
+        if(!isMemberOf(actionUsername,"System Administrator")){
             return ResultFactory.getFailResult(USER_NOT_AUTHORIZED);
         }
 

@@ -7,22 +7,39 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
 
+
+    <http pattern="/resources/**" security="none"/>
+
     <http use-expressions="true">
         <!-- intercept-url pattern="/login*" access="hasRole('IS_AUTHENTICATED_ANONYMOUSLY')"/-->
-        <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
+
+        <intercept-url pattern="/index*" access="permitAll()" />
+        <intercept-url pattern="/user**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/user/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/**" access="isAuthenticated()" />
         <!-- intercept-url pattern="/**" access="hasRole('ROLE_USER')"/-->
-        <form-login login-page="/login" />
-        <logout logout-url="/logout"/>
+        <!--<form-login login-page="/index.html"-->
+                    <!--authentication-success-handler-ref="loginSuccessHandler"-->
+                    <!--authentication-failure-handler-ref="loginFailureHandler"/>-->
+
+
+
+        <logout invalidate-session="true" logout-success-url="/"  logout-url="/security/logout"/>
+        <session-management session-fixation-protection="newSession" >
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
+        </session-management>
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <user-service>
-                <user name="admin" password="admin123" authorities="ROLE_USER,ROLE_ADMIN" />
-                <user name="kip" password="kip123" authorities="ROLE_USER" />
+                <user name="akipkoech" password="1Madison#" authorities="ROLE_USER,ROLE_ADMIN" />
+                <user name="user1" password="Karibu#1" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="loginSuccessHandler" class="ke.co.turbosoft.compass.web.LoginSuccessHandler"/>
+    <beans:bean id="loginFailureHandler" class="ke.co.turbosoft.compass.web.LoginFailureHandler"/>
 
 </beans:beans>

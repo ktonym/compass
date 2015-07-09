@@ -36,6 +36,15 @@ public class InitializeDb {
     @Autowired
     private UserRoleRepo userRoleRepo;
 
+    @Autowired
+    private MenuRepo menuRepo;
+
+    @Autowired
+    private UserGroupRepo userGroupRepo;
+
+    @Autowired
+    private PermissionRepo permissionRepo;
+
     @PostConstruct
     public void init(){
 
@@ -121,12 +130,37 @@ public class InitializeDb {
         userRole2.setRole(sys_adm);
         userRoleRepo.save(userRole2);
 
-        List<UserRole> userRoles1 = new ArrayList<>();
-        userRoles1.add(userRole1);
-        userRoles1.add(userRole2);
+        UserGroup UW_UZR = new UserGroup();
+        UW_UZR.setGroupName("Underwriter");
+        userGroupRepo.save(UW_UZR);
 
-        List<UserRole> userRoles2 = new ArrayList<>();
-        userRoles2.add(userRole1);
+        UserGroup UW_SPVZ = new UserGroup();
+        UW_SPVZ.setGroupName("Underwriting Supervisor");
+        userGroupRepo.save(UW_SPVZ);
+
+        UserGroup UW_MGR = new UserGroup();
+        UW_MGR.setGroupName("Underwriting Manager");
+        userGroupRepo.save(UW_MGR);
+
+        UserGroup CLM_UZR = new UserGroup();
+        CLM_UZR.setGroupName("Claims Analyst");
+        userGroupRepo.save(CLM_UZR);
+
+        UserGroup CLM_SPVZ = new UserGroup();
+        CLM_SPVZ.setGroupName("Claims Supervisor");
+        userGroupRepo.save(CLM_SPVZ);
+
+        UserGroup CLM_MGR = new UserGroup();
+        CLM_MGR.setGroupName("Claims Manager");
+        userGroupRepo.save(CLM_MGR);
+
+        UserGroup CARE_MGR = new UserGroup();
+        CARE_MGR.setGroupName("Care Manager");
+        userGroupRepo.save(CARE_MGR);
+
+        UserGroup SYS_ADM = new UserGroup();
+        SYS_ADM.setGroupName("System Administrator");
+        userGroupRepo.save(SYS_ADM);
 
         User user1 = new User();
         user1.setUsername("akipkoech");
@@ -134,21 +168,16 @@ public class InitializeDb {
         user1.setLastName("Kipkoech");
         user1.setPassword("1Madison#");
         user1.setEmail("akipkoech@madison.co.ke");
-        user1.setUserRoles(userRoles1);
+        user1.setUserGroup(SYS_ADM);
         userRepo.save(user1);
 
-        List<UserRole> userRoleList = userRoleRepo.findByUser(userRepo.findOne("akipkoech"));
+//        List<UserRole> userRoleList = userRoleRepo.findByUser(userRepo.findOne("akipkoech"));
+//
+//        for(UserRole userRole: userRoleList){
+//            System.out.println(userRole.getRole());
+//
+//        }
 
-        for(UserRole userRole: userRoleList){
-            System.out.println(userRole.getRole());
-
-        }
-
-
-//        UserRole userRoleAdm = new UserRole();
-//        userRoleAdm.setUser(user1);
-//        userRoleAdm.setRole(RoleType.SYS_ADM);
-//        userRoleRepo.save(userRoleAdm);
 
         User user2 = new User();
         user2.setUsername("cmwangi");
@@ -156,8 +185,131 @@ public class InitializeDb {
         user2.setLastName("Mwangi");
         user2.setPassword("pass123");
         user2.setEmail("cmwangi@gmail.com");
-        user2.setUserRoles(userRoles2);
+        user2.setUserGroup(CLM_UZR);
         userRepo.save(user2);
+
+        Menu menu1 = new Menu();
+        menu1.setText("menu1");
+        menu1.setIconCls("fa fa-group fa-lg");
+        menuRepo.save(menu1);
+
+        Menu menu11 = new Menu();
+        menu11.setText("menu11");
+        menu11.setIconCls("xf0c0");
+        menu11.setClassName("panel");
+        menu11.setParentMenu(menu1);
+        menuRepo.save(menu11);
+
+        Menu menu12 = new Menu();
+        menu12.setText("menu12");
+        menu12.setIconCls("xf007");
+        menu12.setClassName("panel");
+        menu12.setParentMenu(menu1);
+        menuRepo.save(menu12);
+
+        Menu menu2 = new Menu();
+        menu2.setText("Underwriting");
+        menu2.setIconCls("fa fa-database fa-lg");
+        menuRepo.save(menu2);
+
+        Menu mnuSchemes = new Menu();
+        mnuSchemes.setText("Schemes");
+        mnuSchemes.setIconCls("xf013");
+        mnuSchemes.setClassName("panel");
+        mnuSchemes.setParentMenu(menu2);
+        menuRepo.save(mnuSchemes);
+
+        Menu mnuMem = new Menu();
+        mnuMem.setText("Members");
+        mnuMem.setIconCls("xf005");
+        mnuMem.setClassName("panel");
+        mnuMem.setParentMenu(menu2);
+        menuRepo.save(mnuMem);
+
+        Menu mnuInvc = new Menu();
+        mnuInvc.setText("Invoicing");
+        mnuInvc.setIconCls("xf005");
+        mnuInvc.setClassName("panel");
+        mnuInvc.setParentMenu(menu2);
+        menuRepo.save(mnuInvc);
+
+        Menu mnuCare = new Menu();
+        mnuCare.setText("Care Management");
+        mnuCare.setIconCls("fa fa-database fa-lg");
+        menuRepo.save(mnuCare);
+
+        Menu mnuPreauth = new Menu();
+        mnuPreauth.setText("Pre-authorization");
+        mnuPreauth.setIconCls("xf0ac");
+        mnuPreauth.setClassName("panel");
+        mnuPreauth.setParentMenu(mnuCare);
+        menuRepo.save(mnuPreauth);
+
+        Menu mnuClm = new Menu();
+        mnuClm.setText("Claims");
+        mnuClm.setIconCls("fa fa-database fa-lg");
+        menuRepo.save(mnuClm);
+
+        Menu mnuBatClm = new Menu();
+        mnuBatClm.setText("Enter Claim");
+        mnuBatClm.setIconCls("xf0ac");
+        mnuBatClm.setClassName("panel");
+        mnuBatClm.setParentMenu(mnuClm);
+        menuRepo.save(mnuBatClm);
+
+        Menu mnuEntrClm = new Menu();
+        mnuEntrClm.setText("Enter Claim");
+        mnuEntrClm.setIconCls("xf0ac");
+        mnuEntrClm.setClassName("panel");
+        mnuEntrClm.setParentMenu(mnuClm);
+        menuRepo.save(mnuEntrClm);
+
+        Menu mnuVetClm = new Menu();
+        mnuVetClm.setText("Vet Claim");
+        mnuVetClm.setIconCls("xf0ac");
+        mnuVetClm.setClassName("panel");
+        mnuVetClm.setParentMenu(mnuClm);
+        menuRepo.save(mnuVetClm);
+
+        Menu mnuClmVchr = new Menu();
+        mnuClmVchr.setText("Voucher");
+        mnuClmVchr.setIconCls("xf0ac");
+        mnuClmVchr.setClassName("panel");
+        mnuClmVchr.setParentMenu(mnuClm);
+        menuRepo.save(mnuClmVchr);
+
+        Menu mnuAuthClm = new Menu();
+        mnuAuthClm.setText("Authorize Payment");
+        mnuAuthClm.setIconCls("xf0ac");
+        mnuAuthClm.setClassName("panel");
+        mnuAuthClm.setParentMenu(mnuClm);
+        menuRepo.save(mnuAuthClm);
+
+        Menu mnuRI = new Menu();
+        mnuRI.setText("Reinsurance");
+        mnuRI.setIconCls("fa fa-database fa-lg");
+        menuRepo.save(mnuRI);
+
+        Menu mnuReports = new Menu();
+        mnuReports.setText("Reports");
+        mnuReports.setIconCls("fa fa-line-chart fa-lg");
+        menuRepo.save(mnuReports);
+
+        Permission perm1 = new Permission();
+        perm1.setMenu(menu1);
+        perm1.setUserGroup(SYS_ADM);
+        permissionRepo.save(perm1);
+
+        Permission perm2 = new Permission();
+        perm2.setMenu(menu11);
+        perm2.setUserGroup(SYS_ADM);
+        permissionRepo.save(perm2);
+
+        Permission perm3 = new Permission();
+        perm3.setMenu(menu12);
+        perm3.setUserGroup(SYS_ADM);
+        permissionRepo.save(perm3);
+
 
     }
 

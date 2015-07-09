@@ -70,6 +70,15 @@
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-web:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-spring:1.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-search:5.3.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-search-orm:5.3.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-search-engine:5.3.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:4.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-analyzers-common:4.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-facet:4.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-queries:4.10.4" level="project" />
   </component>
 </module>
 

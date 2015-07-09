@@ -25,6 +25,14 @@
             <props>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!-- Lucene support -->
+                <!-- TODO -->
+                <prop key="hibernate.cache.use_second_level_cache"> true</prop>
+                <prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider</prop>
+                <prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</prop>
+                <prop key="hibernate.search.default.indexBase">./lucene/indexes</prop>
+                <prop key="hibernate.search.default.batch.merge_factor">10</prop>
+                <prop key="hibernate.search.default.batch.max_buffered_docs">10</prop>
             </props>
         </property>
         <property name="persistenceProvider">
@@ -41,7 +49,7 @@
 
     <jpa:repositories base-package="ke.co.turbosoft.compass.repo"/>
 
-    <import resource="security.xml"/>
+    <!--<import resource="security.xml"/>-->
 
 
 </beans>

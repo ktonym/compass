@@ -1,7 +1,9 @@
 package ke.co.turbosoft.compass.service;
 
 import ke.co.turbosoft.compass.entity.User;
+import ke.co.turbosoft.compass.entity.UserGroup;
 import ke.co.turbosoft.compass.entity.UserRole;
+import ke.co.turbosoft.compass.repo.UserGroupRepo;
 import ke.co.turbosoft.compass.repo.UserRepo;
 import ke.co.turbosoft.compass.repo.UserRoleRepo;
 import org.slf4j.Logger;
@@ -21,8 +23,11 @@ public abstract class AbstractService {
     @Autowired
     protected UserRepo userRepo;
 
+//    @Autowired
+//    protected UserRoleRepo userRoleRepo;
+//
     @Autowired
-    protected UserRoleRepo userRoleRepo;
+    protected UserGroupRepo userGroupRepo;
 
     protected final String USER_INVALID = "Not a valid user";
     protected final String USER_NOT_AUTHORIZED = "Transaction not authorized";
@@ -32,18 +37,25 @@ public abstract class AbstractService {
         return user != null;
     }
 
-    protected boolean hasRole(String username, String roleName){
+//    protected boolean hasRole(String username, String roleName){
+//
+//        Predicate<UserRole> predicate = p -> p.getRole().getRoleName().equals(roleName);
+//
+//        return getRoles(username).stream().anyMatch(predicate);
+//    }
+//
+//    protected List<UserRole> getRoles(String username){
+//
+//        User user = userRepo.findOne(username);
+//
+//        return userRoleRepo.findByUser(user);
+//    }
 
-        Predicate<UserRole> predicate = p -> p.getRole().getRoleName().equals(roleName);
+    protected boolean isMemberOf(String username, String userGroupName){
 
-        return getRoles(username).stream().anyMatch(predicate);
-    }
+        UserGroup userGroup = userGroupRepo.findByGroupName(userGroupName);
 
-    protected List<UserRole> getRoles(String username){
-
-        User user = userRepo.findOne(username);
-
-        return userRoleRepo.findByUser(user);
+        return userRepo.findOne(username).getUserGroup().equals(userGroup);
     }
 
 }

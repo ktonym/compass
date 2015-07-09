@@ -1,9 +1,7 @@
 package ke.co.turbosoft.compass.entity;
 
 import javax.json.JsonObjectBuilder;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -17,8 +15,10 @@ public class User extends AbstractEntity implements EntityItem<String> {
 	private String password;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "user")
-    private List<UserRole> userRoles;
+
+    @ManyToOne
+    @JoinColumn(name = "idUserGroup")
+    private UserGroup userGroup;
 
     public User() {
     }
@@ -47,14 +47,6 @@ public class User extends AbstractEntity implements EntityItem<String> {
         this.password = password;
     }
 
-    public List<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -71,6 +63,14 @@ public class User extends AbstractEntity implements EntityItem<String> {
         this.lastName = lastName;
     }
 
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+    }
+
     @Override
     public String getId() {
         return username;
@@ -82,6 +82,7 @@ public class User extends AbstractEntity implements EntityItem<String> {
                  .add("email",email)
                  .add("firstName", firstName)
                  .add("lastName",lastName);
+         userGroup.addJson(builder);
     }
 
     @Override
