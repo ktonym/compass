@@ -2,11 +2,9 @@ package ke.co.turbosoft.compass.service;
 
 import ke.co.turbosoft.compass.entity.Menu;
 import ke.co.turbosoft.compass.entity.Permission;
-import ke.co.turbosoft.compass.entity.PermissionId;
 import ke.co.turbosoft.compass.entity.UserGroup;
 import ke.co.turbosoft.compass.repo.MenuRepo;
 import ke.co.turbosoft.compass.repo.PermissionRepo;
-import ke.co.turbosoft.compass.repo.UserGroupRepo;
 import ke.co.turbosoft.compass.vo.Result;
 import ke.co.turbosoft.compass.vo.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +103,7 @@ public class PermissionServiceImpl extends AbstractService implements Permission
         UserGroup userGroup = userGroupRepo.findOne(idUserGroup);
         Menu menu = menuRepo.findOne(idMenu);
 
-        Permission permission = permissionRepo.findOne(new PermissionId(menu,userGroup));
+        Permission permission = permissionRepo.findByUserGroupAndMenu(userGroup, menu);
 
         if(permission != null){
             return ResultFactory.getFailResult("This permission already exists");
@@ -132,7 +130,7 @@ public class PermissionServiceImpl extends AbstractService implements Permission
         UserGroup userGroup = userGroupRepo.findOne(idUserGroup);
         Menu menu = menuRepo.findOne(idMenu);
 
-        Permission permission = permissionRepo.findOne(new PermissionId(menu,userGroup));
+        Permission permission = permissionRepo.findByUserGroupAndMenu(userGroup, menu);
 
         if(permission == null){
             return ResultFactory.getFailResult("This permission does not exist");

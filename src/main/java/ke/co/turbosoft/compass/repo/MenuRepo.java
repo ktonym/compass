@@ -13,14 +13,13 @@ import java.util.List;
 public interface MenuRepo extends JpaRepository<Menu,Integer> {
 
     @Query("SELECT m FROM Menu m WHERE m.idMenu IN " +
-            "(SELECT p.idMenu FROM Permission p WHERE p.idUserGroup = " +
-            "(SELECT u.idUserGroup FROM User u WHERE u.username = :username))")
+            "(SELECT p.menu FROM Permission p WHERE p.userGroup = " +
+            "(SELECT u.userGroup FROM User u WHERE u.username = :username))")
     List<Menu> findMenusFromUser(@Param("username") String username);
 
     @Query("SELECT m FROM Menu m WHERE m.idMenu IN " +
-            "(SELECT p.idMenu FROM Permission p WHERE p.idUserGroup = " +
-            "(SELECT u.idUserGroup FROM User u WHERE u.username = :username))" +
-            "AND m.idParentMenu IS NULL")
+            "(SELECT p.menu FROM Permission p WHERE p.userGroup = " +
+            "(SELECT u.userGroup FROM User u WHERE u.username = :username)) AND m.parentMenu IS NULL")
     List<Menu> findModulesFromUser(@Param("username") String username);
 
     // TODO get the difference between Modules loading and menus loading from Loiane

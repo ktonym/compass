@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by akipkoech on 3/6/15.
  */
-public interface UserRoleRepo extends JpaRepository<UserRole, UserRoleId> {
+public interface UserRoleRepo extends JpaRepository<UserRole, Integer> {
 
     List<UserRole> findAll();
 

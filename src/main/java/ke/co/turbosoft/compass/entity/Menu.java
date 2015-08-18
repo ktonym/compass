@@ -18,7 +18,7 @@ public class Menu extends AbstractEntity implements EntityItem<Integer> {
     private String className;
     @OneToMany(mappedBy = "parentMenu")
     private List<Menu> subMenu;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()//cascade = CascadeType.ALL)
     @JoinColumn(name = "idParentMenu")
     private Menu parentMenu;
     @OneToMany(mappedBy = "menu")

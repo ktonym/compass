@@ -1,15 +1,13 @@
 package ke.co.turbosoft.compass.entity;
 
 import javax.json.JsonObjectBuilder;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by ktonym on 6/25/15.
  */
+@Entity
 public class UserGroup extends AbstractEntity implements EntityItem<Integer>{
 
     @Id

@@ -13,14 +13,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
-@Indexed @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+/**
+ * TODO enable caching for lucene
+ */
+//@Indexed @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Corporate extends AbstractEntity implements EntityItem<Integer> {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @DocumentId
+    //@DocumentId
     private Integer idCorporate;
-    @Field(index = org.hibernate.search.annotations.Index.YES,analyze = Analyze.YES, store = Store.YES)
+    //@Field(index = org.hibernate.search.annotations.Index.YES,analyze = Analyze.YES, store = Store.YES)
     private String corporateName;
 	private String abbreviation;
 	private String tel;

@@ -1,5 +1,6 @@
 package ke.co.turbosoft.compass.entity;
 
+import javax.annotation.Generated;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
 import java.util.List;
@@ -7,8 +8,13 @@ import java.util.List;
 /**
  * Created by ktonym on 6/25/15.
  */
-@Entity @IdClass(PermissionId.class)
-public class Permission extends AbstractEntity implements EntityItem<PermissionId> {
+@Entity //@IdClass(PermissionId.class)
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"idUserGroup","idMenu"})})
+public class Permission extends AbstractEntity implements EntityItem<Integer> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idPermission;
 
     @ManyToOne
     @JoinColumn(name="idUserGroup")
@@ -18,6 +24,14 @@ public class Permission extends AbstractEntity implements EntityItem<PermissionI
     private Menu menu;
 
     public Permission() {
+    }
+
+    public Integer getIdPermission() {
+        return idPermission;
+    }
+
+    public void setIdPermission(Integer idPermission) {
+        this.idPermission = idPermission;
     }
 
     public UserGroup getUserGroup() {
@@ -37,12 +51,13 @@ public class Permission extends AbstractEntity implements EntityItem<PermissionI
     }
 
     @Override
-    public PermissionId getId() {
-        return new PermissionId(menu,userGroup);
+    public Integer getId() {
+        return idPermission;
     }
 
     @Override
     public void addJson(JsonObjectBuilder builder) {
+        builder.add("idPermission",idPermission);
         userGroup.addJson(builder);
         menu.addJson(builder);
     }

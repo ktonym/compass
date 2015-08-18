@@ -2,8 +2,10 @@ package ke.co.turbosoft.compass.service;
 
 import ke.co.turbosoft.compass.entity.User;
 import ke.co.turbosoft.compass.entity.UserRole;
+import ke.co.turbosoft.compass.repo.UserRoleRepo;
 import ke.co.turbosoft.compass.vo.Result;
 import ke.co.turbosoft.compass.vo.ResultFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,9 @@ import java.util.List;
 @Transactional
 @Service("userService")
 public class UserServiceImpl extends AbstractService implements UserService {
+
+    @Autowired
+    UserRoleRepo userRoleRepo;
 
     public UserServiceImpl() {
         super();
@@ -108,7 +113,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
         //User actionUser = userRepo.findOne(actionUsername);
 
-        if(!hasRole(actionUsername, "SYS_ADM")){
+        if(!isMemberOf(actionUsername, "SYS_ADM")){
             return ResultFactory.getFailResult(USER_NOT_AUTHORIZED);
         }
 
