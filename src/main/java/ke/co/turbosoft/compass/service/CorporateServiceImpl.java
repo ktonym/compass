@@ -5,6 +5,7 @@ import ke.co.turbosoft.compass.repo.*;
 import ke.co.turbosoft.compass.vo.Result;
 import ke.co.turbosoft.compass.vo.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +43,7 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Secured("UW_UZR")
     public Result<Corporate> store(Integer idCorporate,
                                    String corporateName,
                                    String abbreviation,
@@ -84,11 +86,12 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Secured("UW_UZR")
     public Result<Corporate> remove(Integer idCorporate, String actionUsername) {
 
-        if(!isMemberOf(actionUsername,"System Administrator")){
-            return ResultFactory.getFailResult(USER_NOT_AUTHORIZED);
-        }
+//        if(!isMemberOf(actionUsername,"System Administrator")){
+//            return ResultFactory.getFailResult(USER_NOT_AUTHORIZED);
+//        }
 
         if(idCorporate == null){
             return ResultFactory.getFailResult("Unable to remove Corporate. Null idCorporate!");

@@ -298,16 +298,19 @@ public class InitializeDb {
         Permission perm1 = new Permission();
         perm1.setMenu(menu1);
         perm1.setUserGroup(SYS_ADM);
+        perm1.setName("CREATE_UZR");
         permissionRepo.save(perm1);
 
         Permission perm2 = new Permission();
         perm2.setMenu(menu11);
         perm2.setUserGroup(SYS_ADM);
+        perm2.setName("UW_UZR");
         permissionRepo.save(perm2);
 
         Permission perm3 = new Permission();
         perm3.setMenu(menu12);
         perm3.setUserGroup(SYS_ADM);
+        perm3.setName("CLM_UZR");
         permissionRepo.save(perm3);
 
 

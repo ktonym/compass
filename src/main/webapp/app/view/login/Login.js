@@ -40,13 +40,13 @@ Ext.define('compass.view.login.Login',{
             },
             items: [
                 {
-                    name: 'username',
+                    name: 'j_username',
                     fieldLabel: translations.user,
                     maxLength: 25
                 },
                 {
                     inputType: 'password',
-                    name: 'password',
+                    name: 'j_password',
                     fieldLabel: translations.password,
                     maxLength: 15,
                     msgTarget: 'side',

@@ -1,5 +1,7 @@
 package ke.co.turbosoft.compass.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.annotation.Generated;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
@@ -10,11 +12,13 @@ import java.util.List;
  */
 @Entity //@IdClass(PermissionId.class)
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"idUserGroup","idMenu"})})
-public class Permission extends AbstractEntity implements EntityItem<Integer> {
+public class Permission extends AbstractEntity implements EntityItem<Integer>, GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPermission;
+
+    private String name;
 
     @ManyToOne
     @JoinColumn(name="idUserGroup")
@@ -32,6 +36,14 @@ public class Permission extends AbstractEntity implements EntityItem<Integer> {
 
     public void setIdPermission(Integer idPermission) {
         this.idPermission = idPermission;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public UserGroup getUserGroup() {
@@ -57,8 +69,14 @@ public class Permission extends AbstractEntity implements EntityItem<Integer> {
 
     @Override
     public void addJson(JsonObjectBuilder builder) {
-        builder.add("idPermission",idPermission);
+        builder.add("idPermission",idPermission)
+               .add("name",name);
         userGroup.addJson(builder);
         menu.addJson(builder);
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

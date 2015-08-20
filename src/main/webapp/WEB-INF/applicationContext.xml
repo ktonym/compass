@@ -49,7 +49,7 @@
 
     <jpa:repositories base-package="ke.co.turbosoft.compass.repo"/>
 
-    <!--<import resource="security.xml"/>-->
+    <import resource="security.xml"/>
 
 
 </beans>

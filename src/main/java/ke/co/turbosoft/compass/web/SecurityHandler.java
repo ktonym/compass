@@ -37,8 +37,8 @@ public class SecurityHandler  extends AbstractHandler{
 
     @RequestMapping(value = "/logon", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
-    public String logon(@RequestParam(value = "username", required = true) String username,
-                        @RequestParam(value = "password", required = true) String password,
+    public String logon(@RequestParam(value = "j_username", required = true) String username,
+                        @RequestParam(value = "j_password", required = true) String password,
                         HttpServletRequest request){
 
         Result<User> ar = userService.findByUsernameAndPassword(username,password);
