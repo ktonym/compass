@@ -18,6 +18,7 @@ import java.util.List;
  */
 @Service("corporateService")
 @Transactional
+@Secured("UW_UZR")
 public class CorporateServiceImpl extends AbstractService implements CorporateService {
 
    // private static final int PAGE_SIZE = 3;

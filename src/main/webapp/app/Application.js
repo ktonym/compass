@@ -59,4 +59,35 @@ Ext.define('compass.Application', {
             'Loading application', 'splashscreen'
         );
     }
+
+
+
+
+});
+
+Ext.Ajax.on('requestcomplete', function(connection, response){
+    try {
+        if (response.responseText) {
+            var result = Ext.JSON.decode(response.responseText);
+            if(result.success === false) {
+
+                switch(result.message) {
+                    case '401':
+                        Ext.widget('login-dialog');
+                        break;
+                    case '403':
+                        Ext.Msg.show({
+                            modal  : true,
+                            title  : 'No Permission!',
+                            msg    : 'You do not have permission to access this function!',
+                            icon   : Ext.Msg.ERROR,
+                            buttons: Ext.Msg.OK
+                        });
+                        break;
+                    // handle other messages here
+                }
+            }
+        }
+    } catch(err) {
+    }
 });
