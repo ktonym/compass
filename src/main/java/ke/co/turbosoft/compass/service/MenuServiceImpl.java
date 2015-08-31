@@ -27,10 +27,10 @@ public class MenuServiceImpl extends AbstractService implements MenuService {
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
-    public Result<List<Menu>> findAll(String actionUsername) {
+    public Result<List<Menu>> findModules(String actionUsername) {
 
         if(isValidUser(actionUsername)){
-            // TODO ensure we return only menus belonging to actionUser;
+            // TODO ensure we return only modules belonging to actionUser;
 
              List<Menu> moduleList = menuRepo.findModulesFromUser(actionUsername);
 
@@ -44,5 +44,22 @@ public class MenuServiceImpl extends AbstractService implements MenuService {
 
 
 
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Result<List<Menu>> findItems(String actionUsername, int parentMenu){
+
+        if(isValidUser(actionUsername)){
+
+            List<Menu> itemList = menuRepo.findItemsFromUserAndModule(actionUsername,parentMenu);
+            if (itemList.isEmpty()) {
+               return ResultFactory.getFailResult("No menus found for user ["+actionUsername+"]");
+            }
+            return ResultFactory.getSuccessResult(itemList);
+
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
     }
 }

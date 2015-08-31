@@ -11,5 +11,6 @@ translations = {
     capsLockMsg1: 'Kuwaka kwa kufuli hili laweza kusababisha',
     capsLockMsg2: 'ubonyeze nywila yako kwa njia isiyo sawa.',
     capsLockMsg3: 'Unashauriwa ulizime kufuli hilo kabla ',
-    capsLockMsg4: 'ya kubonyeza nywila yako.'
+    capsLockMsg4: 'ya kubonyeza nywila yako.',
+    menu: 'Menu'
 };

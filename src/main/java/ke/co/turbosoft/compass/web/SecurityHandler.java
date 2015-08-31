@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -69,11 +72,54 @@ public class SecurityHandler  extends AbstractHandler{
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SESSION_ATTRIB_USER);
 
-        Result<List<Menu>> ar =  menuService.findAll(user.getUsername());
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("success", true);
+
+
+        Result<List<Menu>> ar =  menuService.findModules(user.getUsername());
+
 
         if(ar.isSuccess()){
-            List<Menu> menuList = ar.getData();
-            return getJsonSuccessData(menuList);
+
+            JsonArrayBuilder menuArrayBuilder = Json.createArrayBuilder();
+
+            for (Menu module : ar.getData()){
+
+
+
+               Result<List<Menu>> subAr = menuService.findItems(user.getUsername(),module.getId());
+
+               if (subAr.isSuccess())   {
+
+                    JsonArrayBuilder itemArrayBuilder = Json.createArrayBuilder();
+
+                     for (Menu item: subAr.getData() ){
+                         itemArrayBuilder.add(
+                                 Json.createObjectBuilder()
+                                         .add("idMenu", item.getId())
+                                         .add("text", item.getText())
+                                         .add("iconCls", item.getIconCls())
+                                         .add("className", item.getClassName())
+                                         .add("idParentMenu", module.getId())
+
+                         );
+
+                     }
+
+                     menuArrayBuilder.add( Json.createObjectBuilder().add(
+                             "items", itemArrayBuilder));
+
+
+               }
+
+            }
+
+            builder.add("data",menuArrayBuilder);
+
+
+            //List<Menu> menuList = ar.getData();
+            return toJsonString(builder.build());
+
         } else {
             return getJsonErrorMsg(ar.getMsg());
         }

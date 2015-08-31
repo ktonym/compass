@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface MenuService {
 
-    public Result<List<Menu>> findAll(String actionUsername);
+    public Result<List<Menu>> findModules(String actionUsername);
+    public Result<List<Menu>> findItems(String actionUsername, int parentMenu);
 
 }

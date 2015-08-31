@@ -15,7 +15,8 @@ Ext.define('compass.view.main.Main', {
         'compass.view.main.Footer',
         'compass.view.main.Panel',
         'compass.view.main.MainController',
-        'compass.view.main.MainModel'
+        'compass.view.main.MainModel',
+        'compass.view.menu.Accordion'
     ],
 
     controller: 'main',
@@ -39,9 +40,7 @@ Ext.define('compass.view.main.Main', {
             xtype: 'appfooter'
         },{
             region: 'west',
-            xtype: 'container',
-            width: 200,
-            split: true
+            xtype: 'mainmenu'
         }
     ]
 });

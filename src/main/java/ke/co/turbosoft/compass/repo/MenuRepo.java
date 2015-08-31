@@ -14,8 +14,8 @@ public interface MenuRepo extends JpaRepository<Menu,Integer> {
 
     @Query("SELECT m FROM Menu m WHERE m.idMenu IN " +
             "(SELECT p.menu FROM Permission p WHERE p.userGroup = " +
-            "(SELECT u.userGroup FROM User u WHERE u.username = :username))")
-    List<Menu> findMenusFromUser(@Param("username") String username);
+            "(SELECT u.userGroup FROM User u WHERE u.username = :username)) AND m.parentMenu = :parentMenu")
+    List<Menu> findItemsFromUserAndModule(@Param("username") String username, @Param("parentMenu") int parentMenu);
 
     @Query("SELECT m FROM Menu m WHERE m.idMenu IN " +
             "(SELECT p.menu FROM Permission p WHERE p.userGroup = " +
