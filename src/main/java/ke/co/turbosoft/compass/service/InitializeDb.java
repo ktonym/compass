@@ -313,6 +313,12 @@ public class InitializeDb {
         perm3.setName("CLM_UZR");
         permissionRepo.save(perm3);
 
+        Permission perm4 = new Permission();
+        perm4.setMenu(mnuReports);
+        perm4.setUserGroup(SYS_ADM);
+        perm4.setName("RPT");
+        permissionRepo.save(perm4);
+
 
     }
 

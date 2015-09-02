@@ -12,5 +12,9 @@ translations = {
     capsLockMsg2: 'ubonyeze nywila yako kwa njia isiyo sawa.',
     capsLockMsg3: 'Unashauriwa ulizime kufuli hilo kabla ',
     capsLockMsg4: 'ya kubonyeza nywila yako.',
-    menu: 'Menu'
+    menu: 'Menu',
+    menu1: 'Test Menu moja',
+    menu11: 'Test Menu pili',
+    menu12: 'Test Menu tatu',
+    Reports: 'Ripoti'
 };

@@ -24,12 +24,18 @@ Ext.define('compass.Application', {
 
     views: ['login.Login'],
 
+    controllers: [
+        'Menu'
+    ],
+
     stores: [
         // TODO: add global / shared stores here
     ],
     
     launch: function () {
         Ext.tip.QuickTipManager.init();
+        glyphFontFamily: 'FontAwesome';
+
         var me = this;
         var task = new Ext.util.DelayedTask(function(){
            me.splashscreen.fadeOut({

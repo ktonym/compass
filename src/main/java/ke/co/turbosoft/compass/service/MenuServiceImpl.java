@@ -48,7 +48,7 @@ public class MenuServiceImpl extends AbstractService implements MenuService {
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Result<List<Menu>> findItems(String actionUsername, int parentMenu){
+    public Result<List<Menu>> findItems(String actionUsername, Menu parentMenu){
 
         if(isValidUser(actionUsername)){
 

@@ -12,5 +12,9 @@ translations = {
     capsLockMsg2: 'enter your password incorrectly.',
     capsLockMsg3: 'You should press Caps Lock to turn it ',
     capsLockMsg4: 'off before entering your password.'   ,
-    menu: 'Menu'
+    menu: 'Menu',
+    menu1: 'Test Menu 1',
+    menu11: 'Test Menu 11',
+    menu12: 'Test Menu 12',
+    Reports: 'Reports'
 };
