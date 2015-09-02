@@ -85,15 +85,16 @@ public class SecurityHandler  extends AbstractHandler{
 
             for (Menu module : ar.getData()){
 
-                menuArrayBuilder.add(Json.createObjectBuilder().add("text", module.getText()));
 
-                menuArrayBuilder.add(Json.createObjectBuilder().add("iconCls", module.getIconCls()));
 
                Result<List<Menu>> subAr = menuService.findItems(user.getUsername(),module);
 
+
+                JsonArrayBuilder itemArrayBuilder = Json.createArrayBuilder();
+
                if (subAr.isSuccess())   {
 
-                    JsonArrayBuilder itemArrayBuilder = Json.createArrayBuilder();
+
 
                      for (Menu item: subAr.getData() ){
                          itemArrayBuilder.add(
@@ -108,13 +109,21 @@ public class SecurityHandler  extends AbstractHandler{
 
                      }
 
-                     menuArrayBuilder.add( Json.createObjectBuilder().add(
-                             "items", itemArrayBuilder));
+//                     menuArrayBuilder.add( Json.createObjectBuilder().add(
+//                             "items", itemArrayBuilder));
 
-
-               }  else {
-                   menuArrayBuilder.add(Json.createObjectBuilder().add("items", "empty"));
+//               }  else {
+//                   menuArrayBuilder.add(Json.createObjectBuilder().add("items", ""));
                }
+
+                menuArrayBuilder.add(Json.createObjectBuilder()
+                        .add("idMenu", module.getId())
+                        .add("text", module.getText())
+                        .add("iconCls", module.getIconCls())
+                        .add("items", itemArrayBuilder)
+                );
+
+
 
             }
 
