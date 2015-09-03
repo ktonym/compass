@@ -13,8 +13,8 @@ translations = {
     capsLockMsg3: 'Unashauriwa ulizime kufuli hilo kabla ',
     capsLockMsg4: 'ya kubonyeza nywila yako.',
     menu: 'Menu',
-    menu1: 'Test Menu moja',
-    menu11: 'Test Menu pili',
-    menu12: 'Test Menu tatu',
+    menu1: 'Usalama',
+    menu11: 'Ruhusa na Makundi',
+    menu12: 'Watumizi',
     Reports: 'Ripoti'
 };

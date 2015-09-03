@@ -4,6 +4,13 @@ Ext.define("compass.controller.Menu",{
         'Menu'
     ],
 
+    refs: [
+        {
+            ref: 'mainPanel',
+            selector: 'mainpanel'
+        }
+    ],
+
     init: function(application){
 
         this.control({
@@ -66,7 +73,25 @@ Ext.define("compass.controller.Menu",{
 
     },
     onTreePanelItemClick: function(view, record, item, index, event, options){
-        console.log('TreePanelItem clicked!');
+
+        var mainPanel = this.getMainPanel();
+
+        var newTab = mainPanel.items.findBy(
+           function(tab){
+                return tab.title === record.get('text');
+        });
+
+        if(!newTab){
+            newTab = mainPanel.add({
+                    xtype: record.get('className'),
+                    closable: true, // #7
+                    glyph: record.get('glyph'), // #8
+                    title: record.get('text')
+                });
+        }
+
+        mainPanel.setActiveTab(newTab);
+
     }
 });
 

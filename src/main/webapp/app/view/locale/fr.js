@@ -13,8 +13,8 @@ translations = {
     capsLockMsg3: 'Vous devez appuyer sur le verrouillage des majuscules ',
     capsLockMsg4: 'pour l\'éteindre avant d\'entrer votre mot de passe.',
     menu: 'Ménu',
-    menu1: 'Test Ménu 1e',
-    menu11: 'Test Ménu 2e',
-    menu12: 'Test Ménu 3e',
+    menu1: 'Sécurité',
+    menu11: 'Groupes et Permissions',
+    menu12: 'Utilisateurs',
     Reports: 'Les Réports'
 };

@@ -22,6 +22,8 @@ Ext.define('compass.Application', {
     
     name: 'compass',
 
+    requires: ['compass.overrides.tree.ColumnOverride'],
+
     views: ['login.Login'],
 
     controllers: [
