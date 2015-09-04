@@ -3,7 +3,8 @@ Ext.define("compass.view.menu.Tree",{
     xtype: "menutree",
     border: 0,
     autoScroll: true,
-    rootVisible: false
+    rootVisible: false,
+    width: 200
  
 //    requires: [
 //        "compass.model.menu.TreeNode"

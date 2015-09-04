@@ -43,8 +43,6 @@ Ext.define("compass.controller.Menu",{
                    iconCls: root.get('iconCls')
                });
 
-               console.log(root.get('text'));
-               console.log(root.get('iconCls'));
 
                var treeNodeStore = root.items(),
                    nodes = [],
@@ -60,6 +58,8 @@ Ext.define("compass.controller.Menu",{
                        id: item.get('id'),
                        className: item.get('className')
                    });
+
+                   console.log(item.get('iconCls'));
 
                }
                menu.getRootNode().appendChild(nodes);

@@ -24,6 +24,8 @@ Ext.define('compass.Application', {
 
     requires: ['compass.overrides.tree.ColumnOverride'],
 
+    glyphFontFamily: 'FontAwesome',
+
     views: ['login.Login'],
 
     controllers: [
@@ -36,7 +38,7 @@ Ext.define('compass.Application', {
     
     launch: function () {
         Ext.tip.QuickTipManager.init();
-        glyphFontFamily: 'FontAwesome';
+
 
         var me = this;
         var task = new Ext.util.DelayedTask(function(){

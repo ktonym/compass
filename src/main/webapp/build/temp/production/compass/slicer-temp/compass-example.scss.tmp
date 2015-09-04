@@ -908,8 +908,10 @@ $include-extthemeneptune-resizer-splitter: true;
 $include-extthemeneptune-toolbar-paging: true;
 $include-extthemeneptune-toolbar-toolbar: true;
 $include-compass-application: true;
+$include-compass-controller-menu: true;
 $include-compass-model-menu-accordion: true;
 $include-compass-model-menu-treenode: true;
+$include-compass-overrides-tree-columnoverride: true;
 $include-compass-store-menu: true;
 $include-compass-util-sessionmonitor: true;
 $include-compass-util-util: true;
@@ -924,6 +926,8 @@ $include-compass-view-main-main: true;
 $include-compass-view-main-maincontroller: true;
 $include-compass-view-main-mainmodel: true;
 $include-compass-view-main-panel: true;
+$include-compass-view-menu-accordion: true;
+$include-compass-view-menu-tree: true;
 /* including package ext-theme-base */
 @import '../../../../../ext/packages/ext-theme-base/sass/etc/all';
 /* including package ext-theme-neutral */
