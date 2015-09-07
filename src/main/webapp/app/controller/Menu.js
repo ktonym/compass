@@ -80,6 +80,8 @@ Ext.define("compass.controller.Menu",{
            function(tab){
                 return tab.title === record.get('text');
         });
+        console.log(record.get('glyph'));
+        console.log(record.get('iconCls'));
 
         if(!newTab){
             newTab = mainPanel.add({
