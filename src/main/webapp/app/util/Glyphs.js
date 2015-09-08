@@ -1,4 +1,4 @@
-Ext.define("compass.util.Glyphs",{
+Ext.define('compass.util.Glyphs',{
     singleton: true,
     config: {
         webFont: 'FontAwesome',
@@ -14,10 +14,10 @@ Ext.define("compass.util.Glyphs",{
     getGlyph: function(glyph){
         var me=this,
             font=me.getWebFont();
-        if(typeof me.config[glyph] === "undefined"){
+        if(typeof me.config[glyph] === 'undefined'){
             return false;
         }
-        return me.config[glyph] + "@" + font;
+        return me.config[glyph] + '@' + font;
     }
 
 

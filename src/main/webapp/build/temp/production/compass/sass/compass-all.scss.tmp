@@ -911,8 +911,11 @@ $include-compass-application: true;
 $include-compass-controller-menu: true;
 $include-compass-model-menu-accordion: true;
 $include-compass-model-menu-treenode: true;
+$include-compass-model-security-base: false;
+$include-compass-model-security-user: false;
 $include-compass-overrides-tree-columnoverride: true;
 $include-compass-store-menu: true;
+$include-compass-util-glyphs: false;
 $include-compass-util-sessionmonitor: true;
 $include-compass-util-util: true;
 $include-compass-view-locale-translation: true;
@@ -928,6 +931,10 @@ $include-compass-view-main-mainmodel: true;
 $include-compass-view-main-panel: true;
 $include-compass-view-menu-accordion: true;
 $include-compass-view-menu-tree: true;
+$include-compass-view-security-user: false;
+$include-compass-view-security-usercontroller: false;
+$include-compass-view-security-usermodel: false;
+$include-compass-view-security-usersgrid: false;
 /* including package ext-theme-base */
 @import '../../../../../ext/packages/ext-theme-base/sass/etc/all';
 /* including package ext-theme-neutral */
