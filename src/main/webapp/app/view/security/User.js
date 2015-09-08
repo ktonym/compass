@@ -5,7 +5,9 @@ Ext.define("compass.view.security.User",{
  
     requires: [
         "compass.view.security.UsersGrid",
-        "compass.util.Glyphs"
+        "compass.util.Glyphs",
+        "compass.view.security.UserModel",
+        "compass.view.security.UserController"
     ],
     
     controller: "user",
@@ -47,6 +49,9 @@ Ext.define("compass.view.security.User",{
                     glyph: compass.util.Glyphs.getGlyph('edit'),
                     listeners: {
                         click: 'onEdit'
+                    },
+                    bind: {
+                        disabled: '{!usersGrid.selection}'
                     }
 
                 },
@@ -56,6 +61,9 @@ Ext.define("compass.view.security.User",{
                     glyph: compass.util.Glyphs.getGlyph('destroy'),
                     listeners: {
                         click: 'onDelete'
+                    },
+                    bind: {
+                        disabled: '{!usersGrid.selection}'
                     }
 
                 }

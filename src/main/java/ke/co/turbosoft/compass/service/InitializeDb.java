@@ -204,7 +204,7 @@ public class InitializeDb {
         Menu menu12 = new Menu();
         menu12.setText("users");
         menu12.setIconCls("xf007");
-        menu12.setClassName("panel");
+        menu12.setClassName("user");
         menu12.setParentMenu(menu1);
         menuRepo.save(menu12);
 

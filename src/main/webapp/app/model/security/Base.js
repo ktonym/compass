@@ -16,10 +16,10 @@ Ext.define('compass.model.security.Base', {
         proxy: {
             type: 'ajax',
             api: {
-                create: '{entityName:lowercase}/store',
-                read: '{entityName:lowercase}/findAll',
-                update: '{entityName:lowercase}/store',
-                destroy: '{entityName:lowercase}/remove'
+                create: 'compass/{entityName:lowercase}/store',
+                read: 'compass/{entityName:lowercase}/findAll',
+                update: 'compass/{entityName:lowercase}/store',
+                destroy: 'compass/{entityName:lowercase}/remove'
             },
             reader: {
                 type: 'json',

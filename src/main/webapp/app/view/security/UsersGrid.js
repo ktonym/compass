@@ -31,5 +31,6 @@ Ext.define("compass.view.security.UsersGrid",{
             dataIndex: "groups_id",
             text: "Group"
         }
-    ]
+    ],
+    bind: '{users}'
 });
