@@ -20,7 +20,9 @@ Ext.define('compass.util.Util',{
                 icon: Ext.Msg.ERROR,
                 buttons: Ext.Msg.OK
             });
-        }
+        },
+
+        required: '<span style="color:red;font-weight:bold" dataqtip="Required"> *</span>'
 
     }
 

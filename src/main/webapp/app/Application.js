@@ -22,7 +22,7 @@ Ext.define('compass.Application', {
     
     name: 'compass',
 
-    requires: ['compass.overrides.tree.ColumnOverride'],
+    requires: ['compass.overrides.tree.ColumnOverride','compass.util.*','compass.model.security.*'],
 
     glyphFontFamily: 'FontAwesome',
 
@@ -101,3 +101,4 @@ Ext.Ajax.on('requestcomplete', function(connection, response){
     } catch(err) {
     }
 });
+

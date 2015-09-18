@@ -6,7 +6,7 @@ Ext.define("compass.view.security.UsersGrid",{
     columns: [
         {
             width: 150,
-            dataIndex: "userName",
+            dataIndex: "username",
             text: "Username"
         },
         {
@@ -28,7 +28,7 @@ Ext.define("compass.view.security.UsersGrid",{
         },
         {
             width: 150,
-            dataIndex: "groups_id",
+            dataIndex: "idGroup",
             text: "Group"
         }
     ],

@@ -8,6 +8,10 @@ Ext.define("compass.controller.Menu",{
         {
             ref: 'mainPanel',
             selector: 'mainpanel'
+        },
+        {
+            ref: 'userPanel',
+            selector: 'user'
         }
     ],
 
@@ -59,7 +63,7 @@ Ext.define("compass.controller.Menu",{
                        className: item.get('className')
                    });
 
-                   console.log(item.get('iconCls'));
+                 //  console.log(item.get('iconCls'));
 
                }
                menu.getRootNode().appendChild(nodes);
@@ -80,9 +84,9 @@ Ext.define("compass.controller.Menu",{
            function(tab){
                 return tab.title === record.get('text');
         });
-        console.log(record.get('glyph'));
+       // console.log(record.get('glyph'));
 
-        console.log(record.get('className'));
+        //console.log(record.get('className'));
 
         if(!newTab){
             newTab = mainPanel.add({

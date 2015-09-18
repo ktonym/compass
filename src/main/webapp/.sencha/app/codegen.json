@@ -304,6 +304,54 @@
         "modelNamespace": "compass.model",
         "name": "security.Base"
       }
+    },
+    "app/model/security/Group.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "groupName:string:null",
+        "modelFileName": "security/Group",
+        "modelNamespace": "compass.model",
+        "name": "security.Group"
+      }
+    },
+    "app/model/securite/Base.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "securite/Base",
+        "modelNamespace": "compass.model",
+        "name": "securite.Base"
+      }
+    },
+    "app/model/sec/Base.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "id:int:null",
+        "modelFileName": "sec/Base",
+        "modelNamespace": "compass.model",
+        "name": "sec.Base"
+      }
+    },
+    "app/model/sec/User.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "firstName:string:null,lastName:string:null,username:string:null,email:auto:null,picture:auto:null,group_id:int:null",
+        "modelFileName": "sec/User",
+        "modelNamespace": "compass.model",
+        "name": "sec.User"
+      }
     }
   }
 }

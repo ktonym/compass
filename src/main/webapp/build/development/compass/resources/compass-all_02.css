@@ -1,3 +1,23 @@
+/* line 66, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-default {
+  background-image: url(images/form/spinner.png);
+  background-color: white;
+  width: 22px;
+  height: 11px; }
+  /* line 70, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+  .x-form-spinner-default.x-rtl {
+    background-image: url(images/form/spinner-rtl.png); }
+
+/* line 102, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-up-default {
+  background-position: 0 0; }
+  /* line 105, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+  .x-form-spinner-up-default.x-form-spinner-over {
+    background-position: -22px 0; }
+    /* line 107, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+    .x-form-spinner-up-default.x-form-spinner-over.x-form-spinner-focus {
+      background-position: -88px 0; }
+  /* line 112, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
   .x-form-spinner-up-default.x-form-spinner-focus {
     background-position: -66px 0; }
   /* line 117, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
@@ -5799,3 +5819,25 @@ tr.x-grid-subtable-row {
 /* line 56, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-southwest {
   background-position: 2px -2px; }
+
+/* including package compass */
+/* line 3, ../../../../sass/src/view/main/Footer.scss */
+.app-footer-title {
+  color: #0b67c4;
+  font-size: 12px;
+  font-weight: bold; }
+
+/* line 9, ../../../../sass/src/view/main/Footer.scss */
+.app-footer {
+  border-top: 1px solid #07417c; }
+
+/* line 3, ../../../../sass/src/view/main/Header.scss */
+.app-header-logo {
+  color: #2a3f5d; }
+
+/* line 7, ../../../../sass/src/view/main/Header.scss */
+.app-header-title {
+  padding: 5px 0 5px 3px;
+  color: #2a3f5d;
+  font-size: 18px;
+  font-weight: bold; }

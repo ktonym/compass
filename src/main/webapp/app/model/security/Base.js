@@ -1,14 +1,10 @@
-Ext.define('compass.model.security.Base', {
+/**
+ * Created by akipkoech on 18/09/15.
+ */
+
+Ext.define('compass.model.security.Base',{
     extend: 'Ext.data.Model',
-
     requires: ['compass.util.Util'],
-
-    idProperty: 'id',
-    
-    fields: [
-        { name: 'id', type: 'int' }
-
-    ],
 
     schema: {
         namespace: 'compass.model.security',

@@ -1,15 +1,14 @@
-
 Ext.define("compass.view.security.User",{
     extend: "Ext.panel.Panel",
     xtype: "user",
- 
+
     requires: [
         "compass.view.security.UsersGrid",
-        //"compass.util.Glyphs",
+        "compass.util.Glyphs",
         "compass.view.security.UserModel",
         "compass.view.security.UserController"
     ],
-    
+
     controller: "user",
     viewModel: {
         type: "user"
@@ -36,7 +35,7 @@ Ext.define("compass.view.security.User",{
                 {
                     xtype: 'button',
                     text: 'Add',
-                    //glyph: compass.util.Glyphs.getGlyph('add'),
+                    glyph: compass.util.Glyphs.getGlyph('add'),
                     listeners: {
                         click: 'onAdd'
                     }
@@ -45,7 +44,7 @@ Ext.define("compass.view.security.User",{
                 {
                     xtype: 'button',
                     text: 'Edit',
-                   // glyph: compass.util.Glyphs.getGlyph('edit'),
+                    glyph: compass.util.Glyphs.getGlyph('edit'),
                     listeners: {
                         click: 'onEdit'
                     },
@@ -57,7 +56,7 @@ Ext.define("compass.view.security.User",{
                 {
                     xtype: 'button',
                     text: 'Delete',
-                    //glyph: compass.util.Glyphs.getGlyph('destroy'),
+                    glyph: compass.util.Glyphs.getGlyph('destroy'),
                     listeners: {
                         click: 'onDelete'
                     },

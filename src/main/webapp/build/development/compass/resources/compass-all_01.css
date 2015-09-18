@@ -2450,12 +2450,32 @@
 .fa-medium:before {
   content: "\f23a"; }
 
-/* line 3, ../../../../sass/etc/all.scss */
+/* line 4, ../../../../sass/etc/iconColors.scss */
+.tabIcon {
+  color: #0b67c4; }
+
+/* line 8, ../../../../sass/etc/iconColors.scss */
+.buttonIcon {
+  color: white; }
+
+/* line 1, ../../../../sass/etc/flagIcons.scss */
+.en {
+  background-image: url("images/app/flags/us.png") !important; }
+
+/* line 5, ../../../../sass/etc/flagIcons.scss */
+.ke {
+  background-image: url("images/app/flags/ke.png") !important; }
+
+/* line 9, ../../../../sass/etc/flagIcons.scss */
+.fr {
+  background-image: url("images/app/flags/fr.png") !important; }
+
+/* line 5, ../../../../sass/etc/all.scss */
 .x-mask.splashscreen {
   backgroung-color: white;
   opacity: 1; }
 
-/* line 9, ../../../../sass/etc/all.scss */
+/* line 11, ../../../../sass/etc/all.scss */
 .x-mask-msg.splashscreen,
 .x-mask-msg.splashscreen div {
   font-size: 16px;
@@ -2465,11 +2485,11 @@
   background-color: transparent;
   background-position: top center; }
 
-/* line 20, ../../../../sass/etc/all.scss */
+/* line 22, ../../../../sass/etc/all.scss */
 .x-message-box .x-window-body .x-box-inner {
   min-height: 110px !important; }
 
-/* line 24, ../../../../sass/etc/all.scss */
+/* line 26, ../../../../sass/etc/all.scss */
 .x-splash-icon {
   background-image: url("images/app/compass.png") !important;
   margin-top: -30px;
@@ -26016,23 +26036,3 @@ div.x-border-layout-ct {
 /* line 59, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
 .x-form-trigger-spinner-default {
   width: 22px; }
-
-/* line 66, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
-.x-form-spinner-default {
-  background-image: url(images/form/spinner.png);
-  background-color: white;
-  width: 22px;
-  height: 11px; }
-  /* line 70, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
-  .x-form-spinner-default.x-rtl {
-    background-image: url(images/form/spinner-rtl.png); }
-
-/* line 102, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
-.x-form-spinner-up-default {
-  background-position: 0 0; }
-  /* line 105, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
-  .x-form-spinner-up-default.x-form-spinner-over {
-    background-position: -22px 0; }
-    /* line 107, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
-    .x-form-spinner-up-default.x-form-spinner-over.x-form-spinner-focus {
-      background-position: -88px 0; }
