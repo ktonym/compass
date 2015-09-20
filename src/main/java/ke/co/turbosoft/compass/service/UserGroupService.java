@@ -10,6 +10,6 @@ import java.util.List;
  * Created by ktonym on 6/27/15.
  */
 public interface UserGroupService {
-    public Result<List<UserGroup>> findAll();
-    public Result<UserGroup> find();
+    public Result<List<UserGroup>> findAll(String actionUsername);
+    public Result<UserGroup> find(String groupName, String actionUsername);
 }

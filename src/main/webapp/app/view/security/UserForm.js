@@ -6,8 +6,8 @@ Ext.define('compass.view.security.UserForm',{
 
     extend: 'Ext.window.Window',
     alias: 'widget.user-form',
-    height: 270,
-    width: 600,
+    height: 290,
+    width: 620,
 
     requires: ['compass.util.Util','compass.util.Glyphs'],
 
@@ -107,10 +107,10 @@ Ext.define('compass.view.security.UserForm',{
                             xtype: 'image',
                             reference: 'userPicture',
                             height: 150,
-                            width: 150,
-                            bind: {
-                                src: 'resources/profileImages/{currentUser.picture}'
-                            }
+                            width: 150//,
+//                            bind: {
+//                                src: 'resources/profileImages/{currentUser.picture}'
+//                            }
                         }
                     ]
                 }

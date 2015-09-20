@@ -55,25 +55,7 @@ Ext.define('compass.view.login.LoginController',{
     },
     onLoginFailure: function(form,action){
         this.getView().unmask();
-        var result = Ext.JSON.decode(action.response.responseText,true);
-        if (!result){
-            result = {};
-            result.success = false;
-            result.msg = action.response.responseText;
-        }
-
-        switch (action.failureType){
-            case Ext.form.action.Action.CLIENT_INVALID:
-                compass.util.Util.showErrorMsg( 'Form fields may not be submitted with invalid values');
-            break;
-            case Ext.form.action.Action.CONNECT_FAILURE:
-                compass.util.Util.showErrorMsg(action.response.responseText);
-            break;
-            case Ext.form.action.Action.SERVER_INVALID:
-                compass.util.Util.showErrorMsg(result.msg);
-
-        }
-
+            compass.util.Util.handleFormFailure(action);
     },
     onLoginSuccess: function(form,action){
         this.getView().unmask();

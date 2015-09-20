@@ -3,6 +3,10 @@ Ext.define("compass.view.security.UsersGrid",{
     extend: "Ext.grid.Panel",
     alias: "widget.users-grid",
     reference: "usersGrid",
+    selModel: {
+        mode: 'MULTI'
+    },
+    selType: 'checkboxmodel',
     columns: [
         {
             width: 150,

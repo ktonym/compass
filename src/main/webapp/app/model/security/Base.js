@@ -26,7 +26,7 @@ Ext.define('compass.model.security.Base',{
                 writeAllFields: true,
                 encode: true,
                 rootProperty: 'data',
-                allowSingle: false
+                allowSingle: true
             },
             listeners: {
                 exception: function(proxy,response,operation){

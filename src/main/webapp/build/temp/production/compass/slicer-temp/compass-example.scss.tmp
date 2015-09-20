@@ -1,4 +1,4 @@
-$image-search-path: 'D:/projects/compass/src/main/webapp/build/production/compass/resources';
+$image-search-path: '/home/ktonym/IdeaProjects/compass/src/main/webapp/build/production/compass/resources';
 $theme-name:  'ext-theme-neptune' !default;
 $include-ext-abstractcomponent: true;
 $include-ext-abstractcontainer: true;
@@ -912,6 +912,7 @@ $include-compass-controller-menu: true;
 $include-compass-model-menu-accordion: true;
 $include-compass-model-menu-treenode: true;
 $include-compass-model-security-base: true;
+$include-compass-model-security-group: true;
 $include-compass-model-security-user: true;
 $include-compass-overrides-tree-columnoverride: true;
 $include-compass-store-menu: true;
@@ -933,6 +934,7 @@ $include-compass-view-menu-accordion: true;
 $include-compass-view-menu-tree: true;
 $include-compass-view-security-user: true;
 $include-compass-view-security-usercontroller: true;
+$include-compass-view-security-userform: true;
 $include-compass-view-security-usermodel: true;
 $include-compass-view-security-usersgrid: true;
 /* including package ext-theme-base */

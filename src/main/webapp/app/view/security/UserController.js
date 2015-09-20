@@ -8,16 +8,15 @@ Ext.define("compass.view.security.UserController",{
     onAdd: function(button,e,options){
         this.createDialog(null)
     },
-    onEdit: function(button,e,options){},
-    createDialog: function(record){},
-    getRecordsSelected: function(){},
-    onDelete: function(button,e,options){},
-    onSave: function(button,e,options){},
-    onSaveSuccess: function(form,action){},
-    onSaveFailure: function(form,action){},
-    onCancel: function(button,e,options){},
-    onRefresh: function(button,e,options){},
-    onFileFieldChange: function(fileField,value,options){},
+    onEdit: function(button,e,options){
+        var me = this,
+            records = me.getRecordsSelected();
+
+        if (records[0]){
+            me.createDialog(records[0]);
+        }
+
+    },
     createDialog: function(record){
         var me = this,
             view = me.getView();
@@ -37,5 +36,44 @@ Ext.define("compass.view.security.UserController",{
             }
         });
         me.dialog.show();
-    }
+    },
+    getRecordsSelected: function(){
+        var grid = this.lookupReference('usersGrid');
+        return grid.getSelection();
+    },
+    onDelete: function(button,e,options){},
+    onSave: function(button,e,options){
+        var me = this,
+            form = me.lookupReference('form');
+
+        if(form && form.isValid){
+            form.submit({
+                clientValidation: true,
+                url: '/compass/user/store',
+                scope: me,
+                success: 'onSaveSuccess',
+                failure: 'onSaveFailure'
+            });
+        }
+
+    },
+    onSaveSuccess: function(form,action){
+        var me = this;
+        me.onCancel();
+        me.refresh();
+        compass.util.Util.showToast('Success! User saved.');
+    },
+    onSaveFailure: function(form,action){
+        compass.util.Util.handleFormFailure(action);
+    },
+    onCancel: function(button,e,options){
+        var me = this;
+        me.dialog = Ext.destroy(me.dialog);
+    },
+    refresh: function(button,e,options){
+        var me = this,
+            store = me.getStore('users');
+        store.load();
+    },
+    onFileFieldChange: function(fileField,value,options){}
 })
