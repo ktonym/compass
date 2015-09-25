@@ -36,5 +36,15 @@ Ext.define("compass.view.security.UsersGrid",{
             text: "Group"
         }
     ],
+    listeners: {
+//        itemclick: function(dv, record, item, index, e) {
+//            this, record, item, index, e, eOpts
+//            console.log(record.get('username'));
+//
+//        },
+        select: function(dv, record, index, eOpts){
+            alert(record.get('username'));
+        }
+    },
     bind: '{users}'
 });

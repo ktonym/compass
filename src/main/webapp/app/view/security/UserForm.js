@@ -6,8 +6,8 @@ Ext.define('compass.view.security.UserForm',{
 
     extend: 'Ext.window.Window',
     alias: 'widget.user-form',
-    height: 290,
-    width: 620,
+    height: 270,
+    width: 600,
 
     requires: ['compass.util.Util','compass.util.Glyphs'],
 
@@ -42,15 +42,15 @@ Ext.define('compass.view.security.UserForm',{
                         anchor: '100%',
                         xtype: 'textfield',
                         msgTarget: 'side',
-                        labelWidth: 75
+                        labelWidth: 85
                     },
                     items: [
-                        {
-                            xtype: 'hiddenfield',
-                            name: 'id',
-                            fieldLabel: 'Label',
-                            bind: '{currentUser.id}'
-                        },
+//                        {
+//                            xtype: 'hiddenfield',
+//                            name: 'id',
+//                            fieldLabel: 'Label',
+//                            bind: '{currentUser.idGroup}'
+//                        },
                         {
                             fieldLabel: 'Username',
                             name: 'username',
@@ -75,7 +75,7 @@ Ext.define('compass.view.security.UserForm',{
                             xtype: 'combo',
                             fieldLabel: 'Group',
                             displayField: 'name',
-                            valueField: 'id',
+                            valueField: 'idGroup',
                             queryMode: 'local',
                             forceSelection: true,
                             editable: false,
@@ -90,7 +90,7 @@ Ext.define('compass.view.security.UserForm',{
                             xtype: 'filefield',
                             fieldLabel: 'Photo',
                             name: 'picture',
-                            buttonText: 'Select Photo...',
+                            buttonText: 'Browse',
                             afterLabelTextTpl: '',
                             listeners: {
                                 change: 'onFileFieldChange'

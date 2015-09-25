@@ -41,20 +41,58 @@ Ext.define("compass.view.security.UserController",{
         var grid = this.lookupReference('usersGrid');
         return grid.getSelection();
     },
-    onDelete: function(button,e,options){},
-    onSave: function(button,e,options){
-        var me = this,
-            form = me.lookupReference('form');
+    onDelete: function(button,e,options){
 
-        if(form && form.isValid){
-            form.submit({
-                clientValidation: true,
-                url: '/compass/user/store',
-                scope: me,
-                success: 'onSaveSuccess',
-                failure: 'onSaveFailure'
+        var me = this,
+            view = me.getView(),
+            records = me.getRecordsSelected(), //#1
+            store = me.getStore('users'); //#2
+        if (store.getCount() >= 2 && records.length){ //#3
+            Ext.Msg.show({
+                title:'Delete?', //#4
+                msg: 'Are you sure you want to delete?',
+                buttons: Ext.Msg.YESNO,
+                icon: Ext.Msg.QUESTION,
+                fn: function (buttonId){
+                    if (buttonId == 'yes'){ //#5
+                        store.remove(records); //#6
+                        store.sync(); //#7
+                    }
+                }
+            });
+        } else if (store.getCount() === 1) { //#8
+            Ext.Msg.show({
+                title:'Warning',
+                msg: 'You cannot delete all the users from the application.',
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.WARNING
             });
         }
+
+    },
+    onSave: function(button,e,options){
+        var me = this,
+            form = me.lookupReference('form'),
+            rec = form.getRecord(),
+            vm = this.getViewModel(),
+            store = vm.getStore('users');
+
+//        var me = this,
+//            view = me.getView(),
+//            records = me.getRecordsSelected(), //#1
+//            store = me.getStore('users');
+
+            if(form && form.isValid){
+
+                console.log(rec);
+                store.add(rec);
+                store.sync({
+                    success: 'onSaveSuccess',
+                    failure: 'onSaveFailure'
+                });
+
+            }
+
 
     },
     onSaveSuccess: function(form,action){

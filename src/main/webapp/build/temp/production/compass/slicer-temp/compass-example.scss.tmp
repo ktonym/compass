@@ -1,4 +1,4 @@
-$image-search-path: '/home/ktonym/IdeaProjects/compass/src/main/webapp/build/production/compass/resources';
+$image-search-path: 'D:/projects/compass/src/main/webapp/build/production/compass/resources';
 $theme-name:  'ext-theme-neptune' !default;
 $include-ext-abstractcomponent: true;
 $include-ext-abstractcontainer: true;
