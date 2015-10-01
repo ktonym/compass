@@ -26,7 +26,7 @@ import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
  * Created by akipkoech on 12/10/14.
  */
 @Controller
-@RequestMapping("/corporate")
+@RequestMapping("/uw")
 public class CorporateHandler extends AbstractHandler{
 
     @Autowired
@@ -54,7 +54,7 @@ public class CorporateHandler extends AbstractHandler{
 
     }
 
-    @RequestMapping(value="/findAll",method = RequestMethod.GET, produces={"application/json"})
+    @RequestMapping(value="/corporate/findAll",method = RequestMethod.GET, produces={"application/json"})
     @ResponseBody
     public String findAll(HttpServletRequest request){
 
@@ -71,7 +71,7 @@ public class CorporateHandler extends AbstractHandler{
     }
 
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/corporate/find", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String find (
             @RequestParam(value = "idCorporate", required = true) Integer idCorporate,
@@ -91,7 +91,7 @@ public class CorporateHandler extends AbstractHandler{
 
     }
 
-    @RequestMapping(value="/store", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value="/corporate/store", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String store (
             @RequestParam(value = "data", required = true) String jsonData,
@@ -126,7 +126,7 @@ public class CorporateHandler extends AbstractHandler{
 
     }
 
-    @RequestMapping(value = "/treenode", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/corporate/treenode", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String getCorpTreeNode(
             @RequestParam(value = "node", required = true) String node,
@@ -337,7 +337,7 @@ public class CorporateHandler extends AbstractHandler{
         }
     }
 
-    @RequestMapping(value = "/contact/findAll", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/contactinfo/findAll", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findContact(
             @RequestParam(value ="idCorporate", required = true) Integer idCorporate,
@@ -354,7 +354,7 @@ public class CorporateHandler extends AbstractHandler{
         }
     }
 
-    @RequestMapping(value = "/contact/store", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/contactinfo/store", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String storeContact(
             @RequestParam(value = "data", required = true) String jsonData,
@@ -383,7 +383,7 @@ public class CorporateHandler extends AbstractHandler{
 
     }
 
-    @RequestMapping(value = "/contact/remove", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/contactinfo/remove", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String removeContact(
             @RequestParam(value = "idContactInfo") Integer idContactInfo,

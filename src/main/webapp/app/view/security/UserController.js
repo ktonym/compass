@@ -14,6 +14,7 @@ Ext.define("compass.view.security.UserController",{
 
         if (records[0]){
             me.createDialog(records[0]);
+            console.log(records[0].getData());
         }
 
     },
@@ -74,14 +75,8 @@ Ext.define("compass.view.security.UserController",{
         var me = this,
             form = me.lookupReference('form'),
             rec = form.getRecord(),
-            vm = this.getViewModel(),
+            vm = me.getViewModel(),
             store = vm.getStore('users');
-
-//        var me = this,
-//            view = me.getView(),
-//            records = me.getRecordsSelected(), //#1
-//            store = me.getStore('users');
-
             if(form && form.isValid){
 
                 console.log(rec);

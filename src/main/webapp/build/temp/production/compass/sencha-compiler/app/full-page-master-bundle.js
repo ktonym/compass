@@ -1,3 +1,3 @@
 // @tag full-page
-// @require D:\projects\compass\src\main\webapp\app.js
-// @require D:\projects\compass\src\main\webapp\app\CustomVTypes.js
+// @require /home/ktonym/IdeaProjects/compass/src/main/webapp/app.js
+// @require /home/ktonym/IdeaProjects/compass/src/main/webapp/app/CustomVTypes.js

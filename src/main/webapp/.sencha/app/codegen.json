@@ -352,6 +352,42 @@
         "modelNamespace": "compass.model",
         "name": "sec.User"
       }
+    },
+    "app/model/uw/Corporate.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "idCorporate:auto:null,int:auto:null,corporateName:string:null,abbreviation:string:null,email:auto:null,tel:string:null,postalAddress:auto:null",
+        "modelFileName": "uw/Corporate",
+        "modelNamespace": "compass.model",
+        "name": "uw.Corporate"
+      }
+    },
+    "app/model/uw/ContactInfo.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "idContactInfo:int:null,firstName:string:null,surname:string:null,jobTitle:string:null,email:auto:null,tel:string:null",
+        "modelFileName": "uw/ContactInfo",
+        "modelNamespace": "compass.model",
+        "name": "uw.ContactInfo"
+      }
+    },
+    "app/model/uw/CorpAnniv.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "31d5356142a167c72422f7902f19df3c583f3249",
+      "parameters": {
+        "appName": "compass",
+        "baseClass": "Ext.data.Model",
+        "fields": "idCorpAnniv:int:null,anniv:int:null,startDate:date:null,endDate:date:null,renewalDate:date:null",
+        "modelFileName": "uw/CorpAnniv",
+        "modelNamespace": "compass.model",
+        "name": "uw.CorpAnniv"
+      }
     }
   }
 }
