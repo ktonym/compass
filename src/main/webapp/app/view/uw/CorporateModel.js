@@ -42,5 +42,21 @@ Ext.define('compass.view.uw.CorporateModel',{
             autoLoad: true
         }
 
+    },
+
+    formulas: {
+        currentCorporate: {
+            bind: {
+                bindTo: '{corporatesGrid.selection}',
+                deep: true
+            },
+            get: function(corporate){
+                return corporate;
+            },
+            set: function(corporate){
+                corporate = this.set('currentCorporate',corporate);
+            }
+        }
     }
+
 })

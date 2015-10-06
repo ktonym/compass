@@ -1,6 +1,6 @@
 Ext.define('compass.view.uw.Corporate',{
     extend: 'Ext.panel.Panel',
-
+    xtype: 'corporate',
     requires: [
         'compass.util.Glyphs',
         'compass.view.uw.CorporatesGrid',

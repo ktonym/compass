@@ -216,7 +216,7 @@ public class InitializeDb {
         Menu mnuSchemes = new Menu();
         mnuSchemes.setText("schemes");
         mnuSchemes.setIconCls("xf013");
-        mnuSchemes.setClassName("panel");
+        mnuSchemes.setClassName("corporate");
         mnuSchemes.setParentMenu(menu2);
         menuRepo.save(mnuSchemes);
 
