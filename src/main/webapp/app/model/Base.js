@@ -1,17 +1,18 @@
-Ext.define('compass.model.security.Base',{
+Ext.define('compass.model.Base',{
     extend: 'Ext.data.Model',
+
     requires: ['compass.util.Util'],
 
     schema: {
-        namespace: 'compass.model.security',
-        //urlPrefix: 'user',
+        namespace: 'compass.model',
+        urlPrefix: 'compass',
         proxy: {
             type: 'ajax',
-            api: {
-                create: 'compass/{entityName:lowercase}/store',
-                read: 'compass/{entityName:lowercase}/findAll',
-                update: 'compass/{entityName:lowercase}/store',
-                destroy: 'compass/{entityName:lowercase}/remove'
+            api : {
+                create: '{prefix}/{entityName:lowercase}/store.json',
+                read: '{prefix}/{entityName:lowercase}/findAll.json',
+                update: '{prefix}/{entityName:lowercase}/store.json',
+                destroy: '{prefix}/{entityName:lowercase}/remove.json'
             },
             reader: {
                 type: 'json',
@@ -20,16 +21,15 @@ Ext.define('compass.model.security.Base',{
             writer: {
                 type: 'json',
                 writeAllFields: true,
-                encode: true,
                 rootProperty: 'data',
-                allowSingle: true
+                allowSingle: false,
+                encode: true
             },
             listeners: {
-                exception: function(proxy,response,operation){
+                exception: function(proxy, response, operation){
                     compass.util.Util.showErrorMsg(response.responseText);
                 }
             }
-
         }
     }
 

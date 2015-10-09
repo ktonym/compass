@@ -21,13 +21,13 @@ import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
  * Created by ktonym on 9/20/15.
  */
 @Controller
-@RequestMapping("/group")
+//@RequestMapping("/group")
 public class UserGroupHandler extends AbstractHandler {
 
     @Autowired
     private UserGroupService userGroupService;
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/group/find", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String find(@RequestParam(value = "name") String groupname,
                        HttpServletRequest request){
@@ -43,7 +43,7 @@ public class UserGroupHandler extends AbstractHandler {
 
     }
 
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/group/findAll", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findAll(HttpServletRequest request) {
 

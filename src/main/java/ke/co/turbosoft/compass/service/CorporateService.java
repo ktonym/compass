@@ -4,6 +4,7 @@ import ke.co.turbosoft.compass.entity.*;
 import ke.co.turbosoft.compass.vo.Result;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -43,4 +44,11 @@ public interface CorporateService {
     Result<Corporate> find(Integer idCorporate, String actionUsername);
 
     Result<List<Corporate>> findAll(String actionUsername);
+
+    Result<List<Corporate>> findModifiedAfter(LocalDateTime time, String actionUsername);
+
+    Result<List<Corporate>> findAddedAfter(LocalDate time, String actionUsername);
+
+    Result<List<Corporate>> findAddedBefore(LocalDate time, String actionUsername);
+
 }

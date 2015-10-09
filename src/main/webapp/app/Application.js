@@ -22,7 +22,7 @@ Ext.define('compass.Application', {
     
     name: 'compass',
 
-    requires: ['compass.overrides.tree.ColumnOverride','compass.util.*','compass.model.security.*'],
+    requires: ['compass.overrides.tree.ColumnOverride','compass.util.*'],
 
     glyphFontFamily: 'FontAwesome',
 

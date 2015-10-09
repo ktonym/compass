@@ -9,6 +9,7 @@ import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -35,10 +36,14 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
     private List<ContactInfo> contactInfo;
     @Convert(converter=LocalDatePersistenceConverter.class)
     private LocalDate joined;
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime lastUpdate;
     @OneToMany(mappedBy = "corporate")
     private List<GroupRate> rates;
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+    static final DateTimeFormatter DATE_FORMATTER_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
     public Corporate() {
         this.setJoined(LocalDate.now());
@@ -116,6 +121,14 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
         this.rates = rates;
     }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     @Override
     public void addJson(JsonObjectBuilder builder) {
         builder.add("idCorporate", idCorporate)
@@ -124,7 +137,8 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
                 .add("tel",tel == null ? "" : tel)
                 .add("email",email)
                 .add("postalAddress", postalAddress == null ? "" : postalAddress)
-                .add("joined", joined == null ? "" : DATE_FORMATTER_yyyyMMdd.format(joined));
+                .add("joined", joined == null ? "" : DATE_FORMATTER_yyyyMMdd.format(joined))
+                .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
     }
 
     @Override

@@ -59,4 +59,4 @@ Ext.define('compass.view.uw.CorporateModel',{
         }
     }
 
-})
+});

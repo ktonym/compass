@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -78,6 +79,7 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
         corporate.setJoined(joined);
         corporate.setPostalAddress(postalAddress);
         corporate.setTel(tel);
+        corporate.setLastUpdate(LocalDateTime.now());
 
         corporateRepo.save(corporate);
 
@@ -137,6 +139,39 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
     public Result<List<Corporate>> findAll(String actionUsername) {
         if(isValidUser(actionUsername)){
             List<Corporate> corporateList = corporateRepo.findAll();
+            return ResultFactory.getSuccessResult(corporateList);
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Result<List<Corporate>> findModifiedAfter(LocalDateTime time, String actionUsername) {
+        if(isValidUser(actionUsername)){
+            List<Corporate> corporateList = corporateRepo.findByLastUpdateAfter(time);
+            return ResultFactory.getSuccessResult(corporateList);
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Result<List<Corporate>> findAddedAfter(LocalDate time, String actionUsername) {
+        if(isValidUser(actionUsername)){
+            List<Corporate> corporateList = corporateRepo.findByJoinedAfter(time);
+            return ResultFactory.getSuccessResult(corporateList);
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Result<List<Corporate>> findAddedBefore(LocalDate time, String actionUsername) {
+        if(isValidUser(actionUsername)){
+            List<Corporate> corporateList = corporateRepo.findByJoinedBefore(time);
             return ResultFactory.getSuccessResult(corporateList);
         } else {
             return ResultFactory.getFailResult(USER_INVALID);

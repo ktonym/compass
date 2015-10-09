@@ -22,7 +22,7 @@ import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
  * Created by akipkoech on 4/13/15.
  */
 @Controller
-@RequestMapping("/category")
+//@RequestMapping("/category")
 public class CategoryHandler extends AbstractHandler{
 
     @Autowired
@@ -31,7 +31,7 @@ public class CategoryHandler extends AbstractHandler{
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/findByAnniv", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/category/findByAnniv", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findByAnniv(
             @RequestParam(value = "idCorpAnniv", required = true) Integer idCorpAnniv,
@@ -48,7 +48,7 @@ public class CategoryHandler extends AbstractHandler{
         }
     }
 
-    @RequestMapping(value = "/store", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/category/store", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String store(
             @RequestParam(value = "data", required = true) String jsonData,
@@ -75,7 +75,7 @@ public class CategoryHandler extends AbstractHandler{
 
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/category/remove", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String remove(
             @RequestParam(value = "idCategory", required = true) Integer idCategory,

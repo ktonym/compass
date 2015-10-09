@@ -17,14 +17,14 @@ import java.util.List;
 import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserHandler extends AbstractHandler{
 	
 	@Autowired
 	private UserService userService;
 
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/user/find", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String find(@RequestParam(value = "username") String username,
                        HttpServletRequest request){
@@ -41,7 +41,7 @@ public class UserHandler extends AbstractHandler{
 
     }
 
-	@RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = {"application/json"})
+	@RequestMapping(value = "/user/findAll", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
 	public String findAll(HttpServletRequest request){
 
@@ -57,7 +57,7 @@ public class UserHandler extends AbstractHandler{
 
 	}
 
-    @RequestMapping(value = "/store", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/user/store", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String store(@RequestParam(value = "data", required = true) String jsonData,
                         HttpServletRequest request){
@@ -82,7 +82,7 @@ public class UserHandler extends AbstractHandler{
 
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/user/remove", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String remove(@RequestParam(value="username") String username,
                          HttpServletRequest request){

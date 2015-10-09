@@ -3,6 +3,8 @@ package ke.co.turbosoft.compass.entity;
 
 import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by akipkoech on 12/8/14.
@@ -19,9 +21,13 @@ public class ContactInfo extends AbstractEntity implements EntityItem<Integer> {
     private String jobTitle;
     private String email;
     private String tel;
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime lastUpdate;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="idCorporate")
     private Corporate corporate;
+
+    static final DateTimeFormatter DATE_FORMATTER_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
     public ContactInfo() {
     }
@@ -82,6 +88,14 @@ public class ContactInfo extends AbstractEntity implements EntityItem<Integer> {
         this.corporate = corporate;
     }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     @Override
     public Integer getId() {
         return idContactInfo;
@@ -94,7 +108,8 @@ public class ContactInfo extends AbstractEntity implements EntityItem<Integer> {
                 .add("surname", surname)
                 .add("jobTitle", jobTitle)
                 .add("email", email)
-                .add("tel", tel);
+                .add("tel", tel)
+                .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
         corporate.addJson(builder);
     }
 }

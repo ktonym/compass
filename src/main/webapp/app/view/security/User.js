@@ -3,6 +3,7 @@ Ext.define("compass.view.security.User",{
     xtype: "user",
 
     requires: [
+        "compass.model.security.*",
         "compass.view.security.UsersGrid",
         "compass.util.Glyphs",
         "compass.view.security.UserModel",

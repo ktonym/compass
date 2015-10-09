@@ -3,6 +3,7 @@ package ke.co.turbosoft.compass.entity;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "intermediary_id",nullable = true)
     private Intermediary intermediary;
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime lastUpdate;
+
+    static final DateTimeFormatter DATE_FORMATTER_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -97,6 +102,14 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
         this.intermediary = intermediary;
     }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     @Override
     public Integer getId() {
         return idCorpAnniv;
@@ -108,7 +121,8 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
                 .add("anniv", anniv)
                 .add("startDate", startDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(startDate))
                 .add("endDate", endDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(endDate))
-                .add("renewalDate", renewalDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(renewalDate)); 
+                .add("renewalDate", renewalDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(renewalDate))
+                .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
         corporate.addJson(builder);
         if(this.getIntermediary()!= null){
             intermediary.addJson(builder);

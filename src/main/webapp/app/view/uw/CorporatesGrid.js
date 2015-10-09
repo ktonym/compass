@@ -31,8 +31,7 @@ Ext.define('compass.view.uw.CorporatesGrid',{
             text: "Postal Address"
         }
     ],
-//    listeners: {
-//
-//    },
-    bind: '{corporates}'
+    bind: {
+        store:  '{corporates}'
+    }
 });

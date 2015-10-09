@@ -26,7 +26,7 @@ import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
  * Created by akipkoech on 12/10/14.
  */
 @Controller
-@RequestMapping("/uw")
+//@RequestMapping("/uw")
 public class CorporateHandler extends AbstractHandler{
 
     @Autowired
