@@ -21,13 +21,13 @@ import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
  * Created by akipkoech on 26/05/15.
  */
 @Controller
-@RequestMapping("/ref")
+//@RequestMapping("/ref")
 public class AdminRefHandler extends AbstractHandler {
 
     @Autowired
     private BenefitRefService benefitRefService;
 
-    @RequestMapping(value = "/benefit/store", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/benefitref/store", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String storeBenefit(
             @RequestParam(value = "data", required = true) String jsonData,
@@ -51,7 +51,7 @@ public class AdminRefHandler extends AbstractHandler {
 
     }
 
-    @RequestMapping (value = "/benefit/remove", method=RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping (value = "/benefitref/remove", method=RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String removeBenefit(
             @RequestParam(value="benefitCode", required = true) Integer benefitCode,
@@ -69,7 +69,7 @@ public class AdminRefHandler extends AbstractHandler {
 
     }
 
-    @RequestMapping(value = "/benefit/search", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/benefitref/search", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findBenefit(
             @RequestParam(value = "benefitName",required = true) String benefitName,
@@ -87,7 +87,7 @@ public class AdminRefHandler extends AbstractHandler {
 
     }
 
-    @RequestMapping(value = "/benefit/findAll", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/benefitref/findAll", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findAllBenefits(HttpServletRequest request){
 
@@ -103,7 +103,7 @@ public class AdminRefHandler extends AbstractHandler {
 
     }
 
-    @RequestMapping(value = "/benefit/find", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/benefitref/find", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findBenefit(
             @RequestParam(value = "benefitCode") Integer benefitCode,

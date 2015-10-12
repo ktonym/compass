@@ -1,8 +1,10 @@
 package ke.co.turbosoft.compass.repo;
 
 import ke.co.turbosoft.compass.entity.Corporate;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;

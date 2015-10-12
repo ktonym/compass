@@ -1,10 +1,7 @@
 package ke.co.turbosoft.compass.entity;
 
 import javax.json.JsonObjectBuilder;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -14,8 +11,9 @@ import java.util.List;
 public class BenefitRef extends AbstractEntity implements EntityItem<Integer> {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer benefitCode;
-    @Column(unique = true)
+    //@Column(unique = true)
     private String benefitName;
     private String description;
     @OneToMany(mappedBy = "benefitRef")

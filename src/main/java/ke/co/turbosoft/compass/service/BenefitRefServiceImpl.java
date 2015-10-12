@@ -37,15 +37,15 @@ public class BenefitRefServiceImpl extends AbstractService implements BenefitRef
         }
 
         if(benefitName==null||benefitName.trim().isEmpty()){
-            return ResultFactory.getFailResult("Benefit name must be none-empty");
+            return ResultFactory.getFailResult("Benefit name must be non-empty");
         }
 
         benefitName=benefitName.trim();
         description=description.trim();
         /**
-         * attempt to fetch a similarly-named benefit from the database
+         * attempt to fetch a similarly-indexed benefit from the database
          */
-        BenefitRef benefitRef = benefitRefRepo.findByBenefitName(benefitName);
+        BenefitRef benefitRef = benefitRefRepo.findOne(benefitCode);
 
         if (benefitRef == null){ //nothing in the database
             // create a new benefit
@@ -55,9 +55,9 @@ public class BenefitRefServiceImpl extends AbstractService implements BenefitRef
              * something is in the database,
              * we're therefore updating a record
               */
-            BenefitRef testBenefitRef = benefitRefRepo.findOne(benefitCode);
+            BenefitRef testBenefitRef = benefitRefRepo.findByBenefitName(benefitName);
             if(testBenefitRef.getBenefitCode() != benefitRef.getBenefitCode()){
-                return ResultFactory.getFailResult("Benefit code [" + benefitCode + "] doesn't match the stored code for " + benefitName);
+                return ResultFactory.getFailResult("Benefit [" + benefitName + "] already exists under a different code ");
             }
         }
 
@@ -73,9 +73,20 @@ public class BenefitRefServiceImpl extends AbstractService implements BenefitRef
     @Override
     public Result<BenefitRef> remove(Integer benefitCode, String actionUsername) {
         if(isValidUser(actionUsername)){
-            //TODO check if it has child records before deleting!
+            /**
+             * First confirm if the benefit ref has any child corporate benefits
+             */
+
+            BenefitRef testBenRef = benefitRefRepo.findOne(benefitCode);
+            if(testBenRef.getCorpBenefits().isEmpty()){
+                benefitRefRepo.delete(benefitCode);
+                return ResultFactory.getSuccessResult("");
+            } else {
+                return ResultFactory.getFailResult("Benefit [" + testBenRef.getBenefitName() +"] has child records associated.");
+            }
+
         }
-        return null;
+        return ResultFactory.getFailResult(USER_INVALID);
     }
 
     @Override

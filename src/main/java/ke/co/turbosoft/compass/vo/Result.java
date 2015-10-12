@@ -1,5 +1,7 @@
 package ke.co.turbosoft.compass.vo;
 
+import org.springframework.data.domain.Page;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -91,6 +93,14 @@ public class Result<T> implements Serializable {
                 sb.append("List of ").append(firstItem.getClass());
             }
 
+        } else if(data instanceof Page){
+            Page castPage = (Page) data;
+            if (castPage.getTotalPages() == 0){
+                sb.append("No pages");
+            } else {
+                Object firstItem = castPage.getContent().get(0);
+                sb.append("List of ").append(firstItem.getClass());
+            }
         } else {
             sb.append(data.toString());
         }

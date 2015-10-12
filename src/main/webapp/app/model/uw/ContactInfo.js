@@ -1,6 +1,5 @@
 Ext.define('compass.model.uw.ContactInfo', {
-    extend: 'Ext.data.Model',
-    requires: ['compass.util.Util'],
+    extend: 'compass.model.uw.Base',
 
     idProperty: 'idContactInfo',
 
@@ -22,33 +21,6 @@ Ext.define('compass.model.uw.ContactInfo', {
             associationKey: 'corporate'
         }
     ],
-
-    proxy: {
-        type: 'ajax',
-        idParam: 'idContactInfo',
-        api: {
-            create:'compass/uw/contactinfo/store.json',
-            read: 'compass/uw/contactinfo/find.json',
-            update: 'compass/uw/contactinfo/store.json',
-            destroy: 'compass/uw/contactinfo/remove.json'
-        },
-        reader: {
-            type: 'json',
-            rootProperty: 'data'
-        },
-        writer: {
-            type: 'json',
-            allowSingle:true,
-            encode:true,
-            rootProperty:'data',
-            writeAllFields: true
-        },
-        listeners: {
-            exception: function(proxy,response,operation){
-                compass.util.Util.showErrorMsg(response.responseText);
-            }
-        }
-    },
 
     validators: {
         firstName: [

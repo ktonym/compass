@@ -45,6 +45,9 @@ public class InitializeDb {
     @Autowired
     private PermissionRepo permissionRepo;
 
+    @Autowired
+    private BenefitRefRepo benefitRefRepo;
+
     @PostConstruct
     public void init(){
 
@@ -234,9 +237,21 @@ public class InitializeDb {
         mnuInvc.setParentMenu(menu2);
         menuRepo.save(mnuInvc);
 
+        Menu menuUWRef = new Menu();
+        menuUWRef.setText("UW Settings");
+        menuUWRef.setIconCls("fa fa-gears fa-lg");
+        menuRepo.save(menuUWRef);
+
+        Menu mnuBenRef = new Menu();
+        mnuBenRef.setText("Benefits");
+        mnuBenRef.setIconCls("xf08a");
+        mnuBenRef.setClassName("panel");
+        mnuBenRef.setParentMenu(menuUWRef);
+        menuRepo.save(mnuBenRef);
+
         Menu mnuCare = new Menu();
         mnuCare.setText("care");
-        mnuCare.setIconCls("fa fa-database fa-lg");
+        mnuCare.setIconCls("fa fa-medkit fa-lg");
         menuRepo.save(mnuCare);
 
         Menu mnuPreauth = new Menu();
@@ -344,6 +359,18 @@ public class InitializeDb {
         invcPerm.setName("INVC_PERM");
         permissionRepo.save(invcPerm);
 
+        Permission uwRefPerm = new Permission();
+        uwRefPerm.setMenu(menuUWRef);
+        uwRefPerm.setUserGroup(UW_UZR);
+        uwRefPerm.setName("UW_REF_PERM");
+        permissionRepo.save(uwRefPerm);
+
+        Permission uwRefBenPerm = new Permission();
+        uwRefBenPerm.setMenu(mnuBenRef);
+        uwRefBenPerm.setUserGroup(UW_UZR);
+        uwRefBenPerm.setName("UW_BEN_REF_PERM");
+        permissionRepo.save(uwRefBenPerm);
+
         Permission clm_perm = new Permission();
         clm_perm.setMenu(mnuClm);
         clm_perm.setUserGroup(CLM_UZR);
@@ -379,6 +406,37 @@ public class InitializeDb {
         pay_clm_perm.setUserGroup(CLM_UZR);
         pay_clm_perm.setName("PAY_CLM_PERM");
         permissionRepo.save(pay_clm_perm);
+
+        //Benefit Ref definitions
+        BenefitRef ip_ben_ref = new BenefitRef();
+        ip_ben_ref.setBenefitName("Inpatient");
+        ip_ben_ref.setDescription("Service requiring a patient to be admitted");
+        benefitRefRepo.save(ip_ben_ref);
+
+        BenefitRef op_ben_ref = new BenefitRef();
+        op_ben_ref.setBenefitName("Outpatient");
+        op_ben_ref.setDescription("Service provided to a patient without admission");
+        benefitRefRepo.save(op_ben_ref);
+
+        BenefitRef optic_ben_ref = new BenefitRef();
+        optic_ben_ref.setBenefitName("Optical");
+        optic_ben_ref.setDescription("Optical health care");
+        benefitRefRepo.save(optic_ben_ref);
+
+        BenefitRef dental_ben_ref = new BenefitRef();
+        dental_ben_ref.setBenefitName("Dental");
+        dental_ben_ref.setDescription("Dental health care");
+        benefitRefRepo.save(dental_ben_ref);
+
+        BenefitRef mat_ben_ref = new BenefitRef();
+        mat_ben_ref.setBenefitName("Maternal");
+        mat_ben_ref.setDescription("General maternal health care");
+        benefitRefRepo.save(mat_ben_ref);
+
+        BenefitRef preExHIV_ben_ref = new BenefitRef();
+        preExHIV_ben_ref.setBenefitName("Pre-existing chronics/HIV");
+        preExHIV_ben_ref.setDescription("Pre-existing chronic conditions including HIV");
+        benefitRefRepo.save(preExHIV_ben_ref);
 
     }
 

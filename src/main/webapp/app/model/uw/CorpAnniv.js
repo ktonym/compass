@@ -1,6 +1,5 @@
 Ext.define('compass.model.uw.CorpAnniv', {
-    extend: 'Ext.data.Model',
-    requires: ['compass.util.Util'],
+    extend: 'compass.model.uw.Base',
 
     idProperty: 'idCorpAnniv',
     
@@ -21,33 +20,6 @@ Ext.define('compass.model.uw.CorpAnniv', {
             associationKey: 'corporate'
         }
     ],
-
-    proxy: {
-        type: 'ajax',
-        idParam: 'idContactInfo',
-        api: {
-            create:'compass/uw/anniv/store.json',
-            read: 'compass/uw/anniv/find.json',
-            update: 'compass/uw/anniv/store.json',
-            destroy: 'compass/uw/anniv/remove.json'
-        },
-        reader: {
-            type: 'json',
-            rootProperty: 'data'
-        },
-        writer: {
-            type: 'json',
-            allowSingle:true,
-            encode:true,
-            rootProperty:'data',
-            writeAllFields: true
-        },
-        listeners: {
-            exception: function(proxy,response,operation){
-                compass.util.Util.showErrorMsg(response.responseText);
-            }
-        }
-    },
 
     validators: {
         anniv: [
