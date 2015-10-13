@@ -238,12 +238,12 @@ public class InitializeDb {
         menuRepo.save(mnuInvc);
 
         Menu menuUWRef = new Menu();
-        menuUWRef.setText("UW Settings");
+        menuUWRef.setText("uwSettings");
         menuUWRef.setIconCls("fa fa-gears fa-lg");
         menuRepo.save(menuUWRef);
 
         Menu mnuBenRef = new Menu();
-        mnuBenRef.setText("Benefits");
+        mnuBenRef.setText("benefitRefs");
         mnuBenRef.setIconCls("xf08a");
         mnuBenRef.setClassName("panel");
         mnuBenRef.setParentMenu(menuUWRef);

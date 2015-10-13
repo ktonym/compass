@@ -10,7 +10,7 @@ Ext.define('compass.view.uw.Corporate',{
     ],
 
     controller: 'corporate',
-    viewmodel: {
+    viewModel: {
         type: 'corporate'
     },
 

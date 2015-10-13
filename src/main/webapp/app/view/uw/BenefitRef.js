@@ -7,7 +7,7 @@ Ext.define('compass.view.uw.BenefitRef',{
         'compass.view.uw.BenefitRefGrid'
     ],
     controller: 'benefitref',
-    viewmodel: {
+    viewModel: {
         type: 'benefitref'
     },
 

@@ -20,6 +20,8 @@ translations = {
     schemes:        'Schemes',
     members:        'Members',
     invoicing:      'Invoicing',
+    benefitRefs:    'Benefits',
+    uwSettings:     'UW Settings',
     care:           'Care',
     preAuth:        'Pre-authorization',
     claims:         'Claims',
