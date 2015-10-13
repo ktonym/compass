@@ -1,5 +1,8 @@
 Ext.define('compass.model.uw.CorpAnniv', {
+
     extend: 'compass.model.uw.Base',
+
+    entityName: 'CorpAnniv',
 
     idProperty: 'idCorpAnniv',
     

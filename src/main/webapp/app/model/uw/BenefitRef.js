@@ -1,6 +1,8 @@
 Ext.define('compass.model.uw.BenefitRef',{
    extend: 'compass.model.uw.Base',
 
+    entityName: 'BenefitRef',
+
     idProperty: 'benefitCode',
 
     fields: [
@@ -9,7 +11,7 @@ Ext.define('compass.model.uw.BenefitRef',{
         {name: 'description', type: 'string'}
     ],
 
-    validations: {
+    validators: {
         benefitName: [
             {type: 'presence', message: 'This field is mandatory'},
             {type: 'length', min:3, max: 45}

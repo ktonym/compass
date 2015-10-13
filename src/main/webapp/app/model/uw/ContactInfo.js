@@ -1,6 +1,8 @@
 Ext.define('compass.model.uw.ContactInfo', {
     extend: 'compass.model.uw.Base',
 
+    entityName: 'ContactInfo',
+
     idProperty: 'idContactInfo',
 
     fields: [

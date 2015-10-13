@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -63,6 +64,7 @@ public class BenefitRefServiceImpl extends AbstractService implements BenefitRef
 
         benefitRef.setBenefitName(benefitName);
         benefitRef.setDescription(description == null ? null : description);
+        benefitRef.setLastUpdate(LocalDateTime.now());
 
         benefitRefRepo.save(benefitRef);
         return ResultFactory.getSuccessResult(benefitRef);

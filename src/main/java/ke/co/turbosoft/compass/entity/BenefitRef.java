@@ -2,6 +2,8 @@ package ke.co.turbosoft.compass.entity;
 
 import javax.json.JsonObjectBuilder;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -18,6 +20,10 @@ public class BenefitRef extends AbstractEntity implements EntityItem<Integer> {
     private String description;
     @OneToMany(mappedBy = "benefitRef")
     private List<CorpBenefit> corpBenefits;
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
+    private LocalDateTime lastUpdate;
+
+    static final DateTimeFormatter DATE_FORMATTER_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 
     public BenefitRef() {
     }
@@ -54,6 +60,14 @@ public class BenefitRef extends AbstractEntity implements EntityItem<Integer> {
         this.corpBenefits = corpBenefits;
     }
 
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     @Override
     public Integer getId() {
         return benefitCode;
@@ -63,6 +77,7 @@ public class BenefitRef extends AbstractEntity implements EntityItem<Integer> {
     public void addJson(JsonObjectBuilder builder) {
         builder.add("benefitCode",benefitCode)
                 .add("benefitName", benefitName)
-                .add("description", description).build();
+                .add("description", description)
+                .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
     }
 }
