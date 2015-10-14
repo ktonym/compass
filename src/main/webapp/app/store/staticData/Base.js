@@ -1,4 +1,4 @@
-Ext.define('compass.store.staticData.base',{
+Ext.define('compass.store.staticData.Base',{
 
     extend: 'Ext.data.Store',
 

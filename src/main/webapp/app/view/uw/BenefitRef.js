@@ -4,7 +4,8 @@ Ext.define('compass.view.uw.BenefitRef',{
     requires: [
         'compass.model.uw.BenefitRef',
         'compass.util.Glyphs',
-        'compass.view.uw.BenefitRefGrid'
+        'compass.view.uw.BenefitRefGrid',
+        'compass.view.uw.BenefitRefController'
     ],
     controller: 'benefitref',
     viewModel: {
