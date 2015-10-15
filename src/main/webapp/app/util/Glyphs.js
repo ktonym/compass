@@ -8,7 +8,9 @@ Ext.define('compass.util.Glyphs',{
             edit: 'xf040',
             destroy: 'xf1f8',
             save: 'xf00c',
-            cancel: 'xf0e2'
+            cancel: 'xf0e2',
+            saveAll: 'xf0c7',
+            clearFilter: 'xf0b0'
         },
 
         constructor: function(config){
