@@ -244,8 +244,8 @@ public class InitializeDb {
 
         Menu mnuBenRef = new Menu();
         mnuBenRef.setText("benefitRefs");
-        mnuBenRef.setIconCls("xf08a");
-        mnuBenRef.setClassName("panel");
+        mnuBenRef.setIconCls("xf06b");
+        mnuBenRef.setClassName("benefitref");
         mnuBenRef.setParentMenu(menuUWRef);
         menuRepo.save(mnuBenRef);
 

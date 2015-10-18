@@ -86,7 +86,7 @@ Ext.define('compass.view.staticData.BaseGrid',{
                     itemId: 'delete',
                     widget: {
                         xtype: 'button', //#16
-                        glyph: Packt.util.Glyphs.getGlyph('destroy'),
+                        glyph: compass.util.Glyphs.getGlyph('destroy'),
                         tooltip: 'Delete',
                         scope: me, //#17
                         handler: function(btn) { //#18
