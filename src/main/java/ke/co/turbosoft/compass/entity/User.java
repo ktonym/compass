@@ -82,7 +82,7 @@ public class User extends AbstractEntity implements EntityItem<String> {
                  .add("email",email)
                  .add("firstName", firstName)
                  .add("lastName",lastName);
-         userGroup.addJson(builder);
+         getUserGroup().addJson(builder);
     }
 
     @Override

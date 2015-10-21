@@ -55,7 +55,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<User> store(String username, String email, String password, String firstName, String lastName, String actionUsername) {
+    public Result<User> store(String username, String email, String firstName, String lastName, String actionUsername) {
 
         //things TODO change this to query for sys_adm rights
 
@@ -67,9 +67,9 @@ public class UserServiceImpl extends AbstractService implements UserService {
             return ResultFactory.getFailResult("Unable to store a user without a valid non-empty username/email");
         }
 
-        if(password==null || password.length()==0){
-            return ResultFactory.getFailResult("Unable to store a user without a valid non-empty password");
-        }
+//        if(password==null || password.length()==0){
+//            return ResultFactory.getFailResult("Unable to store a user without a valid non-empty password");
+//        }
 
         username=username.trim();
         email=email.trim();
@@ -82,6 +82,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
                 user = new User();
                 user.setUsername(username);
                 user.setEmail(email);
+                user.setPassword("1Madison#");
             } else {
                 return ResultFactory.getFailResult("Unable to add new user. Email address is already in use");
             }
@@ -100,7 +101,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setPassword(password);
+        //user.setPassword(password);
 
         userRepo.save(user);
 

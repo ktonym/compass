@@ -1,12 +1,10 @@
-/**
- * Created by akipkoech on 18/09/15.
- */
+
 
 Ext.define('compass.view.security.UserForm',{
 
     extend: 'Ext.window.Window',
     alias: 'widget.user-form',
-    height: 270,
+    height: 290,
     width: 600,
 
     requires: ['compass.util.Util','compass.util.Glyphs'],

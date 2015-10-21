@@ -79,17 +79,17 @@ Ext.define('compass.view.staticData.BaseGrid',{
                     filter: true
                 },
                 {
-                    xtype: 'widgetcolumn', //#13
+                    xtype: 'widgetcolumn',
                     width: 45,
-                    sortable: false, //#14
-                    menuDisabled: true, //#15
+                    sortable: false,
+                    menuDisabled: true,
                     itemId: 'delete',
                     widget: {
-                        xtype: 'button', //#16
+                        xtype: 'button',
                         glyph: compass.util.Glyphs.getGlyph('destroy'),
                         tooltip: 'Delete',
-                        scope: me, //#17
-                        handler: function(btn) { //#18
+                        scope: me,
+                        handler: function(btn) {
                             me.fireEvent('widgetclick', me, btn);
                         }
                     }

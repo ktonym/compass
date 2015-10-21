@@ -77,17 +77,49 @@ Ext.define("compass.view.security.UserController",{
             rec = form.getRecord(),
             vm = me.getViewModel(),
             store = vm.getStore('users');
+
+            console.log('Form is: ' + form);
+            console.log('Rec is: ' + rec);
+            console.log('ViewModel is: ' + vm);
+            console.log('Store is: ' + store );
+
             if(form && form.isValid){
 
-                console.log(rec);
-                store.add(rec);
-                store.sync({
+                Ext.Ajax.request({
+                    //clientValidation: true,
+                    url: 'compass/user/store.json',
+                    scope: me,
+                    params : {
+                        "data" : Ext.util.JSON.encode(form.getValues())
+
+//            }
+//                    jsonData: {
+//                        "data" : Ext.util.JSON.encode(form.getValues())
+                    },
                     success: 'onSaveSuccess',
                     failure: 'onSaveFailure'
                 });
 
+
+
+//                console.log(rec);
+//                store.add(rec);
+//                store.sync({
+//                    success: 'onSaveSuccess',
+//                    failure: 'onSaveFailure'
+//                });
+
             }
 
+
+    },
+    onAjaxSaveSuccess: function(response, opts ){
+        var me = this;
+        me.onCancel();
+        me.refresh();
+        compass.util.Util.showToast('Success! User saved.');
+    },
+    onAjaxSaveFailure: function(response, opts){
 
     },
     onSaveSuccess: function(form,action){

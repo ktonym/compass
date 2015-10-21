@@ -69,7 +69,6 @@ public class UserHandler extends AbstractHandler{
         Result<User> ar = userService.store(
                 jsonObj.getString("username"),
                 jsonObj.getString("email"),
-                jsonObj.getString("password"),
                 jsonObj.getString("firstName"),
                 jsonObj.getString("lastName"),
                 sessionUser.getUsername());

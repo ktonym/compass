@@ -13,7 +13,6 @@ public interface UserService {
 	public Result<User> store(
             String username,
             String email,
-            String password,
             String firstName,
             String lastName,
             String actionUsername);
