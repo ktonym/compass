@@ -1,6 +1,7 @@
 package ke.co.turbosoft.compass.service;
 
 import ke.co.turbosoft.compass.entity.User;
+import ke.co.turbosoft.compass.entity.UserGroup;
 import ke.co.turbosoft.compass.entity.UserRole;
 import ke.co.turbosoft.compass.repo.UserRoleRepo;
 import ke.co.turbosoft.compass.vo.Result;
@@ -55,7 +56,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<User> store(String username, String email, String firstName, String lastName, String actionUsername) {
+    public Result<User> store(String username, String email, String firstName, String lastName, Integer idGroup, String actionUsername) {
 
         //things TODO change this to query for sys_adm rights
 
@@ -75,6 +76,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
         email=email.trim();
         User user = userRepo.findOne(username);
         User testByEmailUser = userRepo.findByEmail(email);
+        UserGroup userGroup = userGroupRepo.findOne(idGroup);
 
         if(user==null){
 
@@ -99,8 +101,16 @@ public class UserServiceImpl extends AbstractService implements UserService {
 
         }
 
+        /**
+         * check whether a <b>UserGroup</b> has been defined for the User
+         */
+        if(userGroup==null){
+            return ResultFactory.getFailResult("Cannot save a user without a group");
+        }
+
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setUserGroup(userGroup);
         //user.setPassword(password);
 
         userRepo.save(user);

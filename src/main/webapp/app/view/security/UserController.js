@@ -78,11 +78,6 @@ Ext.define("compass.view.security.UserController",{
             vm = me.getViewModel(),
             store = vm.getStore('users');
 
-            console.log('Form is: ' + form);
-            console.log('Rec is: ' + rec);
-            console.log('ViewModel is: ' + vm);
-            console.log('Store is: ' + store );
-
             if(form && form.isValid){
 
                 Ext.Ajax.request({
@@ -91,46 +86,36 @@ Ext.define("compass.view.security.UserController",{
                     scope: me,
                     params : {
                         "data" : Ext.util.JSON.encode(form.getValues())
-
-//            }
-//                    jsonData: {
-//                        "data" : Ext.util.JSON.encode(form.getValues())
                     },
                     success: 'onSaveSuccess',
                     failure: 'onSaveFailure'
                 });
 
-
-
-//                console.log(rec);
-//                store.add(rec);
-//                store.sync({
-//                    success: 'onSaveSuccess',
-//                    failure: 'onSaveFailure'
-//                });
-
             }
-
-
     },
-    onAjaxSaveSuccess: function(response, opts ){
-        var me = this;
-        me.onCancel();
-        me.refresh();
-        compass.util.Util.showToast('Success! User saved.');
+    onSaveSuccess: function(conn, response, options, eOpts) {
+        var me=this,
+            result = compass.util.Util.decodeJSON(conn.responseText);
+        if (result.success) {
+            compass.util.Util.showToast('Success! User saved.');
+            me.onCancel();
+            me.refresh();
+        } else {
+            compass.util.Util.showErrorMsg(result.msg);
+        }
     },
-    onAjaxSaveFailure: function(response, opts){
-
+    onSaveFailure: function(conn, response, options, eOpts){
+        compass.util.Util.showErrorMsg(conn.responseText);
     },
-    onSaveSuccess: function(form,action){
-        var me = this;
-        me.onCancel();
-        me.refresh();
-        compass.util.Util.showToast('Success! User saved.');
-    },
-    onSaveFailure: function(form,action){
-        compass.util.Util.handleFormFailure(action);
-    },
+//    onSaveSuccess: function(form,action){
+//        var me = this;
+//        me.onCancel();
+//        me.refresh();
+//        compass.util.Util.showToast('Success! User saved.');
+//    },
+//    onSaveFailure: function(form,action){
+//        compass.util.Util.handleFormFailure(action);
+//    },
     onCancel: function(button,e,options){
         var me = this;
         me.dialog = Ext.destroy(me.dialog);

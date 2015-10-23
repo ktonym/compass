@@ -17,7 +17,7 @@ public class User extends AbstractEntity implements EntityItem<String> {
     private String lastName;
 
     @ManyToOne
-    @JoinColumn(name = "idUserGroup")
+    @JoinColumn(name = "idGroup")
     private UserGroup userGroup;
 
     public User() {
@@ -82,7 +82,11 @@ public class User extends AbstractEntity implements EntityItem<String> {
                  .add("email",email)
                  .add("firstName", firstName)
                  .add("lastName",lastName);
-         getUserGroup().addJson(builder);
+
+        if(getUserGroup()!=null){
+            userGroup.addJson(builder);
+        }
+
     }
 
     @Override

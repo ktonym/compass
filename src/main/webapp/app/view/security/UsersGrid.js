@@ -42,9 +42,9 @@ Ext.define("compass.view.security.UsersGrid",{
 //            console.log(record.get('username'));
 //
 //        },
-        select: function(dv, record, index, eOpts){
-            alert(record.get('username'));
-        }
+//        select: function(dv, record, index, eOpts){
+//            alert(record.get('username'));
+//        }
     },
     bind: '{users}'
 });

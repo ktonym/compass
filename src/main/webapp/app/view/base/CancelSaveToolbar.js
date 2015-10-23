@@ -25,6 +25,14 @@ Ext.define('compass.view.base.CancelSaveToolbar',{
             listeners: {
                 click: 'onSave'
             }
+        },
+        {
+            xtype:'button',
+            text: 'Cancel',
+            glyph: compass.util.Glyphs.getGlyph('cancel'),
+            listeners: {
+                click: 'onCancel'
+            }
         }
     ]
 

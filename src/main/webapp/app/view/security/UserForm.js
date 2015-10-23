@@ -2,23 +2,11 @@
 
 Ext.define('compass.view.security.UserForm',{
 
-    extend: 'Ext.window.Window',
+    extend: 'compass.view.base.WindowForm',
     alias: 'widget.user-form',
     height: 290,
     width: 600,
 
-    requires: ['compass.util.Util','compass.util.Glyphs'],
-
-    layout: {
-        type: 'fit'
-    },
-
-    bind: {
-        title: '{title}'
-    },
-
-    closable: false,
-    modal: true,
     items: [
         {
             xtype: 'form',
@@ -112,36 +100,8 @@ Ext.define('compass.view.security.UserForm',{
                         }
                     ]
                 }
-            ],
-            dockedItems: [
-                {
-                    xtype: 'toolbar',
-                    dock: 'bottom',
-                    ui: 'footer',
-                    layout: {
-                        pack: 'end',
-                        type: 'hbox'
-                    },
-                    items: [
-                        {
-                            xtype:'button',
-                            text: 'Save',
-                            glyph: compass.util.Glyphs.getGlyph('save'),
-                            listeners: {
-                                click: 'onSave'
-                            }
-                        },
-                        {
-                            xtype:'button',
-                            text: 'Cancel',
-                            glyph: compass.util.Glyphs.getGlyph('cancel'),
-                            listeners: {
-                                click: 'onCancel'
-                            }
-                        }
-                    ]
-                }
             ]
+
         }
     ]
 

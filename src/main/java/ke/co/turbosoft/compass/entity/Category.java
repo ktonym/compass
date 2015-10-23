@@ -82,7 +82,8 @@ public class Category extends AbstractEntity implements EntityItem<Integer>{
         builder.add("idCategory", idCategory)
                 .add("cat", cat)
                 .add("description", description);
-        anniv.addJson(builder);
-
+        if(anniv !=null) {
+            anniv.addJson(builder);
+        }
     }
 }

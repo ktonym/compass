@@ -1,5 +1,6 @@
 Ext.define('compass.model.security.Base',{
     extend: 'Ext.data.Model',
+
     requires: ['compass.util.Util'],
 
     schema: {
@@ -20,16 +21,15 @@ Ext.define('compass.model.security.Base',{
             writer: {
                 type: 'json',
                 writeAllFields: true,
-                encode: true,
                 rootProperty: 'data',
-                allowSingle: true
+                allowSingle: false,
+                encode: true
             },
             listeners: {
-                exception: function(proxy,response,operation){
+                exception: function(proxy, response, operation){
                     compass.util.Util.showErrorMsg(response.responseText);
                 }
             }
-
         }
     }
 

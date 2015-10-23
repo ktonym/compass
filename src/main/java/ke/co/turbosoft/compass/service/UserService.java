@@ -15,6 +15,7 @@ public interface UserService {
             String email,
             String firstName,
             String lastName,
+            Integer idGroup,
             String actionUsername);
     public Result<User> remove(String username, String actionUsername);
 

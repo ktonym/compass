@@ -17,18 +17,18 @@ Ext.define('compass.view.security.UserModel', {
             autoLoad: true
         }
     }
-//    formulas: {
-//        currentUser: {
-//            bind: {
-//                bindTo: '{usersGrid.selection}',
-//                deep: true
-//            },
-//            get: function(user){
-//                return user;
-//            },
-//            set: function(user){
-//                user = this.set('currentUser',user);
-//            }
-//        }
-//    }
+    ,formulas: {
+        selectedUser: {
+            bind: {
+                bindTo: '{usersGrid.selection}',
+                deep: true
+            },
+            get: function(user){
+                return user;
+            },
+            set: function(user){
+                user = this.set('selectedUser',user);
+            }
+        }
+    }
 });

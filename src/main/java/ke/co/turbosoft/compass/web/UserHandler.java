@@ -71,6 +71,7 @@ public class UserHandler extends AbstractHandler{
                 jsonObj.getString("email"),
                 jsonObj.getString("firstName"),
                 jsonObj.getString("lastName"),
+                getIntegerValue(jsonObj.get("idGroup")),
                 sessionUser.getUsername());
 
         if(ar.isSuccess()){
@@ -83,12 +84,15 @@ public class UserHandler extends AbstractHandler{
 
     @RequestMapping(value = "/user/remove", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
-    public String remove(@RequestParam(value="username") String username,
+    public String remove(//@RequestParam(value="username") String username,
+                         @RequestParam(value = "data", required = true) String jsonData,
                          HttpServletRequest request){
 
         User sessionUser = getSessionUser(request);
 
-        Result<User> ar = userService.remove(username, sessionUser.getUsername());
+        JsonObject jsonObj = parseJsonObject(jsonData);
+
+        Result<User> ar = userService.remove(jsonObj.getString("username"), sessionUser.getUsername());
 
         if(ar.isSuccess()){
             return getJsonSuccessData(ar.getData());
