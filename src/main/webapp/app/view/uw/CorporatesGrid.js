@@ -4,6 +4,11 @@ Ext.define('compass.view.uw.CorporatesGrid',{
     reference: 'corporatesGrid',
     columns: [
         {
+            width: 20,
+            dataIndex: "idCorporate",
+            text: "Corp. ID"
+        },
+        {
             width: 150,
             dataIndex: "corporateName",
             text: "Organization"
@@ -31,6 +36,12 @@ Ext.define('compass.view.uw.CorporatesGrid',{
             text: "Postal Address"
         }
     ],
+    listeners: {
+        itemclick: function(dv, record, item, index, e) {
+
+            alert(record.get('corporateName'));
+        }
+    },
     bind: {
         store:  '{corporates}'
     }

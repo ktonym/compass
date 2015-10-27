@@ -30,7 +30,7 @@ Ext.define("compass.view.security.UserController",{
                 },
                 links: {
                     currentUser: record || {
-                        type: 'User',
+                        type: 'compass.model.security.User',
                         create: true
                     }
                 }
@@ -41,6 +41,7 @@ Ext.define("compass.view.security.UserController",{
     getRecordsSelected: function(){
         var grid = this.lookupReference('usersGrid');
         return grid.getSelection();
+        //return this.getViewModel().get('selectedUser');
     },
     onDelete: function(button,e,options){
 
@@ -55,9 +56,19 @@ Ext.define("compass.view.security.UserController",{
                 buttons: Ext.Msg.YESNO,
                 icon: Ext.Msg.QUESTION,
                 fn: function (buttonId){
-                    if (buttonId == 'yes'){ //#5
-                        store.remove(records); //#6
-                        store.sync(); //#7
+//                    if (buttonId == 'yes'){ //#5
+//                        store.remove(records); //#6
+//                        store.sync(); //#7
+//                    }
+                    if (buttonId === 'yes') {
+                        var selectedUser = this.getViewModel().get('selectedUser');
+                        selectedUser.erase({
+                            callback: function(e) {
+                                compass.util.Util.showToast('Success! User deleted.');
+                                this.getStore('users').load();
+                            },
+                            scope: this
+                        });
                     }
                 }
             });

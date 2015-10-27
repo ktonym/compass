@@ -7,6 +7,10 @@ Ext.define('compass.model.uw.Base',{
             type: 'date',
             dateFormat: 'Y-m-j H:i:s'
         }
-    ]
+    ],
+
+    validators: {
+        lastUpdate: 'presence'
+    }
 
 });

@@ -30,15 +30,12 @@ Ext.define("compass.controller.Menu",{
 
     },
     renderDynamicMenu: function(view,options){
-        console.log('Dynamic menu rendered');
-        //alert('menu rendered');
+
         var dynamicMenus = [];
 
         view.body.mask('Loading Menus... Please wait...');
 
         this.getMenuStore().load(function(records, op, success){
-
-           //console.log(this);
 
            Ext.each(records, function(root){
 
@@ -62,9 +59,6 @@ Ext.define("compass.controller.Menu",{
                        id: item.get('id'),
                        className: item.get('className')
                    });
-
-                 //  console.log(item.get('iconCls'));
-
                }
                menu.getRootNode().appendChild(nodes);
                dynamicMenus.push(menu);
