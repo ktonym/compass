@@ -29,11 +29,11 @@ Ext.define('compass.Application', {
     views: ['login.Login'],
 
     controllers: [
-        'Menu'
+        'Menu','StaticData'
     ],
 
     stores: [
-        // TODO: add global / shared stores here
+     //   'staticData.Corporates'
     ],
     
     launch: function () {

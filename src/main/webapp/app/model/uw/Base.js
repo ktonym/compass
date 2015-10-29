@@ -5,7 +5,7 @@ Ext.define('compass.model.uw.Base',{
         {
             name: 'lastUpdate',
             type: 'date',
-            dateFormat: 'Y-m-j H:i:s'
+            dateFormat: 'Ymj H:i'
         }
     ],
 

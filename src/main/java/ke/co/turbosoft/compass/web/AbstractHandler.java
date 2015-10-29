@@ -103,4 +103,9 @@ public abstract class AbstractHandler {
 
     }
 
+    protected JsonArray parseJsonArray(String jsonString){
+        JsonReader reader = Json.createReader(new StringReader(jsonString));
+        return reader.readArray();
+    }
+
 }

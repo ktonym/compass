@@ -11,13 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
@@ -42,6 +41,7 @@ public class CorporateHandler extends AbstractHandler{
     private ContactInfoService contactInfoService;
 
     static final DateTimeFormatter DATE_FORMAT_yyyyMMdd =  DateTimeFormatter.ofPattern("yyyyMMdd");
+    static final DateTimeFormatter DATE_FORMAT_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm");
 //    @ModelAttribute("corporate")
 //    public Corporate create(){
 //        return new Corporate();
@@ -99,29 +99,59 @@ public class CorporateHandler extends AbstractHandler{
 
         User sessionUser = getSessionUser(request);
 
-        JsonObject jsonObj = parseJsonObject(jsonData);
+        try{
+            JsonObject jsonObj = parseJsonObject(jsonData);
 
-//        String dateVal = null;
-//
-//           if(!jsonObj.getString("joined").isEmpty() && jsonObj.getString("joined").length()>0){
-//                dateVal = jsonObj.getString("joined");
-//           }
-        String dateVal = jsonObj.getString("joined");
+            String joinDateVal = jsonObj.getString("joined");
+            String lastUpdateVal = jsonObj.getString("lastUpdate");
 
-        Result<Corporate> ar = corporateService.store(
-                getIntegerValue(jsonObj.get("idCorporate")),
-                jsonObj.getString("corporateName"),
-                jsonObj.getString("abbreviation"),
-                jsonObj.getString("tel"),
-                jsonObj.getString("email"),
-                jsonObj.getString("postalAddress"),
-                LocalDate.parse(dateVal, DATE_FORMAT_yyyyMMdd),
-                sessionUser.getUsername());
+            Result<Corporate> ar = corporateService.store(
+                    getIntegerValue(jsonObj.get("idCorporate")),
+                    jsonObj.getString("corporateName"),
+                    jsonObj.getString("abbreviation"),
+                    jsonObj.getString("tel"),
+                    jsonObj.getString("email"),
+                    jsonObj.getString("postalAddress"),
+                    LocalDate.parse(joinDateVal, DATE_FORMAT_yyyyMMdd),
+                    LocalDateTime.parse(lastUpdateVal,DATE_FORMAT_yyyyMMddHHmm),
+                    sessionUser.getUsername());
 
-        if(ar.isSuccess()){
-            return getJsonSuccessData(ar.getData());
-        } else {
-            return getJsonErrorMsg(ar.getMsg());
+            if(ar.isSuccess()){
+                return getJsonSuccessData(ar.getData());
+            } else {
+                return getJsonErrorMsg(ar.getMsg());
+            }
+        } catch (JsonException je){
+            JsonArray jsonArray = parseJsonArray(jsonData);
+
+            List<Corporate> corporateList = new ArrayList<>();
+
+            for (int i = 0; i < jsonArray.size(); i++){
+
+                JsonObject jsonObject = jsonArray.getJsonObject(i);
+                Corporate corp = new Corporate();
+
+                corp.setIdCorporate(getIntegerValue(jsonObject.get("idCorporate")));
+                corp.setCorporateName(jsonObject.getString("corporateName"));
+                corp.setAbbreviation(jsonObject.getString("abbreviation"));
+                corp.setTel(jsonObject.getString("tel"));
+                corp.setEmail(jsonObject.getString("email"));
+                corp.setPostalAddress(jsonObject.getString("postalAddress"));
+                String joinDateVal = jsonObject.getString("joined");
+                corp.setJoined(LocalDate.parse(joinDateVal, DATE_FORMAT_yyyyMMdd));
+                String lastUpdateVal = jsonObject.getString("lastUpdate");
+                corp.setLastUpdate(LocalDateTime.parse(lastUpdateVal, DATE_FORMAT_yyyyMMddHHmm));
+
+                corporateList.add(i,corp);
+
+            }
+            Result<List<Corporate>> ar = corporateService.store(corporateList,sessionUser.getUsername());
+            if(ar.isSuccess()){
+                return getJsonSuccessData(ar.getData());
+            } else {
+                return getJsonErrorMsg(ar.getMsg());
+            }
+
         }
 
     }

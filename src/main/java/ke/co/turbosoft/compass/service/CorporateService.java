@@ -6,6 +6,7 @@ import ke.co.turbosoft.compass.vo.Result;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by akipkoech on 12/8/14.
@@ -36,8 +37,11 @@ public interface CorporateService {
             String email,
             String postalAddress,
             LocalDate joined,
+            LocalDateTime lastUpdate,
             String actionUsername
     );
+
+    Result<List<Corporate>> store(List<Corporate> corporates, String actionUsername);
 
     Result<Corporate> remove(Integer idCorporate, String actionUsername);
 

@@ -7,12 +7,13 @@ Ext.define('compass.model.uw.Corporate', {
     idProperty: 'idCorporate',
 
     fields: [
-        { name: 'idCorporate', type: 'int' },
+        { name: 'idCorporate', type: 'int', useNull: true },
         { name: 'corporateName', type: 'string' },
         { name: 'abbreviation', type: 'string' },
         { name: 'email', type: 'auto' },
         { name: 'tel', type: 'string' },
-        { name: 'postalAddress', type: 'auto' }
+        { name: 'postalAddress', type: 'auto' },
+        { name: 'joined', type: 'date', dateFormat: 'Ymd'}
 
     ],
 
@@ -33,7 +34,8 @@ Ext.define('compass.model.uw.Corporate', {
         tel: [
             { type: 'presence', message: 'This field is mandatory' },
             { type: 'length', min:5, max:40 }
-        ]
+        ],
+        joined: 'presence'
     }
 
 });

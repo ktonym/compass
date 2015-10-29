@@ -28,6 +28,10 @@ Ext.define('compass.view.staticData.Corporates',{
             dataIndex: "abbreviation",
             flex: 1,
             text: "Abbreviation",
+            editor: {
+                allowBlank: false,
+                maxLength: 3
+            },
             filter: {
                 type: 'string'
             }
@@ -36,7 +40,14 @@ Ext.define('compass.view.staticData.Corporates',{
             width: 150,
             dataIndex: "tel",
             flex: 1,
-            text: "Telephone"
+            text: "Telephone",
+            editor: {
+                allowBlank: false,
+                maxLength: 45
+            },
+            filter: {
+                type: 'string'
+            }
         },
         {
             width: 250,
@@ -53,8 +64,29 @@ Ext.define('compass.view.staticData.Corporates',{
         {
             width: 150,
             dataIndex: "postalAddress",
-            text: "Postal Address"
+            text: "Postal Address",
+            editor: {
+                allowBlank: false,
+                maxLength: 45
+            },
+            filter: {
+                type: 'string'
+            }
+        },
+        {
+            width: 150,
+            dataIndex: "joined",
+            text: "Join Date",
+            editor: {
+                allowBlank: false,
+                xtype: 'datefield'
+            }
         }
-    ]
+    ],
+
+    init: function(){
+        var me = this;
+        me.getStore().reload();
+    }
 
 });

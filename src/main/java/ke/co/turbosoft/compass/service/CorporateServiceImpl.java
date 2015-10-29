@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by akipkoech on 12/10/14.
@@ -53,6 +54,7 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
                                    String email,
                                    String postalAddress,
                                    LocalDate joined,
+                                   LocalDateTime lastUpdate,
                                    String actionUsername) {
 
        // User sessionUser = userRepo.findOne(actionUsername);
@@ -79,12 +81,22 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
         corporate.setJoined(joined);
         corporate.setPostalAddress(postalAddress);
         corporate.setTel(tel);
-        corporate.setLastUpdate(LocalDateTime.now());
+        corporate.setLastUpdate(lastUpdate==null?null:LocalDateTime.now());
 
         corporateRepo.save(corporate);
 
         return ResultFactory.getSuccessResult(corporate);
 
+    }
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public Result<List<Corporate>> store(List<Corporate> corporates, String actionUsername) {
+        if(!isValidUser(actionUsername)) {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+        corporateRepo.save(corporates);
+        return ResultFactory.getSuccessResult(corporates);
     }
 
     @Override

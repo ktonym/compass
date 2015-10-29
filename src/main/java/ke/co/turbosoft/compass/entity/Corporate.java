@@ -43,7 +43,7 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-    static final DateTimeFormatter DATE_FORMATTER_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+    static final DateTimeFormatter DATE_FORMATTER_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm");
 
     public Corporate() {
         this.setJoined(LocalDate.now());
@@ -144,5 +144,9 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
     @Override
     public Integer getId() {
         return idCorporate;
+    }
+
+    public void setIdCorporate(Integer idCorporate) {
+        this.idCorporate = idCorporate;
     }
 }
