@@ -28,6 +28,7 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "intermediary_id",nullable = true)
     private Intermediary intermediary;
+
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime lastUpdate;
 
@@ -123,7 +124,9 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
                 .add("endDate", endDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(endDate))
                 .add("renewalDate", renewalDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(renewalDate))
                 .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
-        corporate.addJson(builder);
+        if(this.getCorporate()!=null){
+            corporate.addJson(builder);
+        }
         if(this.getIntermediary()!= null){
             intermediary.addJson(builder);
         }

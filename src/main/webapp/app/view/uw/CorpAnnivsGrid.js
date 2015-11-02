@@ -1,0 +1,59 @@
+Ext.define('compass.view.uw.CorpAnnivsGrid',{
+
+    extend: 'compass.view.base.Grid',
+
+    xtype: 'corpannivs-grid',
+
+    bind: '{corpannivs}',
+
+    reference: 'corpAnnivsGrid',
+
+//    plugins:
+//    {
+//        ptype: 'subtable',
+//        association: 'intermediary',
+//        headerWidth: 24,
+//        columns: [
+//            {
+//                text: 'Type',
+//                dataIndex: 'type',
+//                width: 100
+//            },
+//            {
+//                text: 'Name',
+//                dataIndex: 'intermediaryName',
+//                width: 240
+//            }
+//        ]
+//    },
+    columns: [
+        {
+            text: 'Id',
+            dataIndex: 'idCorpAnniv'
+        },
+        {
+            text: 'Anniversary',
+            dataIndex: 'anniv'
+        },
+        {
+            text: 'Start',
+            dataIndex: 'startDate'
+        },
+        {
+            text: 'End',
+            dataIndex: 'endDate'
+        },
+        {
+            text: 'Renewal',
+            dataIndex: 'renewalDate'
+        },
+        {
+            dataIndex: 'idIntermediary',
+            renderer: function(value, metaData, record ){
+                var intermediaryStore = Ext.getStore('staticData.Intermediaries');
+                var intermediary = intermediaryStore.findRecord('idIntermediary', value);
+                return intermediary != null ? intermediary.get('intermediaryName') : value;
+            }
+        }
+    ]
+})

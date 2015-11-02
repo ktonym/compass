@@ -79,7 +79,8 @@ Ext.define('compass.view.staticData.Corporates',{
             text: "Join Date",
             editor: {
                 allowBlank: false,
-                xtype: 'datefield'
+                xtype: 'datefield',
+                format: 'Y-m-d H:i'
             }
         }
     ],

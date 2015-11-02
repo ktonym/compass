@@ -94,7 +94,7 @@ Ext.define('compass.view.staticData.BaseGrid',{
                         }
                     }
                 }
-                ]
+            ]
         );
 
         /**
@@ -126,7 +126,7 @@ Ext.define('compass.view.staticData.BaseGrid',{
                         Ext.each(cellErrors,function(cellError){
                             messages.push(cellError.message);
                         });
-                        cell.addCls('x-form-error-msg x-form-invalid-icon xform-invalid-icon-default');
+                        cell.addCls('x-form-error-msg x-form-invalid-icon x-form-invalid-icon-default');
                         cell.set({
                             'data-errorqtip': Ext.String.format('<ul><li class="last">{0}</li></ul>',
                             messages.join('<br/>'))

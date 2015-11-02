@@ -1,10 +1,7 @@
 package ke.co.turbosoft.compass.web;
 
 import ke.co.turbosoft.compass.entity.*;
-import ke.co.turbosoft.compass.service.CategoryService;
-import ke.co.turbosoft.compass.service.ContactInfoService;
-import ke.co.turbosoft.compass.service.CorpAnnivService;
-import ke.co.turbosoft.compass.service.CorporateService;
+import ke.co.turbosoft.compass.service.*;
 import ke.co.turbosoft.compass.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +26,9 @@ import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
 public class CorporateHandler extends AbstractHandler{
 
     @Autowired
+    private CorpAnnivSuspService annivSuspService;
+
+    @Autowired
     private CorporateService corporateService;
 
     @Autowired
@@ -42,15 +42,12 @@ public class CorporateHandler extends AbstractHandler{
 
     static final DateTimeFormatter DATE_FORMAT_yyyyMMdd =  DateTimeFormatter.ofPattern("yyyyMMdd");
     static final DateTimeFormatter DATE_FORMAT_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm");
-//    @ModelAttribute("corporate")
-//    public Corporate create(){
-//        return new Corporate();
-//    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder){
 
         binder.registerCustomEditor(LocalDate.class,new LocalDateEditor(DATE_FORMAT_yyyyMMdd,true));
+        binder.registerCustomEditor(LocalDateTime.class, new LocalDateTimeEditor(DATE_FORMAT_yyyyMMddHHmm,true));
 
     }
 
@@ -275,31 +272,6 @@ public class CorporateHandler extends AbstractHandler{
 //
 //    }
 
-//    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
-//    public String editCorporate(@PathVariable Integer id, Model model){
-//        Corporate corporate=corporateService.search(id);
-//        model.addAttribute("corporate", corporate);
-//        return "corporate";
-//    }
-//
-//    @RequestMapping(value="/add")
-//    public String showRegistration(){
-//        return "corp-register";
-//    }
-//
-//    @RequestMapping(value = "/add", method = RequestMethod.POST)
-//    public String doRegistration(@ModelAttribute("corporate") Corporate corporate, BindingResult result /*, RedirectAttributes redirectAttributes*/){
-//
-//        if(result.hasErrors()){
-//            return "add";
-//        }
-//
-//        corporateService.save(corporate);
-//        //redirectAttributes.addFlashAttribute("success",true);
-//        return "redirect:add?success=true";
-//    }
-
-
     @RequestMapping(value = "/anniv/findAll", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public String findAllAnnivs(
@@ -416,7 +388,7 @@ public class CorporateHandler extends AbstractHandler{
     @RequestMapping(value = "/contactinfo/remove", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String removeContact(
-            @RequestParam(value = "idContactInfo") Integer idContactInfo,
+            @RequestParam(value = "idContactInfo", required = true) Integer idContactInfo,
             HttpServletRequest request){
 
         User sessionUser = getSessionUser(request);
@@ -430,6 +402,53 @@ public class CorporateHandler extends AbstractHandler{
         }
 
     }
+
+    @RequestMapping(value = "/annivsusp/store", method = RequestMethod.POST, produces = {"application/json"})
+    @ResponseBody
+    public String storeSuspension(
+            @RequestParam(value = "data", required = true) String jsonData,
+            HttpServletRequest request){
+
+        User sessionUser = getSessionUser(request);
+        JsonObject jsonObj = parseJsonObject(jsonData);
+        String startDateVal = jsonObj.getString("startDate");
+        String endDateVal = jsonObj.getString("endDate");
+        Result<CorpAnnivSuspension> ar = annivSuspService.store(
+                getIntegerValue(jsonObj.get("idAnnivSusp")),
+                getIntegerValue(jsonObj.get("idCorpAnniv")),
+                LocalDate.parse(startDateVal,DATE_FORMAT_yyyyMMdd),
+                LocalDate.parse(endDateVal,DATE_FORMAT_yyyyMMdd),
+                jsonObj.getString("reason"),
+                sessionUser.getUsername());
+
+        if(ar.isSuccess()){
+            return getJsonSuccessData(ar.getData());
+        } else {
+            return getJsonErrorMsg(ar.getMsg());
+        }
+
+    }
+
+    @RequestMapping(value = "/annivsusp/findAll", method = RequestMethod.GET, produces = {"application/json"})
+    @ResponseBody
+    public String findAllSuspensions(
+            @RequestParam(value = "data", required = true) String jsonData,
+            HttpServletRequest request){
+
+        User sessionUser = getSessionUser(request);
+        JsonObject jsonObj = parseJsonObject(jsonData);
+        Result<List<CorpAnnivSuspension>> ar = annivSuspService.findAllInAnniv(
+                getIntegerValue(jsonObj.get("idCorpAnniv")),
+                sessionUser.getUsername());
+
+        if(ar.isSuccess()){
+            return getJsonSuccessData(ar.getData());
+        } else {
+            return getJsonErrorMsg(ar.getMsg());
+        }
+
+    }
+
 
 
 }

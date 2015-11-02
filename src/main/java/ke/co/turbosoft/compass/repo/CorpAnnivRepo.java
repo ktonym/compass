@@ -3,6 +3,8 @@ package ke.co.turbosoft.compass.repo;
 import ke.co.turbosoft.compass.entity.CorpAnniv;
 import ke.co.turbosoft.compass.entity.Corporate;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -16,4 +18,7 @@ public interface CorpAnnivRepo extends JpaRepository<CorpAnniv,Integer> {
     List<CorpAnniv> findByCorporate(Corporate corporate);
 
     CorpAnniv findByCorporateAndAnniv(Corporate corporate, Integer anniv);
+
+    @Query("SELECT max(a.anniv) FROM CorpAnniv a WHERE a.corporate=:corporate")
+    Integer getMax(@Param("corporate") Corporate corporate);
 }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 /**
@@ -84,7 +85,7 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
         /**
          *  Checking if we're creating a new anniversary or not
          */
-
+        //TODO Rewire the anniversary-handling algo
         if(idCorpAnniv == null){
 
             if(testCorpAnniv != null){
@@ -93,7 +94,8 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
             }
 
                 corpAnniv = new CorpAnniv();
-                corpAnniv.setAnniv(anniv);
+                //corpAnniv.setAnniv(anniv);
+                corpAnniv.setAnniv(generateAnniv(corporate));
                 corpAnniv.setCorporate(corporateRepo.findOne(idCorporate));
 
         } else { // We're updating an existing anniversary.
@@ -121,7 +123,7 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
 
         corpAnniv.setStartDate(startDate);
         corpAnniv.setEndDate(endDate);
-        corpAnniv.setRenewalDate(LocalDate.now().plusYears(1));
+        corpAnniv.setRenewalDate(endDate.plusDays(1));
         corpAnniv.setIntermediary(intermediaryRepo.findOne(idIntermediary));
 
         corpAnnivRepo.save(corpAnniv);
@@ -199,5 +201,11 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
         }
         List<CorpAnniv> corpAnnivList = corpAnnivRepo.findByCorporate(corporate);
         return ResultFactory.getSuccessResult(corpAnnivList);
+    }
+
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    private Integer generateAnniv(Corporate corporate){
+        Integer anniv = corpAnnivRepo.getMax(corporate);
+        return anniv == null ? 1 : anniv++;
     }
 }
