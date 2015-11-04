@@ -60,7 +60,7 @@ Ext.define('compass.view.security.UserForm',{
                         {
                             xtype: 'combo',
                             fieldLabel: 'Group',
-                            displayField: 'name',
+                            displayField: 'groupName',
                             valueField: 'idGroup',
                             queryMode: 'local',
                             forceSelection: true,
@@ -71,35 +71,35 @@ Ext.define('compass.view.security.UserForm',{
                                 store: '{groups}',
                                 selection: '{currentUser.group}'
                             }
-                        },
-                        {
-                            xtype: 'filefield',
-                            fieldLabel: 'Photo',
-                            name: 'picture',
-                            buttonText: 'Browse',
-                            afterLabelTextTpl: '',
-                            listeners: {
-                                change: 'onFileFieldChange'
-                            }
-                        }
-                    ]
-                },
-                {
-                    xtype: 'fieldset',
-                    title: 'Photo',
-                    width: 170,
-                    items: [
-                        {
-                            xtype: 'image',
-                            reference: 'userPicture',
-                            height: 150,
-                            width: 150//,
-//                            bind: {
-//                                src: 'resources/profileImages/{currentUser.picture}'
+                        }//,
+//                        {
+//                            xtype: 'filefield',
+//                            fieldLabel: 'Photo',
+//                            name: 'picture',
+//                            buttonText: 'Browse',
+//                            afterLabelTextTpl: '',
+//                            listeners: {
+//                                change: 'onFileFieldChange'
 //                            }
-                        }
+//                        }
                     ]
                 }
+//                {
+//                    xtype: 'fieldset',
+//                    title: 'Photo',
+//                    width: 170,
+//                    items: [
+//                        {
+//                            xtype: 'image',
+//                            reference: 'userPicture',
+//                            height: 150,
+//                            width: 150//,
+////                            bind: {
+////                                src: 'resources/profileImages/{currentUser.picture}'
+////                            }
+//                        }
+//                    ]
+//                }
             ]
 
         }

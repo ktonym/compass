@@ -30,7 +30,7 @@ Ext.define("compass.view.security.UserController",{
                 },
                 links: {
                     currentUser: record || {
-                        type: 'compass.model.security.User',
+                        type: 'User',
                         create: true
                     }
                 }

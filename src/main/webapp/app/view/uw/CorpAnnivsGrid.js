@@ -1,12 +1,14 @@
 Ext.define('compass.view.uw.CorpAnnivsGrid',{
 
-    extend: 'compass.view.base.Grid',
+    extend: 'Ext.grid.Panel',
 
     xtype: 'corpannivs-grid',
 
-    bind: '{corpannivs}',
+    bind : '{corporatesGrid.selection.annivs}',
 
-    reference: 'corpAnnivsGrid',
+    //bind: '{corpannivs}',
+
+    //reference: 'corpAnnivsGrid',
 
 //    plugins:
 //    {

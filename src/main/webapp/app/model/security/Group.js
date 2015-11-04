@@ -1,7 +1,3 @@
-/**
- * Created by akipkoech on 18/09/15.
- */
-
 
 Ext.define('compass.model.security.Group',{
 
@@ -9,9 +5,11 @@ Ext.define('compass.model.security.Group',{
 
     idProperty: 'idGroup',
 
+    entityName: 'Group',
+
     fields: [
-        {name: 'idGroup', type: 'int'},
-        {name: 'name', type: 'string', mapping: 'groupName' }
+        {name: 'idGroup', type: 'int', useNull: true},
+        {name: 'groupName', type: 'string'}//, mapping: 'groupName' }
     ]
 
 });

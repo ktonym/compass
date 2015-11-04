@@ -11,7 +11,10 @@ Ext.define('compass.util.Glyphs',{
             cancel: 'xf0e2',
             saveAll: 'xf0c7',
             clearFilter: 'xf0b0',
-            detail: 'xf06e'
+            detail: 'xf06e',
+            print: 'xf02f',
+            pdf: 'xf1c1',
+            excel: 'xf1c3'
         },
 
         constructor: function(config){

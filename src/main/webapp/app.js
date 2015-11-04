@@ -8,7 +8,9 @@ Ext.application({
 
     extend: 'compass.Application',
     
-    autoCreateViewport: false //'compass.view.main.Main'
+    autoCreateViewport: false, //'compass.view.main.Main'
+
+    "theme": 'ext-theme-crisp'
 	
     //-------------------------------------------------------------------------
     // Most customizations should be made to compass.Application. If you need to

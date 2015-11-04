@@ -4,6 +4,8 @@ Ext.define('compass.model.security.User',{
 
     idProperty: 'username',
 
+    entityName: 'User',
+
     fields: [
         { name: 'username', type: 'string' },
         { name: 'firstName', type: 'string' },
@@ -13,8 +15,8 @@ Ext.define('compass.model.security.User',{
         { name:'groupName', type:'string', persist:false,
             convert:function(v, rec){
                 var data = rec.data;
-                if (data.group && data.group.name){
-                    return data.group.name;
+                if (data.group && data.group.groupName){
+                    return data.group.groupName;
                 }
                 return data.idGroup;
             }

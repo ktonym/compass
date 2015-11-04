@@ -6,12 +6,18 @@ Ext.define('compass.model.uw.ContactInfo', {
     idProperty: 'idContactInfo',
 
     fields: [
-        { name: 'idContactInfo', type: 'int' },
+        { name: 'idContactInfo', type: 'int', useNull: true },
         { name: 'firstName', type: 'string' },
         { name: 'surname', type: 'string' },
         { name: 'jobTitle', type: 'string' },
         { name: 'email', type: 'auto' },
-        { name: 'tel', type: 'string' }
+        { name: 'tel', type: 'string' },
+        { name: 'fullName', type: 'string', persist: false,
+            convert:function(v, record){
+                var data = record.getData();
+                return (data.firstName ? data.firstName + ' ': '') + data.surname;
+            }
+        }
 
     ],
 
