@@ -25,6 +25,9 @@ public class Principal extends AbstractEntity implements EntityItem<Integer> {
     private List<Member> dependants;
     @OneToMany(mappedBy = "principal")
     private List<CategoryPrincipal> categoryPrincipal;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCorporate",nullable = false)
+    private Corporate corporate;
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -95,6 +98,14 @@ public class Principal extends AbstractEntity implements EntityItem<Integer> {
         this.dependants = dependants;
     }
 
+    public Corporate getCorporate() {
+        return corporate;
+    }
+
+    public void setCorporate(Corporate corporate) {
+        this.corporate = corporate;
+    }
+
     @Override
     public Integer getId() {
         return idPrincipal;
@@ -111,5 +122,8 @@ public class Principal extends AbstractEntity implements EntityItem<Integer> {
                 .add("dob", dob == null ? "" : DATE_FORMATTER_yyyyMMdd.format(dob))
                 .add("fullName", firstName.concat(" ").concat(surname).concat(" ").concat(otherNames));
 
+        if(corporate!=null){
+            corporate.addJson(builder);
+        }
     }
 }

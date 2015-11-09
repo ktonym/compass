@@ -15,9 +15,9 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
     private Integer idCorpAnniv;
 	private Integer anniv;
 	@Convert(converter=LocalDatePersistenceConverter.class)
-	private LocalDate startDate;
+	private LocalDate inception;
 	@Convert(converter=LocalDatePersistenceConverter.class)
-	private LocalDate endDate;
+	private LocalDate expiry;
     @Convert(converter=LocalDatePersistenceConverter.class)
     private LocalDate renewalDate;
 	@OneToMany(mappedBy = "anniv")
@@ -28,7 +28,8 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "intermediary_id",nullable = true)
     private Intermediary intermediary;
-
+    @OneToMany(mappedBy = "anniv")
+    private List<MemberAnniversary> memberAnniversaries;
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime lastUpdate;
 
@@ -55,20 +56,20 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
         this.anniv = anniv;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getInception() {
+        return inception;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setInception(LocalDate inception) {
+        this.inception = inception;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getExpiry() {
+        return expiry;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setExpiry(LocalDate expiry) {
+        this.expiry = expiry;
     }
 
     public LocalDate getRenewalDate() {
@@ -111,6 +112,14 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
         this.lastUpdate = lastUpdate;
     }
 
+    public List<MemberAnniversary> getMemberAnniversaries() {
+        return memberAnniversaries;
+    }
+
+    public void setMemberAnniversaries(List<MemberAnniversary> memberAnniversaries) {
+        this.memberAnniversaries = memberAnniversaries;
+    }
+
     @Override
     public Integer getId() {
         return idCorpAnniv;
@@ -120,8 +129,8 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
     public void addJson(JsonObjectBuilder builder) {
         builder.add("idCorpAnniv", idCorpAnniv)
                 .add("anniv", anniv)
-                .add("startDate", startDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(startDate))
-                .add("endDate", endDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(endDate))
+                .add("inception", inception == null ? "" : DATE_FORMATTER_yyyyMMdd.format(inception))
+                .add("expiry", expiry == null ? "" : DATE_FORMATTER_yyyyMMdd.format(expiry))
                 .add("renewalDate", renewalDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(renewalDate))
                 .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
         if(this.getCorporate()!=null){

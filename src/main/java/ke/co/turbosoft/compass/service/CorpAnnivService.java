@@ -17,8 +17,8 @@ public interface CorpAnnivService {
             Integer idCorpAnniv,
             Integer idIntermediary,
             Integer anniv,
-            LocalDate startDate,
-            LocalDate endDate,
+            LocalDate inception,
+            LocalDate expiry,
             LocalDate renewalDate,
             String actionUsername
     );

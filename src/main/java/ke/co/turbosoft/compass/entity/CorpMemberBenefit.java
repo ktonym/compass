@@ -14,13 +14,15 @@ public class CorpMemberBenefit extends AbstractEntity {
 
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="member_id")
-    private Member member;
+    @JoinColumns({@JoinColumn(name = "member_id", referencedColumnName = "member_id", updatable = false, insertable = false),
+            @JoinColumn(name = "idMemberAnniv", referencedColumnName = "idMemberAnniv", updatable = false, insertable = false)})
+    private MemberAnniversary memberAnniv;
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="benefit_id")
+    @JoinColumn(name="benefit_id", referencedColumnName = "idCorpBenefit")
     private CorpBenefit benefit;
     private BenefitStatus status;
+    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate wef;
     @OneToMany
     private List<PreAuth> preAuthList;
@@ -30,12 +32,12 @@ public class CorpMemberBenefit extends AbstractEntity {
     public CorpMemberBenefit() {
     }
 
-    public Member getMember() {
-        return member;
+    public MemberAnniversary getMemberAnniv() {
+        return memberAnniv;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMemberAnniv(MemberAnniversary memberAnniv) {
+        this.memberAnniv = memberAnniv;
     }
 
     public CorpBenefit getBenefit() {
@@ -75,7 +77,7 @@ public class CorpMemberBenefit extends AbstractEntity {
 
         builder.add("status",status.toString())
                 .add("wef", wef == null ? "" : DATE_FORMATTER_yyyyMMdd.format(wef));
-        member.addJson(builder);
+        memberAnniv.addJson(builder);
         benefit.addJson(builder);
 
     }

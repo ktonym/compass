@@ -9,8 +9,8 @@ Ext.define('compass.model.uw.CorpAnniv', {
     fields: [
         { name: 'idCorpAnniv', type: 'int', useNull: true },
         { name: 'anniv', type: 'int' },
-        { name: 'startDate', type: 'date', dateFormat: 'Ymd' },
-        { name: 'endDate', type: 'date', dateFormat: 'Ymd' },
+        { name: 'inception', type: 'date', dateFormat: 'Ymd' },
+        { name: 'expiry', type: 'date', dateFormat: 'Ymd' },
         { name: 'renewalDate', type: 'date', dateFormat: 'Ymd' }
 
     ],
@@ -28,10 +28,10 @@ Ext.define('compass.model.uw.CorpAnniv', {
         anniv: [
             { type: 'presence', message: 'This field is mandatory' }
         ],
-        startDate: [
+        inception: [
             { type: 'presence', message: 'This field is mandatory' }
         ],
-        endDate: [
+        expiry: [
             { type: 'presence', message: 'This field is mandatory' }
         ],
         renewalDate: [

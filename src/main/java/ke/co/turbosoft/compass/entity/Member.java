@@ -20,13 +20,14 @@ public class Member extends AbstractEntity implements EntityItem<Integer> {
     private String surname;
     private String otherNames;
     private Sex sex;
+    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate dob;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="principal_id")
+    @JoinColumn(name="principal_id",nullable = false)
     private Principal principal;
     private MemberType memberType;
     @OneToMany(mappedBy = "member")
-    private List<CorpMemberBenefit> corpMemberBenefits;
+    private List<MemberAnniversary> memberAnniversaries;
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -105,12 +106,12 @@ public class Member extends AbstractEntity implements EntityItem<Integer> {
         this.memberType = memberType;
     }
 
-    public List<CorpMemberBenefit> getCorpMemberBenefits() {
-        return corpMemberBenefits;
+    public List<MemberAnniversary> getMemberAnniversaries() {
+        return memberAnniversaries;
     }
 
-    public void setCorpMemberBenefits(List<CorpMemberBenefit> corpMemberBenefits) {
-        this.corpMemberBenefits = corpMemberBenefits;
+    public void setMemberAnniversaries(List<MemberAnniversary> memberAnniversaries) {
+        this.memberAnniversaries = memberAnniversaries;
     }
 
     @Override
@@ -128,7 +129,8 @@ public class Member extends AbstractEntity implements EntityItem<Integer> {
                  .add("sex",sex.toString())
                  .add("dob", dob == null ? "" : DATE_FORMATTER_yyyyMMdd.format(dob))
                  .add("memberType", memberType.toString());
-
-        principal.addJson(builder);
+        if(principal!=null) {
+            principal.addJson(builder);
+        }
     }
 }

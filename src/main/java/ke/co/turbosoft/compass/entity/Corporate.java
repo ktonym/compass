@@ -30,6 +30,8 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
 	private String tel;
 	private String email;
     private String postalAddress;
+    @OneToMany(mappedBy = "corporate")
+    private List<Principal> principals;
 	@OneToMany(mappedBy = "corporate")
 	private List<CorpAnniv> annivs;
     @OneToMany(mappedBy = "corporate")
@@ -87,6 +89,14 @@ public class Corporate extends AbstractEntity implements EntityItem<Integer> {
 
     public void setPostalAddress(String postalAddress) {
         this.postalAddress = postalAddress;
+    }
+
+    public List<Principal> getPrincipals() {
+        return principals;
+    }
+
+    public void setPrincipals(List<Principal> principals) {
+        this.principals = principals;
     }
 
     public List<CorpAnniv> getAnnivs() {

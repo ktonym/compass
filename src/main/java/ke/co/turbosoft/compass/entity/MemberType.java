@@ -7,5 +7,7 @@ public enum MemberType {
     PRINCIPAL,
     SPOUSE,
     CHILD,
+    PARENT,
+    GRANDPARENT,
     OTHER
 }

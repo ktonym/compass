@@ -38,12 +38,12 @@ Ext.define('compass.view.uw.CorpAnnivsGrid',{
             dataIndex: 'anniv'
         },
         {
-            text: 'Start',
-            dataIndex: 'startDate'
+            text: 'Inception',
+            dataIndex: 'inception'
         },
         {
-            text: 'End',
-            dataIndex: 'endDate'
+            text: 'Expiry',
+            dataIndex: 'expiry'
         },
         {
             text: 'Renewal',

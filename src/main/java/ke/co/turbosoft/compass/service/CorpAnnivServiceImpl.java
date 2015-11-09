@@ -40,8 +40,8 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
                                    Integer idCorpAnniv,
                                    Integer idIntermediary,
                                    Integer anniv,
-                                   LocalDate startDate,
-                                   LocalDate endDate,
+                                   LocalDate inception,
+                                   LocalDate expiry,
                                    LocalDate renewalDate,
                                    String actionUsername) {
 
@@ -57,24 +57,24 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
             return ResultFactory.getFailResult("Cannot create a cover period without a scheme.");
         }
 
-        if(startDate==null){
-            return ResultFactory.getFailResult("Cannot create a cover period without a valid start date.");
+        if(inception==null){
+            return ResultFactory.getFailResult("Cannot create a cover period without a valid inception date.");
         } else {
-            if(endDate==null){
-                return ResultFactory.getFailResult("Cannot create a cover period without a valid end date.");
+            if(expiry==null){
+                return ResultFactory.getFailResult("Cannot create a cover period without a valid expiry date.");
             } else {
-                if(endDate.isBefore(startDate)){
-                    return ResultFactory.getFailResult("End date cannot predate start date.");
+                if(expiry.isBefore(inception)){
+                    return ResultFactory.getFailResult("Expiry date cannot predate inception date.");
                 }
                 //if(Period.between(startDate,endDate).getDays()>)
             }
         }
 
-        if(startDate.plusYears(1).isBefore(endDate)){
+        if(inception.plusYears(1).isBefore(expiry)){
             return ResultFactory.getFailResult("Policy cannot run more than a year.");
         }
 
-        if(renewalDate.isBefore(endDate)){
+        if(renewalDate.isBefore(expiry)){
             return ResultFactory.getFailResult("Policy cannot be renewed before the preceding cover lapses");
         }
 
@@ -90,7 +90,7 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
 
             if(testCorpAnniv != null){
 
-                return ResultFactory.getFailResult("Unable to add new cover period: ["+ anniv +"]the anniversary already exists");
+                return ResultFactory.getFailResult("Unable to add new cover period: ["+ anniv +"] the anniversary already exists");
             }
 
                 corpAnniv = new CorpAnniv();
@@ -121,9 +121,9 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
 
         }
 
-        corpAnniv.setStartDate(startDate);
-        corpAnniv.setEndDate(endDate);
-        corpAnniv.setRenewalDate(endDate.plusDays(1));
+        corpAnniv.setInception(inception);
+        corpAnniv.setExpiry(expiry);
+        corpAnniv.setRenewalDate(expiry.plusDays(1));
         corpAnniv.setIntermediary(intermediaryRepo.findOne(idIntermediary));
 
         corpAnnivRepo.save(corpAnniv);

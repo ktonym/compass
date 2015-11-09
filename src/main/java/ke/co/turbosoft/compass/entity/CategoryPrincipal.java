@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class CategoryPrincipal extends AbstractEntity{
 
     private Boolean active;
+    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate wef;
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
@@ -63,7 +64,7 @@ public class CategoryPrincipal extends AbstractEntity{
     public void addJson(JsonObjectBuilder builder) {
         category.addJson(builder);
         principal.addJson(builder);
-        builder.add("active", active)
+        builder.add("active", active ? "Y" : "N")
                 .add("wef", wef == null ? "" : DATE_FORMATTER_yyyyMMdd.format(wef));
 
     }

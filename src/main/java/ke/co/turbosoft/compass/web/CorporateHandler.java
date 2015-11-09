@@ -299,8 +299,8 @@ public class CorporateHandler extends AbstractHandler{
 
         JsonObject jsonObj = parseJsonObject(jsonData);
 
-        String startDateVal = jsonObj.getString("startDate");
-        String endDateVal = jsonObj.getString("endDate");
+        String inceptionVal = jsonObj.getString("inception");
+        String expiryVal = jsonObj.getString("expiry");
         String renewalDateVal = jsonObj.getString("renewalDate");
 
         Result<CorpAnniv> ar = corpAnnivService.store(
@@ -308,8 +308,8 @@ public class CorporateHandler extends AbstractHandler{
                 getIntegerValue(jsonObj.get("idCorpAnniv")),
                 getIntegerValue(jsonObj.get("idIntermediary")),
                 getIntegerValue(jsonObj.get("anniv")),
-                LocalDate.parse(startDateVal, DATE_FORMAT_yyyyMMdd),
-                LocalDate.parse(endDateVal, DATE_FORMAT_yyyyMMdd),
+                LocalDate.parse(inceptionVal, DATE_FORMAT_yyyyMMdd),
+                LocalDate.parse(expiryVal, DATE_FORMAT_yyyyMMdd),
                 LocalDate.parse(renewalDateVal, DATE_FORMAT_yyyyMMdd),
                 sessionUser.getUsername()
         );

@@ -8,7 +8,7 @@
     <name>compass</name>
 
     <properties>
-        <spring.version>4.1.2.RELEASE</spring.version>
+        <spring.version>4.2.0.RELEASE</spring.version>
         <tiles.version>3.0.5</tiles.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
         <apache.shiro.version>1.2.3</apache.shiro.version>
@@ -54,6 +54,12 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
+        </dependency>
+        //ExtDirect ServerSide
+        <dependency>
+            <groupId>ch.ralscha</groupId>
+            <artifactId>extdirectspring</artifactId>
+            <version>1.6.1</version>
         </dependency>
         <!--dependency>
             <groupId>javax.servlet</groupId>
