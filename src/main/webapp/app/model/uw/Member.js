@@ -28,7 +28,7 @@ Ext.define('compass.model.uw.Member',{
 
     validators: {
         memberNo: [
-            { type: 'format', matcher: /^\S{3}-\d{5}-\d{2}$/, message: 'Member number must be in the format AAA-99999-99' }
+            { type: 'format', matcher: /^\S{3}-\d{2,5}-\d{2}$/, message: 'Member number must be in the format AAA-99999-99' }
         ],
         firstName: [{ type: 'presence', message: 'This field is mandatory' }],
         surname: [{ type: 'presence', message: 'This field is mandatory' }],

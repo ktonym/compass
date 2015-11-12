@@ -21,7 +21,7 @@ Ext.define('compass.model.uw.Principal',{
     //],
     validators: {
         familyNo: [
-            { type: 'format', matcher: /^\S{3}-\d{5}$/, message: 'Family number must be in the format AAA-99999'}
+            { type: 'format', matcher: /^\S{3}-\d{2,5}$/, message: 'Family number must be in the format AAA-99999'}
         ],
         firstName: [{ type: 'presence', message: 'This field is mandatory' }],
         surname: [{ type: 'presence', message: 'This field is mandatory' }],
