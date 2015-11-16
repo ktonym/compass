@@ -26,6 +26,8 @@ public class CorpMemberBenefit extends AbstractEntity {
     private LocalDate wef;
     @OneToMany
     private List<PreAuth> preAuthList;
+    @OneToOne(mappedBy = "corpMemberBenefit")
+    private PremiumInvoiceItem invoiceItem;
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -70,6 +72,14 @@ public class CorpMemberBenefit extends AbstractEntity {
 
     public void setPreAuthList(List<PreAuth> preAuthList) {
         this.preAuthList = preAuthList;
+    }
+
+    public PremiumInvoiceItem getInvoiceItem() {
+        return invoiceItem;
+    }
+
+    public void setInvoiceItem(PremiumInvoiceItem invoiceItem) {
+        this.invoiceItem = invoiceItem;
     }
 
     @Override

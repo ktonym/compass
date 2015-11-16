@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class GroupRate extends PremiumRate {
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corp_id")
+    @JoinColumn(name = "corp_id", nullable = false)
     private Corporate corporate;
 
     public GroupRate() {

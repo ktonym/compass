@@ -34,8 +34,8 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id",nullable = false)
     private Category category;
-    @OneToMany(mappedBy = "corpBenefit")
-    private  List<PremiumRate> premiumRates;
+//    @OneToMany(mappedBy = "corpBenefit")
+//    private  List<PremiumRate> premiumRates;
 
 
     public CorpBenefit() {
@@ -129,13 +129,13 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
         this.category = category;
     }
 
-    public List<PremiumRate> getPremiumRates() {
-        return premiumRates;
-    }
-
-    public void setPremiumRates(List<PremiumRate> premiumRates) {
-        this.premiumRates = premiumRates;
-    }
+//    public List<PremiumRate> getPremiumRates() {
+//        return premiumRates;
+//    }
+//
+//    public void setPremiumRates(List<PremiumRate> premiumRates) {
+//        this.premiumRates = premiumRates;
+//    }
 
     public boolean isMainBenefit(){
         return (this.getParentBenefit() == null);

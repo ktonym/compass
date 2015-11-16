@@ -16,6 +16,7 @@ public class PreAuth extends AbstractEntity implements EntityItem<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPreAuth;
+    @Convert(converter=LocalDatePersistenceConverter.class)
     @Column(nullable = false)
     private LocalDate preAuthDate;
     @Column(nullable = false)

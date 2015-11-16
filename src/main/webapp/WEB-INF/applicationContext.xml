@@ -51,5 +51,29 @@
 
     <import resource="security.xml"/>
 
+    <!-- Activiti configuration -->
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource"></property>
+        <!--<property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" />-->
+        <!--<property name="jdbcDriver" value="org.h2.Driver" />-->
+        <!--<property name="jdbcUsername" value="sa" />-->
+        <!--<property name="jdbcPassword" value="" />-->
+
+        <property name="databaseSchemaUpdate" value="true" />
+
+        <property name="jobExecutorActivate" value="false" />
+        <property name="asyncExecutorEnabled" value="true" />
+        <property name="asyncExecutorActivate" value="false" />
+
+
+
+        <property name="mailServerHost" value="mail.my-corp.com" />
+        <property name="mailServerPort" value="5025" />
+    </bean>
+
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+
 
 </beans>
