@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 /**
  * Created by akipkoech on 12/9/14.
  */
+//TODO setup uniqueness for (corp,benefit,upperlimit,famSize)
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="PREMIUM_TYPE",discriminatorType = DiscriminatorType.STRING)
@@ -17,13 +18,15 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
     private Integer idPremiumRate;
     @Column(name = "PREMIUM_TYPE",insertable = false,updatable = false)
     private PremiumType premiumType;
-    private String benefit;
     private BigDecimal upperLimit;
     private BigDecimal premium;
     private String familySize;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCorpBenefit",nullable = false)
-    private CorpBenefit corpBenefit;
+    @JoinColumn(name = "benefitCode",nullable = false)
+    private BenefitRef benefit;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCorporate",nullable = false)
+    private Corporate corporate;
 
     public PremiumRate() {
     }
@@ -44,11 +47,11 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
         this.premiumType = premiumType;
     }
 
-    public String getBenefit() {
+    public BenefitRef getBenefit() {
         return benefit;
     }
 
-    public void setBenefit(String benefit) {
+    public void setBenefit(BenefitRef benefit) {
         this.benefit = benefit;
     }
 
@@ -76,12 +79,12 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
         this.familySize = familySize;
     }
 
-    public CorpBenefit getCorpBenefit() {
-        return corpBenefit;
+    public Corporate getCorporate() {
+        return corporate;
     }
 
-    public void setCorpBenefit(CorpBenefit corpBenefit) {
-        this.corpBenefit = corpBenefit;
+    public void setCorporate(Corporate corporate) {
+        this.corporate = corporate;
     }
 
     @Override
@@ -93,10 +96,14 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
     public void addJson(JsonObjectBuilder builder) {
          builder.add("idPremiumRate", idPremiumRate)
                  .add("premiumType", premiumType.toString())
-                 .add("benefit", benefit)
                  .add("upperLimit", upperLimit)
                  .add("premium", premium)
                  .add("familySize", familySize);
-        corpBenefit.addJson(builder);
+        if(benefit!=null) {
+            benefit.addJson(builder);
+        }
+        if(corporate!=null){
+            corporate.addJson(builder);
+        }
     }
 }

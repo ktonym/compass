@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface PremiumRateRepo extends JpaRepository<PremiumRate,Integer> {
 
-    List<PremiumRate> findByCorpBenefit_Category_Anniv_Corporate(Corporate corporate);
+  //TODO create generic methods here
 
 }

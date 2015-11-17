@@ -15,6 +15,7 @@ public class GroupRate extends PremiumRate {
     private Corporate corporate;
 
     public GroupRate() {
+        super();
     }
 
     public Corporate getCorporate() {
