@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by akipkoech on 17/11/2015.
@@ -92,13 +94,47 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<List<GroupRate>> store(List<GroupRate> groupRates, String actionUsername) {
+    public Result<List<GroupRate>> store(List<Map<String,Object>> groupRateMap, String actionUsername) {
 
         if(!isValidUser(actionUsername)){
             return ResultFactory.getFailResult(USER_INVALID);
         }
 
-        return null;
+        /**
+         * Pick the first item and query for the Corporate
+         */
+
+        List<GroupRate> groupRateList = new ArrayList<>();
+
+        Corporate corp = corporateRepo.findOne((Integer)groupRateMap.get(0).get("idCorporate"));
+
+        for (Map map: groupRateMap){
+
+            Integer idPremiumRate = (Integer) map.get("idPremiumRate");
+            String premiumType = (String) map.get("premiumType");
+            //Integer idCorporate = (Integer) map.get("idCorporate");
+            Integer benefitCode = (Integer) map.get("benefitCode");
+            BigDecimal upperLimit = (BigDecimal) map.get("upperLimit");
+            BigDecimal premium = (BigDecimal) map.get("premium");
+            String familySize = (String) map.get("familySize");
+
+            BenefitRef benefit = benefitRefRepo.findOne(benefitCode);
+
+            GroupRate groupRate = new GroupRate();
+            groupRate.setCorporate(corp);
+            groupRate.setFamilySize(familySize);
+            groupRate.setPremiumType(PremiumType.valueOf(premiumType));
+            groupRate.setPremium(premium);
+            groupRate.setIdPremiumRate(idPremiumRate);
+            groupRate.setUpperLimit(upperLimit);
+            groupRate.setBenefit(benefit);
+
+            groupRateList.add(groupRate);
+        }
+
+        groupRateRepo.save(groupRateList);
+        return ResultFactory.getSuccessResult(groupRateList);
+
     }
 
     @Override

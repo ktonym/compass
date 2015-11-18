@@ -6,6 +6,7 @@ import ke.co.turbosoft.compass.vo.Result;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -41,7 +42,7 @@ public interface CorporateService {
             String actionUsername
     );
 
-    Result<List<Corporate>> store(List<Corporate> corporates, String actionUsername);
+    Result<List<Corporate>> store(List<Map<String,Object>> corporateMap, String actionUsername);
 
     Result<Corporate> remove(Integer idCorporate, String actionUsername);
 

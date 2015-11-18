@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.json.*;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public abstract class AbstractHandler {
     }
 
     public static String getJsonErrorMsg(String theErrorMessage){
-        return getJsonMsg(theErrorMessage,false);
+        return getJsonMsg(theErrorMessage, false);
     }
 
     public static String getJsonSuccessMsg(String msg){
@@ -106,6 +107,26 @@ public abstract class AbstractHandler {
     protected JsonArray parseJsonArray(String jsonString){
         JsonReader reader = Json.createReader(new StringReader(jsonString));
         return reader.readArray();
+    }
+
+    /**
+     * Method to correctly parse Decimal data types
+     */
+    protected BigDecimal getBigDecimalValue(JsonValue jsonValue){
+
+        BigDecimal value = null;
+
+        switch (jsonValue.getValueType()){
+
+            case NUMBER:
+                JsonNumber num = (JsonNumber) jsonValue;
+                value = num.bigDecimalValue();
+                break;
+            case NULL:
+                break;
+        }
+
+        return value;
     }
 
 }

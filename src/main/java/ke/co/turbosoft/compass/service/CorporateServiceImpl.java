@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -81,7 +83,7 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
         corporate.setJoined(joined);
         corporate.setPostalAddress(postalAddress);
         corporate.setTel(tel);
-        corporate.setLastUpdate(lastUpdate==null?null:LocalDateTime.now());
+        corporate.setLastUpdate(lastUpdate==null?LocalDateTime.now():lastUpdate);
 
         corporateRepo.save(corporate);
 
@@ -91,12 +93,39 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<List<Corporate>> store(List<Corporate> corporates, String actionUsername) {
+    public Result<List<Corporate>> store(List<Map<String,Object>> corporateMap, String actionUsername) {
         if(!isValidUser(actionUsername)) {
             return ResultFactory.getFailResult(USER_INVALID);
         }
-        corporateRepo.save(corporates);
-        return ResultFactory.getSuccessResult(corporates);
+
+        List<Corporate> corporateList = new ArrayList<>();
+
+
+        for (Map map: corporateMap){
+
+            Integer idCorporate = (Integer) map.get("idCorporate");
+            String corporateName = (String) map.get("corporateName");
+            String abbreviation = (String) map.get("abbreviation");
+            String tel = (String) map.get("tel");
+            String email = (String) map.get("email");
+            String postalAddress = (String) map.get("postalAddress");
+            LocalDate joined = (LocalDate) map.get("joined");
+            LocalDateTime lastUpdate = (LocalDateTime) map.get("lastUpdate");
+
+            Corporate corp = new Corporate();
+            corp.setAbbreviation(abbreviation);
+            corp.setCorporateName(corporateName);
+            corp.setTel(tel);
+            corp.setEmail(email);
+            corp.setPostalAddress(postalAddress);
+            corp.setJoined(joined);
+            corp.setLastUpdate(lastUpdate==null?LocalDateTime.now():lastUpdate);
+
+            corporateList.add(corp);
+        }
+
+        corporateRepo.save(corporateList);
+        return ResultFactory.getSuccessResult(corporateList);
     }
 
     @Override

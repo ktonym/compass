@@ -14,7 +14,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static ke.co.turbosoft.compass.web.SecurityHelper.getSessionUser;
 
@@ -39,6 +41,9 @@ public class CorporateHandler extends AbstractHandler{
 
     @Autowired
     private ContactInfoService contactInfoService;
+
+    @Autowired
+    private GroupRateService groupRateService;
 
     static final DateTimeFormatter DATE_FORMAT_yyyyMMdd =  DateTimeFormatter.ofPattern("yyyyMMdd");
     static final DateTimeFormatter DATE_FORMAT_yyyyMMddHHmm = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm");
@@ -76,7 +81,7 @@ public class CorporateHandler extends AbstractHandler{
 
         User sessionUser = getSessionUser(request);
 
-        Result<Corporate> ar = corporateService.find(idCorporate,sessionUser.getUsername());
+        Result<Corporate> ar = corporateService.find(idCorporate, sessionUser.getUsername());
 
         if(ar.isSuccess()){
 
@@ -119,30 +124,30 @@ public class CorporateHandler extends AbstractHandler{
                 return getJsonErrorMsg(ar.getMsg());
             }
         } catch (JsonException je){
+
             JsonArray jsonArray = parseJsonArray(jsonData);
 
-            List<Corporate> corporateList = new ArrayList<>();
+            List<Map<String,Object>> mapList = new ArrayList<>();
 
             for (int i = 0; i < jsonArray.size(); i++){
 
-                JsonObject jsonObject = jsonArray.getJsonObject(i);
-                Corporate corp = new Corporate();
+                JsonObject jsonObj = jsonArray.getJsonObject(i);
+                Map map = new HashMap<>();
 
-                corp.setIdCorporate(getIntegerValue(jsonObject.get("idCorporate")));
-                corp.setCorporateName(jsonObject.getString("corporateName"));
-                corp.setAbbreviation(jsonObject.getString("abbreviation"));
-                corp.setTel(jsonObject.getString("tel"));
-                corp.setEmail(jsonObject.getString("email"));
-                corp.setPostalAddress(jsonObject.getString("postalAddress"));
-                String joinDateVal = jsonObject.getString("joined");
-                corp.setJoined(LocalDate.parse(joinDateVal, DATE_FORMAT_yyyyMMdd));
-                String lastUpdateVal = jsonObject.getString("lastUpdate");
-                corp.setLastUpdate(LocalDateTime.parse(lastUpdateVal, DATE_FORMAT_yyyyMMddHHmm));
+                map.put("idCorporate", getIntegerValue(jsonObj.get("idCorporate")));
+                map.put("corporateName", jsonObj.getString("corporateName"));
+                map.put("abbreviation", jsonObj.getString("abbreviation"));
+                map.put("tel", jsonObj.getString("tel"));
+                map.put("email", jsonObj.getString("email"));
+                map.put("postalAddress", jsonObj.getString("postalAddress"));
+                map.put("joined", LocalDate.parse(jsonObj.getString("joined"), DATE_FORMAT_yyyyMMdd));
+                map.put("lastUpdate", LocalDateTime.parse(jsonObj.getString("lastUpdate"), DATE_FORMAT_yyyyMMddHHmm));
 
-                corporateList.add(i,corp);
+                mapList.add(map);
 
             }
-            Result<List<Corporate>> ar = corporateService.store(corporateList,sessionUser.getUsername());
+
+            Result<List<Corporate>> ar = corporateService.store(mapList,sessionUser.getUsername());
             if(ar.isSuccess()){
                 return getJsonSuccessData(ar.getData());
             } else {
@@ -330,7 +335,7 @@ public class CorporateHandler extends AbstractHandler{
 
         User sessionUser = getSessionUser(request);
 
-        Result<CorpAnniv> ar = corpAnnivService.remove(idCorpAnniv,sessionUser.getUsername());
+        Result<CorpAnniv> ar = corpAnnivService.remove(idCorpAnniv, sessionUser.getUsername());
 
         if(ar.isSuccess()){
             return getJsonSuccessData(ar.getData());
@@ -416,8 +421,8 @@ public class CorporateHandler extends AbstractHandler{
         Result<CorpAnnivSuspension> ar = annivSuspService.store(
                 getIntegerValue(jsonObj.get("idAnnivSusp")),
                 getIntegerValue(jsonObj.get("idCorpAnniv")),
-                LocalDate.parse(startDateVal,DATE_FORMAT_yyyyMMdd),
-                LocalDate.parse(endDateVal,DATE_FORMAT_yyyyMMdd),
+                LocalDate.parse(startDateVal, DATE_FORMAT_yyyyMMdd),
+                LocalDate.parse(endDateVal, DATE_FORMAT_yyyyMMdd),
                 jsonObj.getString("reason"),
                 sessionUser.getUsername());
 
@@ -449,6 +454,90 @@ public class CorporateHandler extends AbstractHandler{
 
     }
 
+    @RequestMapping(value = "/grouprate/store", method = RequestMethod.POST, produces = {"application/json"})
+    @ResponseBody
+    public String storeGroupRates(
+            @RequestParam(value = "data", required = true) String jsonData,
+            HttpServletRequest request){
 
+        User sessionUser = getSessionUser(request);
+
+        try {
+
+            JsonObject jsonObj = parseJsonObject(jsonData);
+            String lastUpdateVal = jsonObj.getString("lastUpdate");
+            Result<GroupRate> ar = groupRateService.store(
+                    getIntegerValue(jsonObj.get("idPremiumRate")),
+                    jsonObj.getString("premiumType"),
+                    getIntegerValue(jsonObj.get("idCorporate")),
+                    getIntegerValue(jsonObj.get("benefitCode")),
+                    getBigDecimalValue(jsonObj.get("upperLimit")),
+                    getBigDecimalValue(jsonObj.get("premium")),
+                    jsonObj.getString("familySize"),
+                    LocalDateTime.parse(lastUpdateVal, DATE_FORMAT_yyyyMMddHHmm),
+                    sessionUser.getUsername());
+
+
+            if (ar.isSuccess()) {
+                return getJsonSuccessData(ar.getData());
+            } else {
+                return getJsonErrorMsg(ar.getMsg());
+            }
+
+        } catch (JsonException je){
+
+            JsonArray jsonArray = parseJsonArray(jsonData);
+
+            List<Map<String,Object>> mapList = new ArrayList<>();
+
+            for (int i = 0; i < jsonArray.size(); i++){
+
+                JsonObject jsonObj = jsonArray.getJsonObject(i);
+                Map map = new HashMap<>();
+
+                map.put("idPremiumRate", getIntegerValue(jsonObj.get("idPremiumRate")));
+                map.put("idCorporate", getIntegerValue(jsonObj.get("idCorporate")));
+                map.put("familySize", jsonObj.getString("familySize"));
+                map.put("premiumType", jsonObj.getString("premiumType"));
+                map.put("benefitCode", getIntegerValue(jsonObj.get("benefitCode")));
+                map.put("upperLimit", getBigDecimalValue(jsonObj.get("upperLimit")));
+                map.put("premium", getBigDecimalValue(jsonObj.get("premium")));
+
+                mapList.add(map);
+
+            }
+
+            Result<List<GroupRate>> ar = groupRateService.store(mapList,sessionUser.getUsername());
+
+            if(ar.isSuccess()){
+                return getJsonSuccessData(ar.getData());
+            } else {
+                return getJsonErrorMsg(ar.getMsg());
+            }
+
+        }
+
+    }
+
+
+    @RequestMapping(value = "/grouprate/findAll", method = RequestMethod.POST, produces = {"application/json"})
+    @ResponseBody
+    public String findAllGroupRates(@RequestParam (value = "data", required = true) String jsonData,
+                                    HttpServletRequest request){
+
+        User sessionUser = getSessionUser(request);
+        JsonObject jsonObj = parseJsonObject(jsonData);
+        Result<List<GroupRate>> ar = groupRateService.findByCorporate(
+                getIntegerValue(jsonObj.get("idCorporate")),
+                sessionUser.getUsername()
+        );
+
+        if (ar.isSuccess()){
+            return getJsonSuccessData(ar.getData());
+        } else {
+            return getJsonErrorMsg(ar.getMsg());
+        }
+
+    }
 
 }
