@@ -30,6 +30,8 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
     private Intermediary intermediary;
     @OneToMany(mappedBy = "anniv")
     private List<MemberAnniversary> memberAnniversaries;
+    @OneToMany(mappedBy = "anniv")
+    private List<CorpAnnivSuspension> annivSuspensions;
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime lastUpdate;
 
@@ -118,6 +120,14 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
 
     public void setMemberAnniversaries(List<MemberAnniversary> memberAnniversaries) {
         this.memberAnniversaries = memberAnniversaries;
+    }
+
+    public List<CorpAnnivSuspension> getAnnivSuspensions() {
+        return annivSuspensions;
+    }
+
+    public void setAnnivSuspensions(List<CorpAnnivSuspension> annivSuspensions) {
+        this.annivSuspensions = annivSuspensions;
     }
 
     @Override
