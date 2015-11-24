@@ -1,10 +1,7 @@
 package ke.co.turbosoft.compass.service;
 
-import ke.co.turbosoft.compass.entity.CorpAnniv;
-import ke.co.turbosoft.compass.entity.CorpAnnivSuspension;
-import ke.co.turbosoft.compass.entity.Corporate;
-import ke.co.turbosoft.compass.repo.CorpAnnivRepo;
-import ke.co.turbosoft.compass.repo.CorpAnnivSuspensionRepo;
+import ke.co.turbosoft.compass.entity.*;
+import ke.co.turbosoft.compass.repo.*;
 import ke.co.turbosoft.compass.vo.Result;
 import ke.co.turbosoft.compass.vo.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +27,19 @@ public class PopulateMemberBenefitsImpl extends AbstractService implements Popul
     @Autowired
     protected CorpAnnivSuspensionRepo suspensionRepo;
 
-//    public static Predicate<CorpAnnivSuspension> isActive() {
-//        return p -> (p.getStartDate().isBefore(LocalDate.now()) || p.getStartDate().) && p.getGender().equalsIgnoreCase("F");
-//    }
+    @Autowired
+    protected CategoryRepo categoryRepo;
+
+    @Autowired
+    protected MemberRepo memberRepo;
+
+    @Autowired
+    protected CorpMemberBenefitRepo memberBenefitRepo;
+
+    public static Predicate<CorpAnnivSuspension> isActive() {
+        return p -> (p.getStartDate().isBefore(LocalDate.now()) || p.getStartDate().isEqual(LocalDate.now()))
+                && (p.getEndDate().isEqual(LocalDate.now()) || p.getEndDate().isAfter(LocalDate.now()));
+    }
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -41,16 +48,50 @@ public class PopulateMemberBenefitsImpl extends AbstractService implements Popul
         List<CorpAnniv> annivList = corpAnnivRepo.findByCorporate(coporate);
 
         CorpAnniv latestAnniv = annivList.stream()
-                .max(Comparator.comparing(corpAnniv -> corpAnniv.getAnniv()))
+                .max(Comparator.comparing(ca -> ca.getAnniv()))
                 .get();
 
         if(latestAnniv.getExpiry().isBefore(LocalDate.now())){
-            ResultFactory.getSuccessResult("No anniversary found to satisfy this request.");
+            return ResultFactory.getFailResult("No anniversary found to satisfy this request.");
         }
 
-//        List<CorpAnnivSuspension> suspensions = suspensionRepo.findByCorpAnniv(latestAnniv);
-//         CorpAnnivSuspension activeSuspension = suspensions.stream()
-//                 .anyMatch()
+        List<CorpAnnivSuspension> suspensions = suspensionRepo.findByCorpAnniv(latestAnniv);
+        if(suspensions.stream().anyMatch(isActive())){
+            return ResultFactory.getFailResult("There is an active anniversary suspension.");
+        }
+
+        List<Category> categories = categoryRepo.findByAnniv(latestAnniv);
+
+        if(categories.isEmpty()){
+            return ResultFactory.getFailResult("No categories have been defined for the active anniversary.");
+        }
+
+//        List<CorpBenefit> benefits = categories.stream().forEach(Category::getCorpBenefits);
+
+        for(Category category: categories){
+
+            List<CorpBenefit> benefits = category.getCorpBenefits();
+
+//            List<CategoryPrincipal> catPrincipals = category.getCategoryPrincipal();
+            List<Member> memberList = memberRepo.findByPrincipal_CategoryPrincipal_Category(category);
+
+            for(CorpBenefit benefit: benefits){
+
+                MemberType memType = benefit.getMemberType();
+
+                for (Member member : memberList){
+                    if(member.getMemberType().equals(memType)){ //Benefit is applicable to member
+                        if (member.getMemberAnniversaries().contains(latestAnniv)){ //member is active in current anniv
+                            CorpMemberBenefit corpMemberBenefit = new CorpMemberBenefit();
+                            corpMemberBenefit.setBenefit(benefit);
+                            corpMemberBenefit.setMemberAnniv(null);
+                        }
+                    }
+                }
+
+            }
+
+        }
 
         return null;
 

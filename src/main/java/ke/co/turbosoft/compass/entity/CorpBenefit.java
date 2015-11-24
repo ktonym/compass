@@ -19,7 +19,8 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
     @JoinColumn(name = "benefitCode", nullable = false)
 	private BenefitRef benefitRef;
 	private Double upperLimit;
-	private String memberType;
+    @Enumerated(EnumType.STRING)
+	private MemberType memberType;
 	private boolean sharing;
     private boolean requiresPreAuth;
     private Integer waitingPeriod;
@@ -65,11 +66,11 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
         this.upperLimit = upperLimit;
     }
 
-    public String getMemberType() {
+    public MemberType getMemberType() {
         return memberType;
     }
 
-    public void setMemberType(String memberType) {
+    public void setMemberType(MemberType memberType) {
         this.memberType = memberType;
     }
 
@@ -150,7 +151,7 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
     public void addJson(JsonObjectBuilder builder) {
         builder.add("idCorpBenefit",idCorpBenefit)
                 .add("upperLimit",upperLimit)
-                .add("memberType",memberType)
+                .add("memberType",memberType.toString())
                 .add("sharing",sharing)
                 .add("requiresPreAuth",requiresPreAuth)
                 .add("waitingPeriod", waitingPeriod);

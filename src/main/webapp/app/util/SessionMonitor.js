@@ -26,7 +26,7 @@ Ext.define('compass.util.SessionMonitor', {
         items: [{
             xtype: 'container',
             frame: true,
-            html: "Your session will automatically expires after 15 minutes of  inactivity. If your session expires, any unsaved data will be lost and  you will be automatically logged out. </br></br>If you want  to continue working, click the 'Continue Working'  button.</br></br>"
+            html: "Your session will automatically expire after 15 minutes of  inactivity. If your session expires, any unsaved data will be lost and  you will be automatically logged out. </br></br>If you want  to continue working, click the 'Continue Working'  button.</br></br>"
         },{
             xtype: 'label',
             text: ''
