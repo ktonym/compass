@@ -8,6 +8,7 @@ import java.util.List;
  * Created by akipkoech on 09/11/2015.
  */
 @Entity @IdClass(MemberAnnivId.class)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"idMember","idCorpAnniv"}))
 public class MemberAnniversary extends AbstractEntity{
 
     @Id

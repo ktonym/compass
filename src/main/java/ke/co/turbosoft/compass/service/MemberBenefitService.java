@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Created by akipkoech on 23/11/2015.
  */
-public interface PopulateMemberBenefits {
+public interface MemberBenefitService {
 
-    Result<String> execute(Corporate coporate, String actionUsername);
+    Result<String> execute(Integer idCorporate, String actionUsername);
 
 }

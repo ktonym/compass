@@ -33,11 +33,11 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
     @OneToMany(mappedBy = "benefit")
     private List<CorpMemberBenefit> corpMemberBenefits;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id",nullable = false)
+    @JoinColumn(name = "idCategory",nullable = false)
     private Category category;
 //    @OneToMany(mappedBy = "corpBenefit")
 //    private  List<PremiumRate> premiumRates;
-
+//TODO consider linking the rate sheet to this class
 
     public CorpBenefit() {
     }

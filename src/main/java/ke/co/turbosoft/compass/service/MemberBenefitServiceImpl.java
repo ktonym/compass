@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -18,8 +17,11 @@ import java.util.function.Predicate;
 /**
  * Created by akipkoech on 23/11/2015.
  */
-@Service("populateMemberBenefits")
-public class PopulateMemberBenefitsImpl extends AbstractService implements PopulateMemberBenefits {
+@Service("memberBenefitService")
+public class MemberBenefitServiceImpl extends AbstractService implements MemberBenefitService {
+
+    @Autowired
+    protected CorporateRepo corporateRepo;
 
     @Autowired
     protected CorpAnnivRepo corpAnnivRepo;
@@ -36,6 +38,9 @@ public class PopulateMemberBenefitsImpl extends AbstractService implements Popul
     @Autowired
     protected CorpMemberBenefitRepo memberBenefitRepo;
 
+    @Autowired
+    protected MemberAnniversaryRepo memAnnivRepo;
+
     public static Predicate<CorpAnnivSuspension> isActive() {
         return p -> (p.getStartDate().isBefore(LocalDate.now()) || p.getStartDate().isEqual(LocalDate.now()))
                 && (p.getEndDate().isEqual(LocalDate.now()) || p.getEndDate().isAfter(LocalDate.now()));
@@ -43,9 +48,11 @@ public class PopulateMemberBenefitsImpl extends AbstractService implements Popul
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<String> execute(Corporate coporate, String actionUsername) {
+    public Result<String> execute(Integer idCorporate, String actionUsername) {
 
-        List<CorpAnniv> annivList = corpAnnivRepo.findByCorporate(coporate);
+        Corporate corporate = corporateRepo.findOne(idCorporate);
+
+        List<CorpAnniv> annivList = corpAnnivRepo.findByCorporate(corporate);
 
         CorpAnniv latestAnniv = annivList.stream()
                 .max(Comparator.comparing(ca -> ca.getAnniv()))
@@ -80,11 +87,15 @@ public class PopulateMemberBenefitsImpl extends AbstractService implements Popul
                 MemberType memType = benefit.getMemberType();
 
                 for (Member member : memberList){
+
+                    MemberAnniversary memberAnniversary = memAnnivRepo.findByCorpAnnivAndMember(latestAnniv, member);
+
                     if(member.getMemberType().equals(memType)){ //Benefit is applicable to member
-                        if (member.getMemberAnniversaries().contains(latestAnniv)){ //member is active in current anniv
+                        if (memberAnniversary!=null){ //member is active in current anniv
                             CorpMemberBenefit corpMemberBenefit = new CorpMemberBenefit();
                             corpMemberBenefit.setBenefit(benefit);
-                            corpMemberBenefit.setMemberAnniv(null);
+                            corpMemberBenefit.setMemberAnniv(memberAnniversary);
+                            memberBenefitRepo.save(corpMemberBenefit);
                         }
                     }
                 }
@@ -93,7 +104,7 @@ public class PopulateMemberBenefitsImpl extends AbstractService implements Popul
 
         }
 
-        return null;
+        return ResultFactory.getSuccessResult("Successfully saved member benefit(s).");
 
     }
 
