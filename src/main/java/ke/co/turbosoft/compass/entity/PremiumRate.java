@@ -23,7 +23,7 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
     private String familySize;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "benefitCode",nullable = false)
-    private BenefitRef benefit;
+    private BenefitRef benefitRef;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idCorporate",nullable = false)
     private Corporate corporate;
@@ -47,12 +47,12 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
         this.premiumType = premiumType;
     }
 
-    public BenefitRef getBenefit() {
-        return benefit;
+    public BenefitRef getBenefitRef() {
+        return benefitRef;
     }
 
-    public void setBenefit(BenefitRef benefit) {
-        this.benefit = benefit;
+    public void setBenefitRef(BenefitRef benefitRef) {
+        this.benefitRef = benefitRef;
     }
 
     public BigDecimal getUpperLimit() {
@@ -99,8 +99,8 @@ public class PremiumRate extends AbstractEntity implements EntityItem<Integer>{
                  .add("upperLimit", upperLimit)
                  .add("premium", premium)
                  .add("familySize", familySize);
-        if(benefit!=null) {
-            benefit.addJson(builder);
+        if(benefitRef !=null) {
+            benefitRef.addJson(builder);
         }
         if(corporate!=null){
             corporate.addJson(builder);

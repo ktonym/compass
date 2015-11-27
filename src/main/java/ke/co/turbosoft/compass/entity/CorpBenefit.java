@@ -152,11 +152,17 @@ public class CorpBenefit extends AbstractEntity implements EntityItem<Integer>{
         builder.add("idCorpBenefit",idCorpBenefit)
                 .add("upperLimit",upperLimit)
                 .add("memberType",memberType.toString())
-                .add("sharing",sharing)
-                .add("requiresPreAuth",requiresPreAuth)
+                .add("sharing",sharing?"Y":"N")
+                .add("requiresPreAuth",requiresPreAuth?"Y":"N")
                 .add("waitingPeriod", waitingPeriod);
-        parentBenefit.addJson(builder);
-        category.addJson(builder);
-        benefitRef.addJson(builder);
+        if(!isMainBenefit()) {
+            parentBenefit.addJson(builder);
+        }
+        if(category!=null){
+            category.addJson(builder);
+        }
+        if(benefitRef!=null){
+            benefitRef.addJson(builder);
+        }
     }
 }

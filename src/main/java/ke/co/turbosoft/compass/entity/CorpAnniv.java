@@ -20,17 +20,17 @@ public class CorpAnniv extends AbstractEntity implements EntityItem<Integer> {
 	private LocalDate expiry;
     @Convert(converter=LocalDatePersistenceConverter.class)
     private LocalDate renewalDate;
-	@OneToMany(mappedBy = "anniv")
+	@OneToMany(mappedBy = "corpAnniv")
 	private List<Category> category;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="corp_id")
     private Corporate corporate;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "intermediary_id",nullable = true)
+    @JoinColumn(name = "intermediary_id",referencedColumnName = "idIntermediary",nullable = true)
     private Intermediary intermediary;
-    @OneToMany(mappedBy = "anniv")
+    @OneToMany(mappedBy = "corpAnniv")
     private List<MemberAnniversary> memberAnniversaries;
-    @OneToMany(mappedBy = "anniv")
+    @OneToMany(mappedBy = "corpAnniv")
     private List<CorpAnnivSuspension> annivSuspensions;
     @Convert(converter = LocalDateTimePersistenceConverter.class)
     private LocalDateTime lastUpdate;

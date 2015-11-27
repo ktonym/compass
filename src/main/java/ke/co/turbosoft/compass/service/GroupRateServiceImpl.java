@@ -1,10 +1,7 @@
 package ke.co.turbosoft.compass.service;
 
 import ke.co.turbosoft.compass.entity.*;
-import ke.co.turbosoft.compass.repo.BenefitRefRepo;
-import ke.co.turbosoft.compass.repo.CorporateRepo;
-import ke.co.turbosoft.compass.repo.GroupRateRepo;
-import ke.co.turbosoft.compass.repo.PremiumInvoiceItemRepo;
+import ke.co.turbosoft.compass.repo.*;
 import ke.co.turbosoft.compass.vo.Result;
 import ke.co.turbosoft.compass.vo.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,7 @@ import java.util.Map;
 public class GroupRateServiceImpl extends AbstractService implements GroupRateService {
 
     @Autowired
-    private GroupRateRepo groupRateRepo;
+    private PremiumRateRepo groupRateRepo;
     @Autowired
     private BenefitRefRepo benefitRefRepo;
     @Autowired
@@ -54,7 +51,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
         BenefitRef benefit = benefitRefRepo.findOne(benefitCode);
         GroupRate groupRate;
         //We're querying the database to find if any defined (Corp,FamSize,Benefit,Limit) combo exists
-        GroupRate testRate = groupRateRepo.findByCorporateAndFamilySizeAndBenefitRefAndUpperLimit(
+        GroupRate testRate = (GroupRate)groupRateRepo.findByCorporateAndFamilySizeAndBenefitRefAndUpperLimit(
                 corp,familySize,benefit,upperLimit
         );
 
@@ -72,7 +69,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
             groupRate = new GroupRate();
 
         } else { //We're updating an existing rate
-            groupRate = groupRateRepo.findOne(idPremiumRate);
+            groupRate = (GroupRate) groupRateRepo.findOne(idPremiumRate);
             if(groupRate==null){
                 return ResultFactory.getFailResult("Can't find a rate with ID ["+idPremiumRate+"].");
             }
@@ -81,7 +78,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
         }
 
         groupRate.setCorporate(corp);
-        groupRate.setBenefit(benefit);
+        groupRate.setBenefitRef(benefit);
         groupRate.setFamilySize(familySize);
         groupRate.setPremiumType(PremiumType.valueOf(premiumType));
         groupRate.setPremium(premium);
@@ -127,7 +124,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
             groupRate.setPremium(premium);
             groupRate.setIdPremiumRate(idPremiumRate);
             groupRate.setUpperLimit(upperLimit);
-            groupRate.setBenefit(benefit);
+            groupRate.setBenefitRef(benefit);
 
             groupRateList.add(groupRate);
         }
@@ -145,7 +142,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
             return ResultFactory.getFailResult(USER_INVALID);
         }
 
-        GroupRate groupRate = groupRateRepo.findOne(idPremiumRate);
+        GroupRate groupRate = (GroupRate) groupRateRepo.findOne(idPremiumRate);
 
         if(groupRate==null){
             return ResultFactory.getFailResult("Cannot remove a null rate");
@@ -170,7 +167,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
             return ResultFactory.getFailResult(USER_INVALID);
         }
 
-        GroupRate groupRate = groupRateRepo.findOne(idPremiumRate);
+        GroupRate groupRate = (GroupRate) groupRateRepo.findOne(idPremiumRate);
 
         if(groupRate==null){
             return ResultFactory.getFailResult("No such rate found.");
@@ -191,7 +188,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
     }
 
     @Override
-    public Result<List<GroupRate>> findByCorporate(Integer idCorporate, String actionUsername) {
+    public Result<List<PremiumRate>> findByCorporate(Integer idCorporate, String actionUsername) {
 
         if(!isValidUser(actionUsername)){
             return ResultFactory.getFailResult(USER_INVALID);
@@ -203,7 +200,7 @@ public class GroupRateServiceImpl extends AbstractService implements GroupRateSe
             return ResultFactory.getFailResult("Invalid corporate!");
         }
 
-        List<GroupRate> groupRates = groupRateRepo.findByCorporate(corporate);
+        List<PremiumRate> groupRates =  groupRateRepo.findByCorporate(corporate);
 
         if(groupRates.isEmpty()){
             return ResultFactory.getFailResult("No rates found for corporate [" +corporate.toString() + "]");

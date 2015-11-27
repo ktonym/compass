@@ -14,6 +14,10 @@ public class GroupRate extends PremiumRate {
     @JoinColumn(name = "corp_id", nullable = false)
     private Corporate corporate;
 
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "benefitCode",insertable=false, updatable=false,nullable = false)
+//    private BenefitRef benefit;
+
     public GroupRate() {
         super();
     }
@@ -21,6 +25,16 @@ public class GroupRate extends PremiumRate {
     public Corporate getCorporate() {
         return corporate;
     }
+
+//    @Override
+//    public BenefitRef getBenefit() {
+//        return benefit;
+//    }
+//
+//    @Override
+//    public void setBenefit(BenefitRef benefit) {
+//        this.benefit = benefit;
+//    }
 
     public void setCorporate(Corporate corporate) {
         this.corporate = corporate;

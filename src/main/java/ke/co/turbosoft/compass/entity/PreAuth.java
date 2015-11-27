@@ -28,10 +28,11 @@ public class PreAuth extends AbstractEntity implements EntityItem<Integer> {
     private Provider provider;
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "member_id",referencedColumnName = "member_id",nullable = false),
-            @JoinColumn(name = "benefit_id",referencedColumnName = "benefit_id",nullable = false)
+            @JoinColumn(name = "idMember",referencedColumnName = "idMember",nullable = false),
+            @JoinColumn(name = "idCorpAnniv",referencedColumnName = "idCorpAnniv",nullable = false),
+            @JoinColumn(name = "idCorpBenefit",referencedColumnName = "idCorpBenefit", nullable = false)
     })
-    private CorpMemberBenefit memberBenefit;
+    private CorpMemberBenefit corpMemberBenefit;
     @OneToMany(mappedBy="preAuth")
     private List<PreAuthBill> preAuthBills;
 
@@ -89,11 +90,11 @@ public class PreAuth extends AbstractEntity implements EntityItem<Integer> {
     }
 
     public CorpMemberBenefit getMemberBenefit() {
-        return memberBenefit;
+        return corpMemberBenefit;
     }
 
     public void setMemberBenefit(CorpMemberBenefit memberBenefit) {
-        this.memberBenefit = memberBenefit;
+        this.corpMemberBenefit = memberBenefit;
     }
 
     @Override
@@ -109,7 +110,7 @@ public class PreAuth extends AbstractEntity implements EntityItem<Integer> {
                 .add("preDiagnosis",preDiagnosis)
                 .add("preAuthLimit", preAuthLimit);
         provider.addJson(builder);
-        memberBenefit.addJson(builder);
+        corpMemberBenefit.addJson(builder);
 
 
     }

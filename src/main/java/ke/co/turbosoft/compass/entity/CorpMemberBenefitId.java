@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class CorpMemberBenefitId implements Serializable{
 
     CorpBenefit benefit;
-    Member member;
+    MemberAnniversary memberAnniv;
 
     public CorpMemberBenefitId() {
     }
@@ -21,12 +21,12 @@ public class CorpMemberBenefitId implements Serializable{
 		this.benefit = benefit;
 	}
 
-	public Member getMember() {
-		return member;
+	public MemberAnniversary getMemberAnniv() {
+		return memberAnniv;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMemberAnniv(MemberAnniversary memberAnniv) {
+		this.memberAnniv = memberAnniv;
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class CorpMemberBenefitId implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((benefit == null) ? 0 : benefit.hashCode());
-		result = prime * result + ((member == null) ? 0 : member.hashCode());
+		result = prime * result + ((memberAnniv == null) ? 0 : memberAnniv.hashCode());
 		return result;
 	}
 
@@ -52,14 +52,14 @@ public class CorpMemberBenefitId implements Serializable{
 				return false;
 		} else if (!benefit.equals(other.benefit))
 			return false;
-		if (member == null) {
-			if (other.member != null)
+		if (memberAnniv == null) {
+			if (other.memberAnniv != null)
 				return false;
-		} else if (!member.equals(other.member))
+		} else if (!memberAnniv.equals(other.memberAnniv))
 			return false;
 		return true;
 	}
 
-        
-    
+
+
 }

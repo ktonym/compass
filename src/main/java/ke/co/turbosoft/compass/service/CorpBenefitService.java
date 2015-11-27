@@ -26,17 +26,10 @@ public interface CorpBenefitService {
 
     Result<List<CorpBenefit>> store(List<Map<String,Object>> corpBenefitMap, String actionUsername);
 
-    Result<List<CorpBenefit>> findAll(String actionUsername);
+    Result<List<CorpBenefit>> findAll(Integer idCategory, String actionUsername);
 
     Result<CorpBenefit> remove(Integer idCorpBenefit, String actionUsername);
 
     Result<CorpBenefit> findOne(Integer idCorpBenefit, String actionUsername);
-
-    Result<List<CorpBenefit>> listSubBenefits(Integer idCorpBenefit,String actionUsername);
-
-    Result<List<CorpBenefit>> listMainBenefits(Integer idCategory,String actionUsername);
-
-
-
 
 }

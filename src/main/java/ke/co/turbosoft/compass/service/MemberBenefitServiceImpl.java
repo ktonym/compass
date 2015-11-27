@@ -67,7 +67,7 @@ public class MemberBenefitServiceImpl extends AbstractService implements MemberB
             return ResultFactory.getFailResult("There is an active anniversary suspension.");
         }
 
-        List<Category> categories = categoryRepo.findByAnniv(latestAnniv);
+        List<Category> categories = categoryRepo.findByCorpAnniv(latestAnniv);
 
         if(categories.isEmpty()){
             return ResultFactory.getFailResult("No categories have been defined for the active anniversary.");

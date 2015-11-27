@@ -30,6 +30,8 @@ public class CorpBenefitServiceImpl extends AbstractService implements CorpBenef
     protected CorpBenefitRepo corpBenefitRepo;
     @Autowired
     protected BenefitRefRepo benefitRefRepo;
+    @Autowired
+    protected CorpMemberBenefitRepo corpMemberBenefitRepo;
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -90,6 +92,8 @@ public class CorpBenefitServiceImpl extends AbstractService implements CorpBenef
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Result<List<CorpBenefit>> store(List<Map<String, Object>> corpBenefitMaps, String actionUsername) {
 
+        StringBuilder sb = new StringBuilder();
+
         if(!isValidUser(actionUsername)) {
             return ResultFactory.getFailResult(USER_INVALID);
         }
@@ -97,6 +101,10 @@ public class CorpBenefitServiceImpl extends AbstractService implements CorpBenef
         List<CorpBenefit> benefitList = new ArrayList<>();
 
         for (Map map : corpBenefitMaps){
+
+            boolean err = false;
+
+            CorpBenefit corpBenefit;
 
             Integer idCategory = (Integer) map.get("idCategory");
             Integer benefitCode = (Integer) map.get("benefitCode");
@@ -110,53 +118,117 @@ public class CorpBenefitServiceImpl extends AbstractService implements CorpBenef
 
             boolean share = sharing.equalsIgnoreCase("Y");
             boolean preAuthRequired = requiresPreAuth.equalsIgnoreCase("Y");
+            BenefitRef benefitRef = benefitRefRepo.findOne(benefitCode);
 
-            CorpBenefit corpBenefit = new CorpBenefit();
-            corpBenefit.setUpperLimit(upperLimit);
+            if (idCorpBenefit==null) {
+                corpBenefit = new CorpBenefit();
+            } else {
+                corpBenefit = corpBenefitRepo.findOne(idCorpBenefit);
+            }
+
+            if (upperLimit!=null) {
+                corpBenefit.setUpperLimit(upperLimit);
+            } else {
+                // escape from this loop
+                sb.append("Invalid limit specified for " + corpBenefit.toString() );
+                err=true;
+            }
             corpBenefit.setRequiresPreAuth(preAuthRequired);
             corpBenefit.setSharing(share);
             corpBenefit.setWaitingPeriod(waitingPeriod);
             corpBenefit.setMemberType(memberType);
-            corpBenefit.setParentBenefit(corpBenefitRepo.findOne(parentBenefit_id));
-            corpBenefit.setBenefitRef(benefitRefRepo.findOne(benefitCode));
+            if (parentBenefit_id!=null) {
+                corpBenefit.setParentBenefit(corpBenefitRepo.findOne(parentBenefit_id));
+            }
+            if (benefitRef!=null){
+                corpBenefit.setBenefitRef(benefitRef);
+            } else {
+                sb.append("Invalid benefit code [" + benefitCode +"] specified.");
+                err=true;
+            }
+
             corpBenefit.setCategory(categoryRepo.findOne(idCategory));
 
-            benefitList.add(corpBenefit);
+            if (!err) benefitList.add(corpBenefit);
 
         }
 
-        corpBenefitRepo.save(benefitList);
+        if (benefitList.size()>0) {
+            corpBenefitRepo.save(benefitList);
+            return ResultFactory.getSuccessResult(benefitList,sb.toString());
+        }
+
+        return ResultFactory.getFailResult(sb.toString());
+
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Result<List<CorpBenefit>> findAll(Integer idCategory, String actionUsername) {
+
+        if(!isValidUser(actionUsername)) {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+
+        Category cat = categoryRepo.findOne(idCategory);
+
+        if (cat==null) {
+            return ResultFactory.getFailResult("Invalid category ID ["+idCategory+"]");
+        }
+
+        List<CorpBenefit> benefitList =  corpBenefitRepo.findByCategory(cat);
+
+        if (benefitList.isEmpty()){
+            return ResultFactory.getFailResult("No benefits found for category "+cat.getCat());
+        }
 
         return ResultFactory.getSuccessResult(benefitList);
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Result<List<CorpBenefit>> findAll(String actionUsername) {
-        return null;
-    }
-
-    @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Result<CorpBenefit> remove(Integer idCorpBenefit, String actionUsername) {
-        return null;
+
+        if(!isValidUser(actionUsername)) {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+
+        CorpBenefit corpBenefit = corpBenefitRepo.findOne(idCorpBenefit);
+
+        if(corpBenefit==null){
+            return ResultFactory.getFailResult("Cannot delete benefit. Invalid ID ["+idCorpBenefit+"] specified.");
+        }
+
+        if(corpBenefit.getSubBenefit().size()>0){
+            return ResultFactory.getFailResult("Cannot delete benefit. Child records exist.");
+        }
+
+        List<CorpMemberBenefit> memberBenefits = corpMemberBenefitRepo.findByBenefit(corpBenefit);
+
+        if(memberBenefits.size()>0){
+            return ResultFactory.getFailResult("Cannot delete benefit. Child records exist.");
+        }
+
+        corpBenefitRepo.delete(corpBenefit);
+
+        return ResultFactory.getSuccessResult("Benefit removed from system by " + actionUsername );
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Result<CorpBenefit> findOne(Integer idCorpBenefit, String actionUsername) {
-        return null;
+
+        if(!isValidUser(actionUsername)) {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+
+        CorpBenefit benefit = corpBenefitRepo.findOne(idCorpBenefit);
+
+        if(benefit==null){
+            return ResultFactory.getFailResult("Invalid or null ID ["+idCorpBenefit+"] supplied");
+        }
+
+        return ResultFactory.getSuccessResult(benefit);
     }
 
-    @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Result<List<CorpBenefit>> listSubBenefits(Integer idCorpBenefit, String actionUsername) {
-        return null;
-    }
-
-    @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Result<List<CorpBenefit>> listMainBenefits(Integer idCategory, String actionUsername) {
-        return null;
-    }
 }

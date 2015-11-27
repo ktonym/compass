@@ -12,9 +12,6 @@ import java.util.List;
  * Created by akipkoech on 12/9/14.
  */
 public interface GroupRateRepo extends JpaRepository<GroupRate,Integer> {
-    List<GroupRate> findByCorporate(Corporate corporate);
-    GroupRate findByCorporateAndFamilySizeAndBenefitRefAndUpperLimit(Corporate corporate,
-                                                                     String famSize,
-                                                                     BenefitRef benefitRef,
-                                                                     BigDecimal upperLimit);
+
+
 }

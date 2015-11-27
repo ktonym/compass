@@ -527,7 +527,7 @@ public class CorporateHandler extends AbstractHandler{
 
         User sessionUser = getSessionUser(request);
         JsonObject jsonObj = parseJsonObject(jsonData);
-        Result<List<GroupRate>> ar = groupRateService.findByCorporate(
+        Result<List<PremiumRate>> ar = groupRateService.findByCorporate(
                 getIntegerValue(jsonObj.get("idCorporate")),
                 sessionUser.getUsername()
         );

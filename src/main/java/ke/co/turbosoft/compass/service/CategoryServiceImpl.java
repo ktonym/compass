@@ -61,7 +61,7 @@ public class CategoryServiceImpl extends AbstractService implements CategoryServ
 
         }
 
-        category.setAnniv(corpAnnivRepo.findOne(idCorpAnniv));
+        category.setCorpAnniv(corpAnnivRepo.findOne(idCorpAnniv));
         category.setCat(cat);
         category.setDescription(description);
         categoryRepo.save(category);
@@ -104,7 +104,7 @@ public class CategoryServiceImpl extends AbstractService implements CategoryServ
             return ResultFactory.getFailResult(USER_INVALID);
         }
 
-        return ResultFactory.getSuccessResult(categoryRepo.findByAnniv(anniv));
+        return ResultFactory.getSuccessResult(categoryRepo.findByCorpAnniv(anniv));
 
 
     }

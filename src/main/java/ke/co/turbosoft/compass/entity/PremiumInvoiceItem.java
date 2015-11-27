@@ -24,7 +24,9 @@ public class PremiumInvoiceItem extends AbstractEntity implements EntityItem<Int
     @JoinColumn(name = "idPremiumInvoice")
     private PremiumInvoice premiumInvoice;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCorpMemberBenefit")
+    @JoinColumns({@JoinColumn(name="idMember", referencedColumnName = "idMember", nullable = false),
+                  @JoinColumn(name = "idCorpAnniv", referencedColumnName = "idCorpAnniv", nullable = false),
+                  @JoinColumn(name = "idCorpBenefit",referencedColumnName = "idCorpBenefit", nullable = false)})
     private CorpMemberBenefit corpMemberBenefit;
     private BigDecimal amount;
 

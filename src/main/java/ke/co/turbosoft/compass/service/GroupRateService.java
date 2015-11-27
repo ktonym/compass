@@ -1,6 +1,7 @@
 package ke.co.turbosoft.compass.service;
 
 import ke.co.turbosoft.compass.entity.GroupRate;
+import ke.co.turbosoft.compass.entity.PremiumRate;
 import ke.co.turbosoft.compass.vo.Result;
 
 import java.math.BigDecimal;
@@ -35,7 +36,7 @@ public interface GroupRateService {
 
     Result<List<GroupRate>> findAll(String actionUsername);
 
-    Result<List<GroupRate>> findByCorporate(Integer idCorporate, String actionUsername);
+    Result<List<PremiumRate>> findByCorporate(Integer idCorporate, String actionUsername);
 
 
 

@@ -34,10 +34,11 @@ public class Bill extends AbstractEntity implements EntityItem<Integer>{
     private LocalDate enteredDate;
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "member_id",referencedColumnName = "member_id",nullable = false),
-            @JoinColumn(name = "benefit_id",referencedColumnName = "benefit_id",nullable = false)
+            @JoinColumn(name = "idMember",referencedColumnName = "idMember",nullable = false),
+            @JoinColumn(name = "idCorpAnniv",referencedColumnName = "idCorpAnniv",nullable = false),
+            @JoinColumn(name = "idCorpBenefit",referencedColumnName = "idCorpBenefit", nullable = false)
     })
-    private CorpMemberBenefit memberBenefit;
+    private CorpMemberBenefit corpMemberBenefit;
     @ManyToOne
     @JoinColumn(name = "provider_id",nullable = false)
     private Provider provider;
@@ -118,12 +119,12 @@ public class Bill extends AbstractEntity implements EntityItem<Integer>{
         this.enteredDate = enteredDate;
     }
 
-    public CorpMemberBenefit getMemberBenefit() {
-        return memberBenefit;
+    public CorpMemberBenefit getCorpMemberBenefit() {
+        return corpMemberBenefit;
     }
 
-    public void setMemberBenefit(CorpMemberBenefit memberBenefit) {
-        this.memberBenefit = memberBenefit;
+    public void setCorpMemberBenefit(CorpMemberBenefit corpMemberBenefit) {
+        this.corpMemberBenefit = corpMemberBenefit;
     }
 
     public Provider getProvider() {
@@ -175,8 +176,8 @@ public class Bill extends AbstractEntity implements EntityItem<Integer>{
                 .add("enteredDate",enteredDate==null ? "" : DATE_FORMAT_yyyyMMdd.format(enteredDate));
 
 
-        if(memberBenefit!=null){
-            memberBenefit.addJson(builder);
+        if(corpMemberBenefit!=null){
+            corpMemberBenefit.addJson(builder);
         }
 
         batch.addJson(builder);

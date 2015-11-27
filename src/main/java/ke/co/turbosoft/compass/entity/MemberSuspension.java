@@ -20,8 +20,8 @@ public class MemberSuspension extends AbstractEntity implements EntityItem<Integ
     private LocalDate reinstatementDate;
     private String reason;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumns({@JoinColumn(name = "member_id", referencedColumnName = "member_id", updatable = false, insertable = false),
-            @JoinColumn(name = "idMemberAnniv", referencedColumnName = "idMemberAnniv", updatable = false, insertable = false)})
+    @JoinColumns({@JoinColumn(name = "idMember", referencedColumnName = "idMember", updatable = false, insertable = false),
+            @JoinColumn(name = "idCorpAnniv", referencedColumnName = "idCorpAnniv", updatable = false, insertable = false)})
     private MemberAnniversary memberAnniv;
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");

@@ -18,7 +18,7 @@ public class MemberAnniversary extends AbstractEntity{
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idCorpAnniv", referencedColumnName = "idCorpAnniv", nullable = false)
-    private CorpAnniv anniv;
+    private CorpAnniv corpAnniv;
 
     @OneToMany(mappedBy = "memberAnniv")
     private List<MemberSuspension> memberSuspensions;
@@ -29,12 +29,12 @@ public class MemberAnniversary extends AbstractEntity{
     public MemberAnniversary() {
     }
 
-    public CorpAnniv getAnniv() {
-        return anniv;
+    public CorpAnniv getCorpAnniv() {
+        return corpAnniv;
     }
 
-    public void setAnniv(CorpAnniv anniv) {
-        this.anniv = anniv;
+    public void setCorpAnniv(CorpAnniv corpAnniv) {
+        this.corpAnniv = corpAnniv;
     }
 
     public Member getMember() {
@@ -64,6 +64,6 @@ public class MemberAnniversary extends AbstractEntity{
     @Override
     public void addJson(JsonObjectBuilder builder) {
         member.addJson(builder);
-        anniv.addJson(builder);
+        corpAnniv.addJson(builder);
     }
 }

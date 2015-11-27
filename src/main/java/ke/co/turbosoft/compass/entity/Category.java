@@ -17,7 +17,7 @@ public class Category extends AbstractEntity implements EntityItem<Integer>{
 	private List<CorpBenefit> corpBenefits;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "anniv_id",nullable = false)
-    private CorpAnniv anniv;
+    private CorpAnniv corpAnniv;
     @OneToMany(mappedBy = "category")
     private List<CategoryPrincipal> categoryPrincipal;
 
@@ -64,12 +64,12 @@ public class Category extends AbstractEntity implements EntityItem<Integer>{
         this.corpBenefits = corpBenefits;
     }
 
-    public CorpAnniv getAnniv() {
-        return anniv;
+    public CorpAnniv getCorpAnniv() {
+        return corpAnniv;
     }
 
-    public void setAnniv(CorpAnniv anniv) {
-        this.anniv = anniv;
+    public void setCorpAnniv(CorpAnniv corpAnniv) {
+        this.corpAnniv = corpAnniv;
     }
 
     @Override
@@ -82,8 +82,8 @@ public class Category extends AbstractEntity implements EntityItem<Integer>{
         builder.add("idCategory", idCategory)
                 .add("cat", cat)
                 .add("description", description);
-        if(anniv !=null) {
-            anniv.addJson(builder);
+        if(corpAnniv !=null) {
+            corpAnniv.addJson(builder);
         }
     }
 }

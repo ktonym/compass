@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class MemberAnnivId implements Serializable{
 
     Member member;
-    CorpAnniv anniv;
+    CorpAnniv corpAnniv;
 
     public MemberAnnivId() {
     }
@@ -21,12 +21,12 @@ public class MemberAnnivId implements Serializable{
         this.member = member;
     }
 
-    public CorpAnniv getAnniv() {
-        return anniv;
+    public CorpAnniv getCorpAnniv() {
+        return corpAnniv;
     }
 
-    public void setAnniv(CorpAnniv anniv) {
-        this.anniv = anniv;
+    public void setCorpAnniv(CorpAnniv corpAnniv) {
+        this.corpAnniv = corpAnniv;
     }
 
     @Override
@@ -37,14 +37,14 @@ public class MemberAnnivId implements Serializable{
         MemberAnnivId that = (MemberAnnivId) o;
 
         if (!member.equals(that.member)) return false;
-        return anniv.equals(that.anniv);
+        return corpAnniv.equals(that.corpAnniv);
 
     }
 
     @Override
     public int hashCode() {
         int result = member.hashCode();
-        result = 31 * result + anniv.hashCode();
+        result = 31 * result + corpAnniv.hashCode();
         return result;
     }
 }

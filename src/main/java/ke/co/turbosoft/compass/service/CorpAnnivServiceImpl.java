@@ -145,7 +145,7 @@ public class CorpAnnivServiceImpl extends AbstractService implements CorpAnnivSe
         }
 
         CorpAnniv corpAnniv = corpAnnivRepo.findOne(idCorpAnniv);
-        long categoryCount = categoryRepo.countByAnniv(corpAnniv);
+        long categoryCount = categoryRepo.countByCorpAnniv(corpAnniv);
 
         if(corpAnniv==null){
             return ResultFactory.getFailResult("Unable to obtain cover period by ID [ " +idCorpAnniv + " ] for deletion");

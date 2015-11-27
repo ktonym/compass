@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface CategoryRepo extends JpaRepository<Category,Integer> {
     //List<Category> findByAnniv_Corporate(Corporate corporate);
-    List<Category> findByAnniv(CorpAnniv anniv);
-    long countByAnniv(CorpAnniv anniv);
+    List<Category> findByCorpAnniv(CorpAnniv corpAnniv);
+    long countByCorpAnniv(CorpAnniv corpAnniv);
 }

@@ -14,20 +14,22 @@ public class CorpMemberBenefit extends AbstractEntity {
 
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumns({@JoinColumn(name = "member_id", referencedColumnName = "member_id", updatable = false, insertable = false),
-            @JoinColumn(name = "idMemberAnniv", referencedColumnName = "idMemberAnniv", updatable = false, insertable = false)})
+    @JoinColumns({@JoinColumn(name = "idMember", referencedColumnName = "idMember", updatable = false, insertable = false),
+            @JoinColumn(name = "idCorpAnniv", referencedColumnName = "idCorpAnniv", updatable = false, insertable = false)})
     private MemberAnniversary memberAnniv;
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="benefit_id", referencedColumnName = "idCorpBenefit")
+    @JoinColumn(name="idCorpBenefit", referencedColumnName = "idCorpBenefit")
     private CorpBenefit benefit;
     private BenefitStatus status;
     @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate wef;
-    @OneToMany
+    @OneToMany(mappedBy = "corpMemberBenefit")
     private List<PreAuth> preAuthList;
     @OneToOne(mappedBy = "corpMemberBenefit")
     private PremiumInvoiceItem invoiceItem;
+    @OneToMany(mappedBy = "corpMemberBenefit")
+    private List<Bill> bills;
 
     static final DateTimeFormatter DATE_FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -80,6 +82,14 @@ public class CorpMemberBenefit extends AbstractEntity {
 
     public void setInvoiceItem(PremiumInvoiceItem invoiceItem) {
         this.invoiceItem = invoiceItem;
+    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
     }
 
     @Override
