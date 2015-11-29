@@ -11,20 +11,11 @@ import javax.persistence.Entity;
 @DiscriminatorValue("AGENCY")
 public class Agency extends Intermediary {
 
-    private String name;
     private String street;
     private String town;
     private String postalAddress;
 
     public Agency() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getStreet() {
@@ -56,10 +47,9 @@ public class Agency extends Intermediary {
 
         super.addJson(builder);
 
-        builder.add("name", name)
-                .add("street",street)
-                .add("town",town)
-                .add("postalAddress", postalAddress);
+        builder.add("street",street)
+               .add("town",town)
+               .add("postalAddress", postalAddress);
     }
 
 }

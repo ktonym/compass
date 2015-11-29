@@ -407,36 +407,6 @@ public class InitializeDb {
         pay_clm_perm.setName("PAY_CLM_PERM");
         permissionRepo.save(pay_clm_perm);
 
-        //Benefit Ref definitions
-        BenefitRef ip_ben_ref = new BenefitRef();
-        ip_ben_ref.setBenefitName("Inpatient");
-        ip_ben_ref.setDescription("Service requiring a patient to be admitted");
-        benefitRefRepo.save(ip_ben_ref);
-
-        BenefitRef op_ben_ref = new BenefitRef();
-        op_ben_ref.setBenefitName("Outpatient");
-        op_ben_ref.setDescription("Service provided to a patient without admission");
-        benefitRefRepo.save(op_ben_ref);
-
-        BenefitRef optic_ben_ref = new BenefitRef();
-        optic_ben_ref.setBenefitName("Optical");
-        optic_ben_ref.setDescription("Optical health care");
-        benefitRefRepo.save(optic_ben_ref);
-
-        BenefitRef dental_ben_ref = new BenefitRef();
-        dental_ben_ref.setBenefitName("Dental");
-        dental_ben_ref.setDescription("Dental health care");
-        benefitRefRepo.save(dental_ben_ref);
-
-        BenefitRef mat_ben_ref = new BenefitRef();
-        mat_ben_ref.setBenefitName("Maternal");
-        mat_ben_ref.setDescription("General maternal health care");
-        benefitRefRepo.save(mat_ben_ref);
-
-        BenefitRef preExHIV_ben_ref = new BenefitRef();
-        preExHIV_ben_ref.setBenefitName("Pre-existing chronics/HIV");
-        preExHIV_ben_ref.setDescription("Pre-existing chronic conditions including HIV");
-        benefitRefRepo.save(preExHIV_ben_ref);
 
     }
 

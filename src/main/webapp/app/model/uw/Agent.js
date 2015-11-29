@@ -7,7 +7,8 @@ Ext.define('compass.model.uw.Agent',{
     fields: [
         { name: 'firstName', type: 'string' },
         { name: 'surname', type: 'string'},
-        { name: 'otherNames', type: 'string'}
+        { name: 'otherNames', type: 'string'},
+        { name: 'name'}
     ],
 
     validators: {

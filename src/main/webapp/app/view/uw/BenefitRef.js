@@ -4,6 +4,7 @@ Ext.define('compass.view.uw.BenefitRef',{
     requires: [
         'compass.model.uw.BenefitRef',
         'compass.util.Glyphs',
+        'compass.view.base.TopToolbar',
         'compass.view.uw.BenefitRefGrid',
         'compass.view.uw.BenefitRefModel',
         'compass.view.uw.BenefitRefController'
@@ -12,6 +13,8 @@ Ext.define('compass.view.uw.BenefitRef',{
     viewModel: {
         type: 'benefitref'
     },
+
+    session: true,
 
     frame: true,
 
@@ -26,46 +29,51 @@ Ext.define('compass.view.uw.BenefitRef',{
         }
     ],
 
-    dockedItems: [
-        {
-            xtype: "toolbar",
-            dock: "top",
-            items: [
-                {
-                    xtype: 'button',
-                    text: 'Add',
-                    glyph: compass.util.Glyphs.getGlyph('add'),
-                    listeners: {
-                        click: 'onAdd'
-                    }
+    dockedItems: [{
+        xtype: 'top-tool-bar'
+    }]
 
-                },
-                {
-                    xtype: 'button',
-                    text: 'Edit',
-                    glyph: compass.util.Glyphs.getGlyph('edit'),
-                    listeners: {
-                        click: 'onEdit'
-                    },
-                    bind: {
-                        disabled: '{!benefitRefGrid.selection}'
-                    }
 
-                },
-                {
-                    xtype: 'button',
-                    text: 'Delete',
-                    glyph: compass.util.Glyphs.getGlyph('destroy'),
-                    listeners: {
-                        click: 'onDelete'
-                    },
-                    bind: {
-                        disabled: '{!benefitRefGrid.selection}'
-                    }
-
-                }
-            ]
-        }
-    ]
+    //dockedItems: [
+    //    {
+    //        xtype: "toolbar",
+    //        dock: "top",
+    //        items: [
+    //            {
+    //                xtype: 'button',
+    //                text: 'Add',
+    //                glyph: compass.util.Glyphs.getGlyph('add'),
+    //                listeners: {
+    //                    click: 'onAdd'
+    //                }
+    //
+    //            },
+    //            {
+    //                xtype: 'button',
+    //                text: 'Edit',
+    //                glyph: compass.util.Glyphs.getGlyph('edit'),
+    //                listeners: {
+    //                    click: 'onEdit'
+    //                },
+    //                bind: {
+    //                    disabled: '{!benefitRefGrid.selection}'
+    //                }
+    //
+    //            },
+    //            {
+    //                xtype: 'button',
+    //                text: 'Delete',
+    //                glyph: compass.util.Glyphs.getGlyph('destroy'),
+    //                listeners: {
+    //                    click: 'onDelete'
+    //                },
+    //                bind: {
+    //                    disabled: '{!benefitRefGrid.selection}'
+    //                }
+    //
+    //            }
+    //        ]
+    //    }
+    //]
 
 });

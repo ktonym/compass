@@ -22,6 +22,8 @@ public abstract class Intermediary extends AbstractEntity implements EntityItem<
     private String PIN;
     @Column(name = "INTERMEDIARY_TYPE",insertable = false,updatable = false)
     private IntermediaryType type;
+    private String name;
+    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate joinDate;
     private String email;
     private String tel;
@@ -55,6 +57,14 @@ public abstract class Intermediary extends AbstractEntity implements EntityItem<
 
     public void setType(IntermediaryType type) {
         this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDate getJoinDate() {
@@ -99,6 +109,7 @@ public abstract class Intermediary extends AbstractEntity implements EntityItem<
         builder.add("idIntermediary", idIntermediary)
                 .add("PIN", PIN)
                 .add("type",type.toString())
+                .add("name", name)
                 .add("joinDate", joinDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(joinDate))
                 .add("email",email)
                 .add("tel",tel);

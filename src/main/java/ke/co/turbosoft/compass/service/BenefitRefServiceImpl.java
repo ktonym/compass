@@ -43,20 +43,30 @@ public class BenefitRefServiceImpl extends AbstractService implements BenefitRef
 
         benefitName=benefitName.trim();
         description=description.trim();
-        /**
-         * attempt to fetch a similarly-indexed benefit from the database
-         */
-        BenefitRef benefitRef = benefitRefRepo.findOne(benefitCode);
 
-        if (benefitRef == null){ //nothing in the database
+        BenefitRef benefitRef;
+
+        // Test for an existing Benefit with a similar name
+        BenefitRef testBenefitRef = benefitRefRepo.findByName(benefitName);
+
+        if (benefitCode == null || benefitCode == 0){
             // create a new benefit
             benefitRef = new BenefitRef();
+            // If the testBenefit returns anything, then we're trying to define a benefit twice!
+            if (testBenefitRef!=null){
+                return ResultFactory.getFailResult("Benefit ["+benefitName+"] is already in the system.");
+            }
         } else {
             /**
-             * something is in the database,
+             * something must be in the database,
              * we're therefore updating a record
               */
-            BenefitRef testBenefitRef = benefitRefRepo.findByBenefitName(benefitName);
+            benefitRef = benefitRefRepo.findOne(benefitCode);
+
+            if(benefitRef==null){
+                return ResultFactory.getFailResult("Invalid benefit code ["+benefitCode+"] supplied.");
+            }
+            // The update we're trying to make is for another benefit!
             if(testBenefitRef.getBenefitCode() != benefitRef.getBenefitCode()){
                 return ResultFactory.getFailResult("Benefit [" + benefitName + "] already exists under a different code ");
             }

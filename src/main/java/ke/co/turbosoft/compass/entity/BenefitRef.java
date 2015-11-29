@@ -13,7 +13,7 @@ import java.util.List;
 public class BenefitRef extends AbstractEntity implements EntityItem<Integer> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer benefitCode;
     //@Column(unique = true)
     private String benefitName;
@@ -89,5 +89,21 @@ public class BenefitRef extends AbstractEntity implements EntityItem<Integer> {
                 .add("benefitName", benefitName)
                 .add("description", description)
                 .add("lastUpdate", lastUpdate == null ? "" : DATE_FORMATTER_yyyyMMddHHmm.format(lastUpdate));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BenefitRef)) return false;
+
+        BenefitRef that = (BenefitRef) o;
+
+        return benefitName.equalsIgnoreCase(that.benefitName);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return benefitName.hashCode();
     }
 }

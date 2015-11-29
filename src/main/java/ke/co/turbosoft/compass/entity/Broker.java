@@ -55,10 +55,9 @@ public class Broker extends Intermediary {
     public void addJson(JsonObjectBuilder builder) {
 
         super.addJson(builder);
-        builder.add("name", name)
-                .add("street",street)
-                .add("town",town)
-                .add("postalAddress", postalAddress);
+        builder.add("street",street)
+               .add("town",town)
+               .add("postalAddress", postalAddress);
 
     }
 

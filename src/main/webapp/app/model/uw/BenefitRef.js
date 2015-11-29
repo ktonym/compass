@@ -5,6 +5,8 @@ Ext.define('compass.model.uw.BenefitRef',{
 
     idProperty: 'benefitCode',
 
+    identifier: 'custom',
+
     fields: [
         {name: 'benefitCode', type: 'int', useNull: true},
         {name: 'benefitName', type: 'string'},

@@ -1,5 +1,5 @@
 Ext.define('compass.view.uw.BenefitRefGrid',{
-    extend: 'Ext.grid.Panel',
+    extend: 'compass.view.base.Grid',
     alias: 'widget.benefitref-grid',
     reference: 'benefitRefGrid',
     columns: [

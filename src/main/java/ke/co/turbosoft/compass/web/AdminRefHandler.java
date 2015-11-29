@@ -37,6 +37,9 @@ public class AdminRefHandler extends AbstractHandler {
 
         JsonObject jsonObj = parseJsonObject(jsonData);
 
+//        System.out.println("Code:   " + jsonObj.getString("benefitCode"));
+//        System.out.println("Name:   " + jsonObj.getString("benefitName"));
+
         Result<BenefitRef> ar = benefitRefService.store(
                 getIntegerValue(jsonObj.get("benefitCode")),
                 jsonObj.getString("benefitName"),
