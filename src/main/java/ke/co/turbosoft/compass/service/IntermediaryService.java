@@ -26,39 +26,17 @@ public interface IntermediaryService {
     Result<Intermediary> find(Integer idIntermediary, String actionUsername);
     Result<Intermediary> remove(Integer idIntermediary, String actionUsername);
 
-    Result<Broker> addBroker(
+    Result<Intermediary> store(
+            Integer idIntermediary,
+            String name,
             String PIN,
             IntermediaryType type,
             LocalDate joinDate,
             String email,
             String tel,
-            String name,
+            String postalAddress,
             String street,
             String town,
-            String postalAddress,
-            String actionUsername);
-
-    Result<Broker> addAgency(
-            String PIN,
-            IntermediaryType type,
-            LocalDate joinDate,
-            String email,
-            String tel,
-            String name,
-            String street,
-            String town,
-            String postalAddress,
-            String actionUsername);
-
-    Result<Broker> addAgent(
-            String PIN,
-            IntermediaryType type,
-            LocalDate joinDate,
-            String email,
-            String tel,
-            String firstName,
-            String surname,
-            String otherNames,
             String actionUsername);
 
 }

@@ -1,9 +1,7 @@
-Ext.define('compass.view.staticData.Intermediaries',{
-
-    extend: 'compass.view.staticData.BaseGrid',
-    xtype: 'intermediaries-grid',
-    store: 'staticData.Intermediaries',
-
+Ext.define('compass.view.uw.IntermediaryGrid',{
+    extend: 'compass.view.base.Grid',
+    alias: 'widget.intermediary-grid',
+    reference: 'intermediaryGrid',
     columns: [
 
         {
@@ -25,32 +23,39 @@ Ext.define('compass.view.staticData.Intermediaries',{
         {
             width: 100,
             dataIndex: "type",
-            text: "PIN",
+            text: "Type",
+            //editor : {
+            //    xtype : 'combobox',
+            //    store : 'intermediaryTypes',
+            //    queryMode : 'local',
+            //    displayField : 'text',
+            //    valueField : 'text'
+            //},
+            filter: {
+                type: 'string'
+            }
+
+        },
+        {
+            width: 100,
+            dataIndex: "tel",
+            text: "Telephone",
+            //editor: {
+            //    allowBlank: false,
+            //    maxLength: 45
+            //},
             filter: {
                 type: 'string'
             }
         },
         {
             width: 150,
-            dataIndex: "tel",
-            flex: 1,
-            text: "Telephone",
-            editor: {
-                allowBlank: false,
-                maxLength: 45
-            },
-            filter: {
-                type: 'string'
-            }
-        },
-        {
-            width: 250,
             dataIndex: "email",
             text: "Email",
-            editor: {
-                allowBlank: false,
-                maxLength: 45
-            },
+            //editor: {
+            //    allowBlank: false,
+            //    maxLength: 45
+            //},
             filter: {
                 type: 'string'
             }
@@ -61,7 +66,10 @@ Ext.define('compass.view.staticData.Intermediaries',{
             text: "Join Date"
         }
 
-    ]
+    ],
 
+    bind: {
+        store: '{intermediaries}'
+    }
 
 });

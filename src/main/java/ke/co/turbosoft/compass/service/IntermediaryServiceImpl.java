@@ -1,6 +1,5 @@
 package ke.co.turbosoft.compass.service;
 
-import ke.co.turbosoft.compass.entity.Broker;
 import ke.co.turbosoft.compass.entity.Intermediary;
 import ke.co.turbosoft.compass.entity.IntermediaryType;
 import ke.co.turbosoft.compass.repo.IntermediaryRepo;
@@ -50,19 +49,44 @@ public class IntermediaryServiceImpl extends AbstractService implements Intermed
 
     @Override
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<Broker> addBroker(String PIN, IntermediaryType type, LocalDate joinDate, String email, String tel, String name, String street, String town, String postalAddress, String actionUsername) {
-        return null;
+    public Result<Intermediary> store(Integer idIntermediary,
+                                      String name,
+                                      String PIN,
+                                      IntermediaryType type,
+                                      LocalDate joinDate,
+                                      String email,
+                                      String tel,
+                                      String postalAddress,
+                                      String street,
+                                      String town,
+                                      String actionUsername) {
+
+        if(!isValidUser(actionUsername)){
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+
+        Intermediary intermediary;
+
+        if(idIntermediary==null || idIntermediary<1){ //new Intermediary
+            intermediary = new Intermediary();
+        } else {
+            intermediary = intermediaryRepo.findOne(idIntermediary);
+        }
+
+        intermediary.setName(name);
+        intermediary.setPIN(PIN);
+        intermediary.setType(type);
+        intermediary.setJoinDate(joinDate);
+        intermediary.setEmail(email);
+        intermediary.setTel(tel);
+        intermediary.setPostalAddress(postalAddress);
+        intermediary.setStreet(street);
+        intermediary.setTown(town);
+
+        intermediaryRepo.save(intermediary);
+
+
+        return ResultFactory.getSuccessResult(intermediary);
     }
 
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<Broker> addAgency(String PIN, IntermediaryType type, LocalDate joinDate, String email, String tel, String name, String street, String town, String postalAddress, String actionUsername) {
-        return null;
-    }
-
-    @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Result<Broker> addAgent(String PIN, IntermediaryType type, LocalDate joinDate, String email, String tel, String firstName, String surname, String otherNames, String actionUsername) {
-        return null;
-    }
 }

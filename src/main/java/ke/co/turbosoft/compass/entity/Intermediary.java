@@ -10,19 +10,22 @@ import java.util.List;
  * Created by akipkoech on 12/8/14.
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="INTERMEDIARY_TYPE",discriminatorType = DiscriminatorType.STRING)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name="INTERMEDIARY_TYPE",discriminatorType = DiscriminatorType.STRING)
 //TODO consider replacing above @nnotation with   @DiscriminatorFormula
 //TODO read more about @ForceDiscriminator
-public abstract class Intermediary extends AbstractEntity implements EntityItem<Integer>{
+public class Intermediary extends AbstractEntity implements EntityItem<Integer>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idIntermediary;
     private String PIN;
-    @Column(name = "INTERMEDIARY_TYPE",insertable = false,updatable = false)
+   // @Column(name = "INTERMEDIARY_TYPE",insertable = false,updatable = false)
     private IntermediaryType type;
     private String name;
+    private String street;
+    private String town;
+    private String postalAddress;
     @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate joinDate;
     private String email;
@@ -65,6 +68,30 @@ public abstract class Intermediary extends AbstractEntity implements EntityItem<
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getTown() {
+        return town;
+    }
+
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getPostalAddress() {
+        return postalAddress;
+    }
+
+    public void setPostalAddress(String postalAddress) {
+        this.postalAddress = postalAddress;
     }
 
     public LocalDate getJoinDate() {
@@ -110,6 +137,9 @@ public abstract class Intermediary extends AbstractEntity implements EntityItem<
                 .add("PIN", PIN)
                 .add("type",type.toString())
                 .add("name", name)
+                .add("street",street)
+                .add("town", town)
+                .add("postalAddress", postalAddress)
                 .add("joinDate", joinDate == null ? "" : DATE_FORMATTER_yyyyMMdd.format(joinDate))
                 .add("email",email)
                 .add("tel",tel);

@@ -22,6 +22,7 @@ translations = {
     invoicing:      'Invoicing',
     benefitRefs:    'Benefits',
     uwSettings:     'UW Settings',
+    intermediaries: 'Intermédiaires',
     care:           'Care',
     preAuth:        'Pre-authorization',
     claims:         'Claims',

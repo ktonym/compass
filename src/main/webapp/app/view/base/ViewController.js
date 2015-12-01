@@ -24,6 +24,20 @@ Ext.define('compass.view.base.ViewController',{
     onSave: function(button,e,options){
 
     },
+    onSaveSuccess: function(conn, response, options, eOpts) {
+        var me=this,
+            result = compass.util.Util.decodeJSON(conn.responseText);
+        if (result.success) {
+            compass.util.Util.showToast('Success! Record saved.');
+            me.onCancel();
+            me.refresh();
+        } else {
+            compass.util.Util.showErrorMsg(result.msg);
+        }
+    },
+    onSaveFailure: function(conn, response, options, eOpts){
+        compass.util.Util.showErrorMsg(conn.responseText);
+    },
     onCancel: function(button,e,options){
         var me=this;
         me.dialog=Ext.destroy(me.dialog);
