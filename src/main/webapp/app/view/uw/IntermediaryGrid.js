@@ -2,6 +2,16 @@ Ext.define('compass.view.uw.IntermediaryGrid',{
     extend: 'compass.view.base.Grid',
     alias: 'widget.intermediary-grid',
     reference: 'intermediaryGrid',
+    plugins:[
+        {
+            ptype: 'rowexpander',
+            rowBodyTpl:[
+                '<b>PIN:</b> {pin}</br>',
+                '<b>Postal Address:</b> {postalAddress}</br>',
+                '<b>Street:</b> {street}, <b>Town:</b> {town}</br>'
+            ]
+        }
+    ],
     columns: [
 
         {
@@ -13,9 +23,9 @@ Ext.define('compass.view.uw.IntermediaryGrid',{
             }
         },
         {
-            width: 100,
-            dataIndex: "pin",
-            text: "PIN",
+            width: 150,
+            dataIndex: "name",
+            text: "Name",
             filter: {
                 type: 'string'
             }
@@ -24,13 +34,6 @@ Ext.define('compass.view.uw.IntermediaryGrid',{
             width: 100,
             dataIndex: "type",
             text: "Type",
-            //editor : {
-            //    xtype : 'combobox',
-            //    store : 'intermediaryTypes',
-            //    queryMode : 'local',
-            //    displayField : 'text',
-            //    valueField : 'text'
-            //},
             filter: {
                 type: 'string'
             }
@@ -40,10 +43,6 @@ Ext.define('compass.view.uw.IntermediaryGrid',{
             width: 100,
             dataIndex: "tel",
             text: "Telephone",
-            //editor: {
-            //    allowBlank: false,
-            //    maxLength: 45
-            //},
             filter: {
                 type: 'string'
             }
@@ -52,10 +51,6 @@ Ext.define('compass.view.uw.IntermediaryGrid',{
             width: 150,
             dataIndex: "email",
             text: "Email",
-            //editor: {
-            //    allowBlank: false,
-            //    maxLength: 45
-            //},
             filter: {
                 type: 'string'
             }
@@ -63,6 +58,7 @@ Ext.define('compass.view.uw.IntermediaryGrid',{
         {
             width: 150,
             dataIndex: "joinDate",
+            format: "d-m-Y",
             text: "Join Date"
         }
 

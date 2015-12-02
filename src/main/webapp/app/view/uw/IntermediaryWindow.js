@@ -2,7 +2,7 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
     extend: 'compass.view.base.WindowForm',
     xtype: 'intermediary-window',
 
-    height: 400,
+    height: 360,
     width: 400,
 
     items: [
@@ -47,6 +47,7 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
                         },
                         {
                             xtype: 'combobox',
+                            name: 'type',
                             fieldLabel: 'Type',
                             displayField: 'text',
                             valueField: 'text',
@@ -60,6 +61,7 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
                             xtype: 'datefield',
                             fieldLabel: 'Join Date',
                             name: 'joinDate',
+                            format: 'Ymd',
                             bind: '{currentIntermediary.joinDate}'
                         },
                         {
@@ -73,6 +75,11 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
                             bind: '{currentIntermediary.tel}'
                         },
                         {
+                            fieldLabel: 'Postal Address',
+                            name: 'postalAddress',
+                            bind: '{currentIntermediary.postalAddress}'
+                        },
+                        {
                             fieldLabel: 'Street',
                             name: 'street',
                             bind: '{currentIntermediary.street}'
@@ -81,11 +88,6 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
                             fieldLabel: 'Town',
                             name: 'town',
                             bind: '{currentIntermediary.town}'
-                        },
-                        {
-                            fieldLabel: 'Postal Address',
-                            name: 'postalAddress',
-                            bind: '{currentIntermediary.postalAddress}'
                         }
                     ]
                 }

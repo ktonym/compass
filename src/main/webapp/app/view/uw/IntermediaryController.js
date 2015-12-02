@@ -31,6 +31,7 @@ Ext.define('compass.view.uw.IntermediaryController',{
         var me = this,
             dialog = me.dialog,
             form = me.lookupReference('form');
+        console.log(Ext.util.JSON.encode(form.getValues()));
         if(form.isValid()){
             Ext.Ajax.request({
                 url: 'compass/intermediary/store.json',

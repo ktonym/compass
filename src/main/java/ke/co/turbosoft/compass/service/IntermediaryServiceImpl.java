@@ -51,7 +51,7 @@ public class IntermediaryServiceImpl extends AbstractService implements Intermed
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Result<Intermediary> store(Integer idIntermediary,
                                       String name,
-                                      String PIN,
+                                      String pin,
                                       IntermediaryType type,
                                       LocalDate joinDate,
                                       String email,
@@ -67,6 +67,7 @@ public class IntermediaryServiceImpl extends AbstractService implements Intermed
 
         Intermediary intermediary;
 
+       // System.out.println("ID intermediary: " + idIntermediary);
         if(idIntermediary==null || idIntermediary<1){ //new Intermediary
             intermediary = new Intermediary();
         } else {
@@ -74,7 +75,7 @@ public class IntermediaryServiceImpl extends AbstractService implements Intermed
         }
 
         intermediary.setName(name);
-        intermediary.setPIN(PIN);
+        intermediary.setPin(pin);
         intermediary.setType(type);
         intermediary.setJoinDate(joinDate);
         intermediary.setEmail(email);
@@ -82,7 +83,7 @@ public class IntermediaryServiceImpl extends AbstractService implements Intermed
         intermediary.setPostalAddress(postalAddress);
         intermediary.setStreet(street);
         intermediary.setTown(town);
-
+       // System.out.println("About to save:"+intermediary.toString());
         intermediaryRepo.save(intermediary);
 
 

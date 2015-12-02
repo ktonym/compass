@@ -19,7 +19,7 @@ public class Intermediary extends AbstractEntity implements EntityItem<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idIntermediary;
-    private String PIN;
+    private String pin;
    // @Column(name = "INTERMEDIARY_TYPE",insertable = false,updatable = false)
     private IntermediaryType type;
     private String name;
@@ -46,12 +46,12 @@ public class Intermediary extends AbstractEntity implements EntityItem<Integer>{
         this.idIntermediary = idIntermediary;
     }
 
-    public String getPIN() {
-        return PIN;
+    public String getPin() {
+        return pin;
     }
 
-    public void setPIN(String PIN) {
-        this.PIN = PIN;
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
     public IntermediaryType getType() {
@@ -134,7 +134,7 @@ public class Intermediary extends AbstractEntity implements EntityItem<Integer>{
     @Override
     public void addJson(JsonObjectBuilder builder) {
         builder.add("idIntermediary", idIntermediary)
-                .add("PIN", PIN)
+                .add("pin", pin)
                 .add("type",type.toString())
                 .add("name", name)
                 .add("street",street)
@@ -145,6 +145,19 @@ public class Intermediary extends AbstractEntity implements EntityItem<Integer>{
                 .add("tel",tel);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Intermediary{" +
+                "idIntermediary=" + idIntermediary +
+                ", pin='" + pin + '\'' +
+                ", type=" + type +
+                ", name='" + name + '\'' +
+                ", street='" + street + '\'' +
+                ", town='" + town + '\'' +
+                ", postalAddress='" + postalAddress + '\'' +
+                ", joinDate=" + joinDate +
+                ", email='" + email + '\'' +
+                ", tel='" + tel + '\'' +
+                '}';
+    }
 }

@@ -165,7 +165,7 @@ public class InitializeDb {
         Menu mnuSchemes = new Menu();
         mnuSchemes.setText("schemes");
         mnuSchemes.setIconCls("xf19c");
-        mnuSchemes.setClassName("corporatesgrid");
+        mnuSchemes.setClassName("corporate");
         mnuSchemes.setParentMenu(menu2);
         menuRepo.save(mnuSchemes);
 

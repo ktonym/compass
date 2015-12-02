@@ -7,7 +7,8 @@ Ext.define('compass.view.uw.CorporateModel',{
     stores: {
         corporates: {
             model: 'compass.model.uw.Corporate',
-            autoLoad: true
+            autoLoad: true,
+            session: true
         },
         contactinfos: {
             model: 'compass.model.uw.ContactInfo',
@@ -23,8 +24,8 @@ Ext.define('compass.view.uw.CorporateModel',{
                     //totalProperty   : 'results'
                 }
             },
-
-            autoLoad: true
+            autoLoad: true,
+            session: true
         },
         annivs: {
             model: 'compass.model.uw.CorpAnniv',
@@ -39,10 +40,11 @@ Ext.define('compass.view.uw.CorporateModel',{
                     rootProperty    : 'data'
                 }
             },
-            autoLoad: true
+            autoLoad: true,
+            session: true
         }
 
-    },
+    }/*,
 
     formulas: {
         currentCorporate: {
@@ -57,6 +59,6 @@ Ext.define('compass.view.uw.CorporateModel',{
                 corporate = this.set('currentCorporate',corporate);
             }
         }
-    }
+    }*/
 
 });

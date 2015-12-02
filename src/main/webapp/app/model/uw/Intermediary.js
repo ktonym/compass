@@ -6,6 +6,8 @@ Ext.define('compass.model.uw.Intermediary',{
 
     idProperty: 'idIntermediary',
 
+    identifier: 'custom',
+
     fields: [
         { name: 'idIntermediary', type: 'int', useNull: true },
         { name: 'pin', type: 'string' },

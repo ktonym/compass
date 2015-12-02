@@ -29,7 +29,7 @@ public interface IntermediaryService {
     Result<Intermediary> store(
             Integer idIntermediary,
             String name,
-            String PIN,
+            String pin,
             IntermediaryType type,
             LocalDate joinDate,
             String email,
