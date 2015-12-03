@@ -1,15 +1,15 @@
 Ext.define('compass.view.uw.CorpAnnivsGrid',{
 
     extend: 'Ext.grid.Panel',
-
     xtype: 'corpannivs-grid',
-
+    reference: 'corpAnnivsGrid',
+    requires: ['compass.util.Glyphs'],
     bind : '{corporatesGrid.selection.annivs}',
+    title: 'Anniversaries',
+    glyph: compass.util.Glyphs.getGlyph('cover'),
+    border: true,
 
     //bind: '{corpannivs}',
-
-    //reference: 'corpAnnivsGrid',
-
 //    plugins:
 //    {
 //        ptype: 'subtable',

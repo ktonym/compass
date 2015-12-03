@@ -6,7 +6,7 @@ Ext.define('compass.view.uw.CorporateModel',{
 
     stores: {
         corporates: {
-            model: 'compass.model.uw.Corporate',
+            source: 'staticData.Corporates',
             autoLoad: true,
             session: true
         },

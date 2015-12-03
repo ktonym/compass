@@ -65,7 +65,62 @@ public class CorporateHandler extends AbstractHandler{
         Result<List<Corporate>> ar = corporateService.findAll(sessionUser.getUsername());
 
         if(ar.isSuccess()){
-            return getJsonSuccessData(ar.getData());
+
+            JsonObjectBuilder builder = Json.createObjectBuilder();
+            builder.add("success", true);
+
+            JsonArrayBuilder corpArrayBuilder = Json.createArrayBuilder();
+
+            for (Corporate corporate: ar.getData()){
+
+                Result<List<CorpAnniv>> annivsAr = corpAnnivService.findByCorporate(corporate,sessionUser.getUsername());
+                JsonArrayBuilder annivsArrayBuilder = Json.createArrayBuilder();
+
+                if(annivsAr.isSuccess()){
+                       for(CorpAnniv corpAnniv: annivsAr.getData()){
+                           annivsArrayBuilder.add(
+                                 Json.createObjectBuilder()
+                                       .add("idCorpAnniv", corpAnniv.getId())
+                                       .add("anniv", corpAnniv.getAnniv())
+                                       .add("inception", corpAnniv.getInception().format(DATE_FORMAT_yyyyMMdd))
+                                       .add("expiry", corpAnniv.getExpiry().format(DATE_FORMAT_yyyyMMdd))
+                                       .add("renewal", corpAnniv.getRenewalDate().format(DATE_FORMAT_yyyyMMdd))
+                                       .add("lastUpdate", corpAnniv.getLastUpdate().format(DATE_FORMAT_yyyyMMddHHmm))
+                           );
+                       }
+                    corpArrayBuilder.add(Json.createObjectBuilder().add("annivs", annivsArrayBuilder));
+                }
+
+                Result<List<ContactInfo>> contactsAr = contactInfoService.findAll(corporate.getId(),sessionUser.getUsername());
+                JsonArrayBuilder contactsArrayBuilder = Json.createArrayBuilder();
+                if(contactsAr.isSuccess()){
+                    for(ContactInfo contactInfo: contactsAr.getData()){
+                        contactsArrayBuilder.add(
+                                Json.createObjectBuilder()
+                                        .add("idContactInfo", contactInfo.getId())
+                                        .add("firstName", contactInfo.getFirstName())
+                                        .add("surname", contactInfo.getSurname())
+                                        .add("jobTitle", contactInfo.getJobTitle())
+                                        .add("tel", contactInfo.getTel())
+                                        .add("email", contactInfo.getEmail())
+                        );
+                    }
+                    corpArrayBuilder.add(Json.createObjectBuilder().add("contacts", contactsArrayBuilder));
+                }
+
+                corpArrayBuilder.add(Json.createObjectBuilder()
+                        .add("idCorporate", corporate.getId())
+                        .add("corporateName", corporate.getCorporateName())
+                        .add("abbreviation", corporate.getAbbreviation())
+                        .add("email", corporate.getEmail())
+                        .add("tel", corporate.getTel())
+                        .add("postalAddress", corporate.getPostalAddress())
+                        .add("joined", corporate.getJoined().format(DATE_FORMAT_yyyyMMdd)));
+
+            }
+
+            builder.add("data", corpArrayBuilder);
+            return toJsonString(builder.build());
         } else {
             return getJsonErrorMsg(ar.getMsg());
         }

@@ -21,12 +21,6 @@ Ext.define('compass.view.uw.CorporatesGrid',{
             dataIndex: "corporateName",
             text: "Organization"
         },
-//        {
-//            width: 150,
-//            dataIndex: "abbreviation",
-//            flex: 1,
-//            text: "Abbreviation"
-//        },
         {
             width: 150,
             dataIndex: "tel",
@@ -38,11 +32,6 @@ Ext.define('compass.view.uw.CorporatesGrid',{
             dataIndex: "email",
             text: "Email"
         }
-//        {
-//            width: 150,
-//            dataIndex: "postalAddress",
-//            text: "Postal Address"
-//        }
     ],
     listeners: {
         itemclick: function(dv, record, item, index, e) {

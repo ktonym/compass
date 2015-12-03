@@ -1,13 +1,13 @@
 Ext.define('compass.view.uw.ContactInfoGrid',{
 
     extend: 'Ext.grid.Panel',
-
     xtype: 'contact-info-grid',
-
     reference: 'contactInfoGrid',
-
-    bind : '{corporatesGrid.selection.contactinfos}',
-
+    requires: ['compass.util.Glyphs'],
+    bind : '{corporatesGrid.selection.contacts}',
+    border: true,
+    title: 'Contact Info',
+    glyph: compass.util.Glyphs.getGlyph('contact'),
     columns: [
         {
             width: 20,
@@ -20,15 +20,10 @@ Ext.define('compass.view.uw.ContactInfoGrid',{
             text: "Name",
             renderer: function(value,metaData,record){
                 metaData['tdAttr'] = 'data-qtip="' +
-                    record.get('jobTitle') + '"';
+                    record.get('jobTitle') + ' ' + record.get('fullName') + '"';
                 return value;
             }
         },
-//        {
-//            width: 150,
-//            dataIndex: "jobTitle",
-//            text: "Job Title"
-//        },
         {
             width: 150,
             dataIndex: "email",
