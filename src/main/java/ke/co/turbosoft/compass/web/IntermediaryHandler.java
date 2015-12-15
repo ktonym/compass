@@ -62,10 +62,10 @@ public class IntermediaryHandler extends AbstractHandler{
         String joinDateVal = jsonObj.getString("joinDate");
         IntermediaryType intType = IntermediaryType.valueOf(jsonObj.getString("type"));
 
-        System.out.println(jsonObj.getString("pin"));
-
+        //System.out.println(jsonObj.getString("idIntermediary"));
+        Integer idInt = Integer.valueOf(jsonObj.getString("idIntermediary"));
         Result<Intermediary> ar = intermediaryService.store(
-                                getIntegerValue(jsonObj.get("idIntermediary")),
+                                idInt,
                                 jsonObj.getString("name"),
                                 jsonObj.getString("pin"),
                                 intType,

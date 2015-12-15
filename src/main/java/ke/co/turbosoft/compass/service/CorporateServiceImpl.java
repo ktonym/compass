@@ -103,6 +103,8 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
 
         for (Map map: corporateMap){
 
+            Corporate corp;
+
             Integer idCorporate = (Integer) map.get("idCorporate");
             String corporateName = (String) map.get("corporateName");
             String abbreviation = (String) map.get("abbreviation");
@@ -112,7 +114,13 @@ public class CorporateServiceImpl extends AbstractService implements CorporateSe
             LocalDate joined = (LocalDate) map.get("joined");
             LocalDateTime lastUpdate = (LocalDateTime) map.get("lastUpdate");
 
-            Corporate corp = new Corporate();
+            if(idCorporate==null||idCorporate==0){
+                corp = new Corporate();
+            } else {
+                corp = corporateRepo.findOne(idCorporate);
+            }
+
+
             corp.setAbbreviation(abbreviation);
             corp.setCorporateName(corporateName);
             corp.setTel(tel);

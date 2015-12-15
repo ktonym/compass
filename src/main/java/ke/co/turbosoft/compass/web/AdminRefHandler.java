@@ -40,8 +40,10 @@ public class AdminRefHandler extends AbstractHandler {
 //        System.out.println("Code:   " + jsonObj.getString("benefitCode"));
 //        System.out.println("Name:   " + jsonObj.getString("benefitName"));
 
+        Integer intBen = Integer.valueOf(jsonObj.getString("benefitCode"));
+
         Result<BenefitRef> ar = benefitRefService.store(
-                getIntegerValue(jsonObj.get("benefitCode")),
+                intBen,
                 jsonObj.getString("benefitName"),
                 jsonObj.getString("description"),
                 sessionUser.getUsername());

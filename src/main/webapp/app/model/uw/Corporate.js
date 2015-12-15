@@ -6,6 +6,8 @@ Ext.define('compass.model.uw.Corporate', {
 
     idProperty: 'idCorporate',
 
+    identifier: 'custom',
+
     fields: [
         { name: 'idCorporate', type: 'int', useNull: true },
         { name: 'corporateName', type: 'string' },

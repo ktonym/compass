@@ -66,11 +66,13 @@ public class IntermediaryServiceImpl extends AbstractService implements Intermed
         }
 
         Intermediary intermediary;
-
-       // System.out.println("ID intermediary: " + idIntermediary);
+        System.out.println("Inside IntermediaryService.store() function.");
+        System.out.println("ID intermediary: " + idIntermediary);
         if(idIntermediary==null || idIntermediary<1){ //new Intermediary
+            System.out.println("creating a new record!");
             intermediary = new Intermediary();
         } else {
+            System.out.println("updating an existing record.");
             intermediary = intermediaryRepo.findOne(idIntermediary);
         }
 

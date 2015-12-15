@@ -161,9 +161,9 @@ public class CorporateHandler extends AbstractHandler{
 
             String joinDateVal = jsonObj.getString("joined");
             String lastUpdateVal = jsonObj.getString("lastUpdate");
-
+            Integer idCorp = Integer.valueOf(jsonObj.getString("idCorporate"));
             Result<Corporate> ar = corporateService.store(
-                    getIntegerValue(jsonObj.get("idCorporate")),
+                    idCorp,
                     jsonObj.getString("corporateName"),
                     jsonObj.getString("abbreviation"),
                     jsonObj.getString("tel"),
@@ -189,14 +189,17 @@ public class CorporateHandler extends AbstractHandler{
                 JsonObject jsonObj = jsonArray.getJsonObject(i);
                 Map map = new HashMap<>();
 
-                map.put("idCorporate", getIntegerValue(jsonObj.get("idCorporate")));
+                //Integer idCorpStr = jsonObj.getInt("idCorporate");
+                //long temp = (long) jsonObj.get("idCorporate");
+                Integer idCorpInt = ((JsonNumber) jsonObj.get("idCorporate")).intValue();
+                map.put("idCorporate", idCorpInt);//jsonObj.getInt("idCorporate"));
                 map.put("corporateName", jsonObj.getString("corporateName"));
                 map.put("abbreviation", jsonObj.getString("abbreviation"));
                 map.put("tel", jsonObj.getString("tel"));
                 map.put("email", jsonObj.getString("email"));
                 map.put("postalAddress", jsonObj.getString("postalAddress"));
                 map.put("joined", LocalDate.parse(jsonObj.getString("joined"), DATE_FORMAT_yyyyMMdd));
-                map.put("lastUpdate", LocalDateTime.parse(jsonObj.getString("lastUpdate"), DATE_FORMAT_yyyyMMddHHmm));
+                map.put("lastUpdate", LocalDateTime.now());//.format(DATE_FORMAT_yyyyMMddHHmm)); //LocalDateTime.parse(jsonObj.getString("lastUpdate"), DATE_FORMAT_yyyyMMddHHmm));
 
                 mapList.add(map);
 

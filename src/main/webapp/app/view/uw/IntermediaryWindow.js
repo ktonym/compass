@@ -2,7 +2,7 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
     extend: 'compass.view.base.WindowForm',
     xtype: 'intermediary-window',
 
-    height: 360,
+    height: 370,
     width: 400,
 
     items: [
@@ -33,7 +33,7 @@ Ext.define('compass.view.uw.IntermediaryWindow', {
                             xtype: 'hiddenfield',
                             name: 'idIntermediary',
                             fieldLabel: 'Label',
-                            bind: '{currentIntermediary.intermediaryCode}'
+                            bind: '{currentIntermediary.idIntermediary}'
                         },
                         {
                             fieldLabel: 'Name',

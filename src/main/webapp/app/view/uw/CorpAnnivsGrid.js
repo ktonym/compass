@@ -8,6 +8,10 @@ Ext.define('compass.view.uw.CorpAnnivsGrid',{
     title: 'Anniversaries',
     glyph: compass.util.Glyphs.getGlyph('cover'),
     border: true,
+    listeners: {
+        scope: me,
+        itemcontextmenu: 'onAnnivsCxtMnu'
+    },
 
     //bind: '{corpannivs}',
 //    plugins:
