@@ -67,6 +67,14 @@ Ext.define('compass.view.uw.CorporateController',{
         Ext.Msg.alert('adding new cover');
     },
 
+    onSuspendCover: function(button,e,options){
+        Ext.Msg.alert('suspending cover...');
+    },
+
+    onReinstateCover: function(button,e,options){
+        Ext.Msg.alert('reinstating cover..');
+    },
+
     onAnnivsCxtMnu: function(grid, record, item, index, e, eOpts){
         Ext.Msg.alert('Right Clicked!');
     }

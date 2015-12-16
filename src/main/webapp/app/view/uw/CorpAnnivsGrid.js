@@ -9,7 +9,7 @@ Ext.define('compass.view.uw.CorpAnnivsGrid',{
     glyph: compass.util.Glyphs.getGlyph('cover'),
     border: true,
     listeners: {
-        scope: me,
+        //scope: me,
         itemcontextmenu: 'onAnnivsCxtMnu'
     },
 
@@ -32,6 +32,44 @@ Ext.define('compass.view.uw.CorpAnnivsGrid',{
 //            }
 //        ]
 //    },
+    dockedItems: [
+        {
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Add Cover',
+                    glyph: compass.util.Glyphs.getGlyph('add'),
+                    listeners: {
+                        click: 'onAddCover'
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'Suspend',
+                    glyph: compass.util.Glyphs.getGlyph('pause'),
+                    listeners: {
+                        click: 'onSuspendCover'
+                    },
+                    bind: {
+                        disabled: '{!corpAnnivsGrid.selection}'
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'Reinstate',
+                    glyph: compass.util.Glyphs.getGlyph('play'),
+                    listeners: {
+                        click: 'onReinstateCover'
+                    },
+                    bind: {
+                        disabled: '{!corpAnnivsGrid.selection}'
+                    }
+                }
+            ]
+        }
+    ],
     columns: [
         {
             text: 'Id',

@@ -17,7 +17,10 @@ Ext.define('compass.util.Glyphs',{
             excel: 'xf1c3',
             contact: 'xf095',
             corporate: 'xf19c',
-            cover: 'xf0e9'
+            cover: 'xf0e9',
+            ban: 'xf05e',
+            pause: 'xf04c',
+            play: 'xf04b'
         },
 
         constructor: function(config){
